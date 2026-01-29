@@ -475,6 +475,76 @@
             background: #34495e;
             border-color: #4a5f7f;
         }
+        
+        /* Футер */
+        .footer {
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 2px solid rgba(102, 126, 234, 0.2);
+            text-align: center;
+            font-size: 0.9em;
+            color: #6c757d;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+        
+        .developer-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .developer-link {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .developer-link:hover {
+            color: #764ba2;
+            text-decoration: underline;
+        }
+        
+        .version-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #6c757d;
+        }
+        
+        .version-badge {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.85em;
+            font-weight: bold;
+        }
+        
+        body.dark-theme .footer {
+            border-top-color: rgba(116, 192, 252, 0.2);
+            color: #adb5bd;
+        }
+        
+        body.dark-theme .version-info {
+            color: #adb5bd;
+        }
+        
+        body.dark-theme .developer-link {
+            color: #74c0fc;
+        }
+        
+        body.dark-theme .developer-link:hover {
+            color: #a5d8ff;
+        }
     </style>
 </head>
 <body>
@@ -564,6 +634,22 @@
                 <button class="choice-button start-button" onclick="goToPage('page1')">
                     🚀 Розпочати історію
                 </button>
+            </div>
+            
+            <div class="footer">
+                <div class="footer-content">
+                    <div class="developer-info">
+                        <span>👨‍💻 Розробник:</span>
+                        <a href="https://sargeras197.github.io/contacts/" target="_blank" class="developer-link">
+                            Сергій Євдокимов
+                        </a>
+                    </div>
+                    <div class="version-info">
+                        <span>📌</span>
+                        <span class="version-badge">v0.01</span>
+                        <span>від 30.01.2026</span>
+                    </div>
+                </div>
             </div>
         </div>
 
