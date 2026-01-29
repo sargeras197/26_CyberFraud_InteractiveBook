@@ -247,9 +247,293 @@
             padding: 25px 50px;
             margin-top: 30px;
         }
+        
+        /* Меню навігації */
+        .top-menu {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 15px;
+            z-index: 1000;
+        }
+        
+        .menu-icon {
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.5em;
+        }
+        
+        .menu-icon:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+        
+        /* Модальне вікно */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            animation: slideUp 0.3s ease;
+        }
+        
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 2em;
+            cursor: pointer;
+            color: #666;
+            transition: color 0.3s;
+        }
+        
+        .modal-close:hover {
+            color: #667eea;
+        }
+        
+        .modal-title {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #667eea;
+        }
+        
+        .setting-group {
+            margin-bottom: 25px;
+        }
+        
+        .setting-label {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+            display: block;
+        }
+        
+        .setting-control select,
+        .setting-control input[type="range"] {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+        
+        .setting-control select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .zoom-value {
+            display: inline-block;
+            margin-left: 10px;
+            color: #667eea;
+            font-weight: bold;
+        }
+        
+        /* Інтерактивна карта сюжету */
+        .story-map {
+            padding: 30px;
+        }
+        
+        .map-container {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 20px;
+            overflow: auto;
+        }
+        
+        #storyGraph {
+            width: 100%;
+            min-height: 600px;
+            border: 2px solid #dee2e6;
+            border-radius: 10px;
+            background: white;
+        }
+        
+        .legend {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .legend-color {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 2px solid #333;
+        }
+        
+        .legend-good { background: #51cf66; }
+        .legend-bad { background: #ff6b6b; }
+        .legend-neutral { background: #74c0fc; }
+        .legend-choice { background: #ffd43b; }
+        
+        .back-button {
+            background: linear-gradient(135deg, #495057 0%, #343a40 100%);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+        }
+        
+        /* Темна тема */
+        body.dark-theme {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+        }
+        
+        body.dark-theme .container {
+            background: #2c3e50;
+            color: #ecf0f1;
+        }
+        
+        body.dark-theme h1,
+        body.dark-theme .chapter-title,
+        body.dark-theme .modal-title {
+            color: #74c0fc;
+        }
+        
+        body.dark-theme .story-text,
+        body.dark-theme .subtitle,
+        body.dark-theme .setting-label {
+            color: #ecf0f1;
+        }
+        
+        body.dark-theme .intro-description,
+        body.dark-theme .stats,
+        body.dark-theme .message-box,
+        body.dark-theme .map-container {
+            background: #34495e;
+            color: #ecf0f1;
+        }
+        
+        body.dark-theme .modal-content {
+            background: #2c3e50;
+            color: #ecf0f1;
+        }
+        
+        body.dark-theme .menu-icon {
+            background: #34495e;
+            color: #74c0fc;
+        }
+        
+        body.dark-theme #storyGraph {
+            background: #34495e;
+            border-color: #4a5f7f;
+        }
     </style>
 </head>
 <body>
+    <!-- Меню навігації -->
+    <div class="top-menu">
+        <div class="menu-icon" onclick="openSettings()" title="Налаштування">
+            ⚙️
+        </div>
+        <div class="menu-icon" onclick="openStoryMap()" title="Інтерактивна карта">
+            🗺️
+        </div>
+    </div>
+
+    <!-- Модальне вікно налаштувань -->
+    <div id="settingsModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeSettings()">&times;</span>
+            <h2 class="modal-title">⚙️ Налаштування</h2>
+            
+            <div class="setting-group">
+                <label class="setting-label">🔍 Масштабування</label>
+                <div class="setting-control">
+                    <input type="range" id="zoomSlider" min="80" max="130" value="100" step="10" oninput="changeZoom(this.value)">
+                    <span class="zoom-value" id="zoomValue">100%</span>
+                </div>
+            </div>
+            
+            <div class="setting-group">
+                <label class="setting-label">🎨 Тема</label>
+                <div class="setting-control">
+                    <select id="themeSelect" onchange="changeTheme(this.value)">
+                        <option value="light">☀️ Світла</option>
+                        <option value="dark">🌙 Темна</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="setting-group">
+                <label class="setting-label">🌍 Мова</label>
+                <div class="setting-control">
+                    <select id="languageSelect" onchange="changeLanguage(this.value)">
+                        <option value="uk">🇺🇦 Українська</option>
+                        <option value="en">🇬🇧 English</option>
+                        <option value="pl">🇵🇱 Polski</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="setting-group">
+                <label class="setting-label">💾 Прогрес</label>
+                <div class="setting-control">
+                    <button class="choice-button" onclick="resetProgress()" style="margin: 0;">
+                        🔄 Скинути прогрес
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="container">
         <!-- Вступний екран -->
         <div class="page active intro-screen" id="intro">
@@ -636,6 +920,41 @@
 
     </div>
 
+    <!-- Інтерактивна карта сюжету -->
+    <div class="container story-map" id="storyMapPage" style="display: none;">
+        <h1>🗺️ Інтерактивна карта історії</h1>
+        <p class="subtitle">Всі можливі шляхи та вибори Олега</p>
+        
+        <div class="map-container">
+            <canvas id="storyGraph"></canvas>
+        </div>
+        
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-color legend-choice"></div>
+                <span>Вибір</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color legend-neutral"></div>
+                <span>Продовження</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color legend-good"></div>
+                <span>Хороший результат</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color legend-bad"></div>
+                <span>Поганий результат</span>
+            </div>
+        </div>
+        
+        <div class="choices">
+            <button class="back-button" onclick="closeStoryMap()">
+                ⬅️ Повернутися до історії
+            </button>
+        </div>
+    </div>
+
     <script>
         function goToPage(pageId) {
             //Ховаємо всі сторінки
@@ -670,9 +989,274 @@
         
         // Скидання прогресу
         function resetProgress() {
-            localStorage.removeItem('olegStoryProgress');
-            goToPage('intro');
+            if (confirm('Ви впевнені, що хочете скинути весь прогрес?')) {
+                localStorage.removeItem('olegStoryProgress');
+                localStorage.removeItem('olegStorySettings');
+                closeSettings();
+                goToPage('intro');
+            }
         }
+        
+        // ===== НАЛАШТУВАННЯ =====
+        
+        function openSettings() {
+            document.getElementById('settingsModal').classList.add('active');
+            loadSettings();
+        }
+        
+        function closeSettings() {
+            document.getElementById('settingsModal').classList.remove('active');
+        }
+        
+        function changeZoom(value) {
+            document.getElementById('zoomValue').textContent = value + '%';
+            document.querySelector('.container').style.fontSize = value + '%';
+            saveSettingValue('zoom', value);
+        }
+        
+        function changeTheme(theme) {
+            if (theme === 'dark') {
+                document.body.classList.add('dark-theme');
+            } else {
+                document.body.classList.remove('dark-theme');
+            }
+            saveSettingValue('theme', theme);
+        }
+        
+        function changeLanguage(lang) {
+            saveSettingValue('language', lang);
+            // Тут буде логіка зміни мови (поки що просто зберігаємо)
+            alert('Переклад буде доданий в наступних версіях. Translation coming soon!');
+        }
+        
+        function saveSettingValue(key, value) {
+            let settings = JSON.parse(localStorage.getItem('olegStorySettings') || '{}');
+            settings[key] = value;
+            localStorage.setItem('olegStorySettings', JSON.stringify(settings));
+        }
+        
+        function loadSettings() {
+            let settings = JSON.parse(localStorage.getItem('olegStorySettings') || '{}');
+            
+            // Масштабування
+            if (settings.zoom) {
+                document.getElementById('zoomSlider').value = settings.zoom;
+                changeZoom(settings.zoom);
+            }
+            
+            // Тема
+            if (settings.theme) {
+                document.getElementById('themeSelect').value = settings.theme;
+                changeTheme(settings.theme);
+            }
+            
+            // Мова
+            if (settings.language) {
+                document.getElementById('languageSelect').value = settings.language;
+            }
+        }
+        
+        // ===== ІНТЕРАКТИВНА КАРТА =====
+        
+        const storyStructure = {
+            intro: { 
+                title: 'Початок', 
+                type: 'start',
+                x: 400, y: 50,
+                children: ['page1']
+            },
+            page1: { 
+                title: 'День змін', 
+                type: 'choice',
+                x: 400, y: 150,
+                children: ['page1_1', 'page1_2', 'page1_3']
+            },
+            page1_1: { 
+                title: 'Перевірка балансу', 
+                type: 'choice',
+                x: 200, y: 250,
+                children: ['page1_1a', 'page1_1b', 'page1_1c']
+            },
+            page1_2: { 
+                title: 'Збирання речей', 
+                type: 'choice',
+                x: 400, y: 250,
+                children: ['page1_2a', 'page1_2b', 'page1_2c']
+            },
+            page1_3: { 
+                title: 'Кава і роздуми', 
+                type: 'choice',
+                x: 600, y: 250,
+                children: ['page1_3a', 'page1_3b', 'page1_3c']
+            },
+            page1_1a: { 
+                title: 'Фішинг → Втрата грошей', 
+                type: 'bad',
+                x: 100, y: 350,
+                children: []
+            },
+            page1_1b: { 
+                title: 'Перевірка → Безпека', 
+                type: 'good',
+                x: 200, y: 350,
+                children: ['page2']
+            },
+            page1_1c: { 
+                title: 'Офіційний сайт → Успіх', 
+                type: 'good',
+                x: 300, y: 350,
+                children: ['page2']
+            },
+            page1_2a: { 
+                title: 'Відповісти на дзвінок', 
+                type: 'neutral',
+                x: 350, y: 350,
+                children: ['page2']
+            },
+            page1_2b: { 
+                title: 'Скинути дзвінок', 
+                type: 'neutral',
+                x: 420, y: 350,
+                children: ['page2']
+            },
+            page1_2c: { 
+                title: 'Відправити SMS', 
+                type: 'neutral',
+                x: 490, y: 350,
+                children: ['page2']
+            },
+            page1_3a: { 
+                title: 'Фейкова посилка', 
+                type: 'bad',
+                x: 550, y: 350,
+                children: []
+            },
+            page1_3b: { 
+                title: 'Офіційний додаток', 
+                type: 'good',
+                x: 630, y: 350,
+                children: ['page2']
+            },
+            page1_3c: { 
+                title: 'Видалити спам', 
+                type: 'good',
+                x: 710, y: 350,
+                children: ['page2']
+            },
+            page2: { 
+                title: 'Збори (продовження)', 
+                type: 'choice',
+                x: 400, y: 450,
+                children: ['page2_1', 'page2_2', 'page2_3']
+            },
+            page2_1: { 
+                title: 'Відповісти на дзвінок', 
+                type: 'neutral',
+                x: 300, y: 550,
+                children: []
+            },
+            page2_2: { 
+                title: 'Відновити дані', 
+                type: 'neutral',
+                x: 400, y: 550,
+                children: []
+            },
+            page2_3: { 
+                title: 'Продовжити збори', 
+                type: 'neutral',
+                x: 500, y: 550,
+                children: []
+            }
+        };
+        
+        function openStoryMap() {
+            document.getElementById('storyMapPage').style.display = 'block';
+            document.querySelector('.container:not(.story-map)').style.display = 'none';
+            setTimeout(() => drawStoryGraph(), 100);
+        }
+        
+        function closeStoryMap() {
+            document.getElementById('storyMapPage').style.display = 'none';
+            document.querySelector('.container:not(.story-map)').style.display = 'block';
+        }
+        
+        function drawStoryGraph() {
+            const canvas = document.getElementById('storyGraph');
+            const ctx = canvas.getContext('2d');
+            
+            // Встановлюємо розмір canvas
+            canvas.width = canvas.offsetWidth;
+            canvas.height = 650;
+            
+            // Очищуємо canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Малюємо з'єднання
+            ctx.lineWidth = 2;
+            ctx.strokeStyle = '#adb5bd';
+            
+            Object.keys(storyStructure).forEach(nodeId => {
+                const node = storyStructure[nodeId];
+                node.children.forEach(childId => {
+                    if (storyStructure[childId]) {
+                        const child = storyStructure[childId];
+                        
+                        ctx.beginPath();
+                        ctx.moveTo(node.x, node.y + 25);
+                        ctx.lineTo(child.x, child.y - 25);
+                        ctx.stroke();
+                    }
+                });
+            });
+            
+            // Малюємо вузли
+            Object.keys(storyStructure).forEach(nodeId => {
+                const node = storyStructure[nodeId];
+                
+                // Колір вузла
+                let color;
+                switch(node.type) {
+                    case 'start': color = '#667eea'; break;
+                    case 'choice': color = '#ffd43b'; break;
+                    case 'good': color = '#51cf66'; break;
+                    case 'bad': color = '#ff6b6b'; break;
+                    case 'neutral': color = '#74c0fc'; break;
+                    default: color = '#adb5bd';
+                }
+                
+                // Малюємо коло
+                ctx.beginPath();
+                ctx.arc(node.x, node.y, 25, 0, 2 * Math.PI);
+                ctx.fillStyle = color;
+                ctx.fill();
+                ctx.strokeStyle = '#333';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+                
+                // Малюємо текст
+                ctx.fillStyle = '#000';
+                ctx.font = 'bold 10px Arial';
+                ctx.textAlign = 'center';
+                const words = node.title.split(' ');
+                words.forEach((word, i) => {
+                    ctx.fillText(word, node.x, node.y + 50 + (i * 12));
+                });
+            });
+        }
+        
+        // Закриття модального вікна при кліку поза ним
+        window.onclick = function(event) {
+            const modal = document.getElementById('settingsModal');
+            if (event.target === modal) {
+                closeSettings();
+            }
+        }
+        
+        // Завантажуємо налаштування при старті
+        window.addEventListener('load', () => {
+            loadSettings();
+            // loadProgress(); // Розкоментувати для автозавантаження прогресу
+        });
         
         // Завантажуємо прогрес при відкритті
         // window.addEventListener('load', loadProgress);
