@@ -2638,7 +2638,7 @@
             
             // Встановлюємо розмір canvas
             canvas.width = canvas.offsetWidth;
-            canvas.height = currentMapMode === 'choices' ? 800 : 4200;
+            canvas.height = currentMapMode === 'choices' ? 3200 : 4200;
             
             // Очищуємо canvas
             ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -2649,6 +2649,65 @@
                 drawStoryMode(ctx, canvas);
             }
         }
+        
+        // Додаємо обробник кліків на canvas
+        document.addEventListener('DOMContentLoaded', function() {
+            const canvas = document.getElementById('storyGraph');
+            
+            canvas.addEventListener('click', function(event) {
+                if (currentMapMode !== 'story') return;
+                
+                const rect = canvas.getBoundingClientRect();
+                const scaleX = canvas.width / rect.width;
+                const scaleY = canvas.height / rect.height;
+                const x = (event.clientX - rect.left) * scaleX;
+                const y = (event.clientY - rect.top) * scaleY;
+                
+                // Перевіряємо, чи клікнули на якийсь вузол
+                for (let node of storyNodesPositions) {
+                    const distance = Math.sqrt(
+                        Math.pow(x - node.x, 2) + Math.pow(y - node.y, 2)
+                    );
+                    
+                    if (distance <= node.radius) {
+                        // Клікнули на вузол - переходимо на сторінку
+                        console.log('Перехід на:', node.pageId, node.title);
+                        closeStoryMap();
+                        goToPage(node.pageId);
+                        break;
+                    }
+                }
+            });
+            
+            // Додаємо ефект hover
+            canvas.addEventListener('mousemove', function(event) {
+                if (currentMapMode !== 'story') {
+                    canvas.style.cursor = 'default';
+                    return;
+                }
+                
+                const rect = canvas.getBoundingClientRect();
+                const scaleX = canvas.width / rect.width;
+                const scaleY = canvas.height / rect.height;
+                const x = (event.clientX - rect.left) * scaleX;
+                const y = (event.clientY - rect.top) * scaleY;
+                
+                let isOverNode = false;
+                
+                for (let node of storyNodesPositions) {
+                    const distance = Math.sqrt(
+                        Math.pow(x - node.x, 2) + Math.pow(y - node.y, 2)
+                    );
+                    
+                    if (distance <= node.radius) {
+                        isOverNode = true;
+                        break;
+                    }
+                }
+                
+                canvas.style.cursor = isOverNode ? 'pointer' : 'default';
+            });
+        });
         
         function drawChoicesMode(ctx, canvas) {
             // Збільшена висота для всіх розділів
@@ -2826,39 +2885,42 @@
             });
         }
         
+        // Глобальна змінна для зберігання позицій вузлів
+        let storyNodesPositions = [];
+        
         function drawStoryMode(ctx, canvas) {
             // Лінійний потік історії - акцент на сюжеті, а не на виборах
             const storyNodes = [
-                { id: 'intro', x: 400, y: 100, label: '1', title: 'Пробудження', desc: 'SMS від мами. Рішення їхати до Києва', section: 'Вступ' },
-                { id: 'morning', x: 400, y: 250, label: '2', title: 'Ранкові збори', desc: 'Пакування речей, перевірка документів', section: 'Розділ 1' },
-                { id: 'online_threats', x: 400, y: 400, label: '3', title: 'Перші загрози', desc: 'Фішингові SMS, підозрілі дзвінки, фейкові листи', section: 'Розділ 1' },
-                { id: 'choices_made', x: 400, y: 550, label: '4', title: 'Перші рішення', desc: 'Олег робить вибори під тиском часу', section: 'Розділ 1' },
-                { id: 'consequences', x: 400, y: 700, label: '5', title: 'Перші наслідки', desc: 'Результати прийнятих рішень стають відчутними', section: 'Розділ 1' },
+                { id: 'intro', pageId: 'intro', x: 400, y: 100, label: '1', title: 'Пробудження', desc: 'SMS від мами. Рішення їхати до Києва', section: 'Вступ' },
+                { id: 'morning', pageId: 'page1', x: 400, y: 250, label: '2', title: 'Ранкові збори', desc: 'Пакування речей, перевірка документів', section: 'Розділ 1' },
+                { id: 'online_threats', pageId: 'page1_1', x: 400, y: 400, label: '3', title: 'Перші загрози', desc: 'Фішингові SMS, підозрілі дзвінки, фейкові листи', section: 'Розділ 1' },
+                { id: 'choices_made', pageId: 'page1_2', x: 400, y: 550, label: '4', title: 'Перші рішення', desc: 'Олег робить вибори під тиском часу', section: 'Розділ 1' },
+                { id: 'consequences', pageId: 'page1_3', x: 400, y: 700, label: '5', title: 'Перші наслідки', desc: 'Результати прийнятих рішень стають відчутними', section: 'Розділ 1' },
                 
-                { id: 'final_prep', x: 400, y: 900, label: '6', title: 'Останні приготування', desc: 'Перевірка готовності до поїздки', section: 'Розділ 2' },
-                { id: 'tech_issues', x: 400, y: 1050, label: '7', title: 'Технічні проблеми', desc: 'Підозрілий диск, проблеми з зарядкою', section: 'Розділ 2' },
-                { id: 'departure', x: 400, y: 1200, label: '8', title: 'Виїзд', desc: 'Дорога на вокзал, останні перевірки', section: 'Розділ 2' },
+                { id: 'final_prep', pageId: 'page2', x: 400, y: 900, label: '6', title: 'Останні приготування', desc: 'Перевірка готовності до поїздки', section: 'Розділ 2' },
+                { id: 'tech_issues', pageId: 'page2_1', x: 400, y: 1050, label: '7', title: 'Технічні проблеми', desc: 'Підозрілий диск, проблеми з зарядкою', section: 'Розділ 2' },
+                { id: 'departure', pageId: 'page2_2', x: 400, y: 1200, label: '8', title: 'Виїзд', desc: 'Дорога на вокзал, останні перевірки', section: 'Розділ 2' },
                 
-                { id: 'station', x: 400, y: 1400, label: '9', title: 'На вокзалі', desc: 'Публічний Wi-Fi, натовп, нові ризики', section: 'Розділ 3' },
-                { id: 'wifi_threat', x: 400, y: 1550, label: '10', title: 'Цифрові пастки', desc: 'Фейкові мережі, SMS від "банку"', section: 'Розділ 3' },
-                { id: 'train', x: 400, y: 1700, label: '11', title: 'У потягу', desc: 'Дорога до нового життя, рефлексія', section: 'Розділ 3' },
-                { id: 'train_learning', x: 400, y: 1850, label: '12', title: 'Аналіз помилок', desc: 'Олег переосмислює свої дії', section: 'Розділ 3' },
+                { id: 'station', pageId: 'page3', x: 400, y: 1400, label: '9', title: 'На вокзалі', desc: 'Публічний Wi-Fi, натовп, нові ризики', section: 'Розділ 3' },
+                { id: 'wifi_threat', pageId: 'page4', x: 400, y: 1550, label: '10', title: 'Цифрові пастки', desc: 'Фейкові мережі, SMS від "банку"', section: 'Розділ 3' },
+                { id: 'train', pageId: 'page5', x: 400, y: 1700, label: '11', title: 'У потягу', desc: 'Дорога до нового життя, рефлексія', section: 'Розділ 3' },
+                { id: 'train_learning', pageId: 'page5', x: 400, y: 1850, label: '12', title: 'Аналіз помилок', desc: 'Олег переосмислює свої дії', section: 'Розділ 3' },
                 
-                { id: 'arrival', x: 400, y: 2050, label: '13', title: 'Прибуття до Києва', desc: 'Нове місто, нові можливості, нові загрози', section: 'Розділ 4' },
-                { id: 'housing_search', x: 400, y: 2200, label: '14', title: 'Пошук житла', desc: 'Оголошення, соцмережі, рекомендації', section: 'Розділ 4' },
-                { id: 'housing_traps', x: 400, y: 2350, label: '15', title: 'Шахрайські схеми', desc: 'Передоплата, фейкові власники, підроблені документи', section: 'Розділ 4' },
-                { id: 'housing_decision', x: 400, y: 2500, label: '16', title: 'Вибір житла', desc: 'Олег приймає важливе рішення', section: 'Розділ 4' },
-                { id: 'new_home', x: 400, y: 2650, label: '17', title: 'Облаштування', desc: 'Перші дні в новому місті', section: 'Розділ 4' },
+                { id: 'arrival', pageId: 'page6', x: 400, y: 2050, label: '13', title: 'Прибуття до Києва', desc: 'Нове місто, нові можливості, нові загрози', section: 'Розділ 4' },
+                { id: 'housing_search', pageId: 'page6_1', x: 400, y: 2200, label: '14', title: 'Пошук житла', desc: 'Оголошення, соцмережі, рекомендації', section: 'Розділ 4' },
+                { id: 'housing_traps', pageId: 'page6_2', x: 400, y: 2350, label: '15', title: 'Шахрайські схеми', desc: 'Передоплата, фейкові власники, підроблені документи', section: 'Розділ 4' },
+                { id: 'housing_decision', pageId: 'page6_3', x: 400, y: 2500, label: '16', title: 'Вибір житла', desc: 'Олег приймає важливе рішення', section: 'Розділ 4' },
+                { id: 'new_home', pageId: 'page7', x: 400, y: 2650, label: '17', title: 'Облаштування', desc: 'Перші дні в новому місті', section: 'Розділ 4' },
                 
-                { id: 'assessment', x: 400, y: 2850, label: '18', title: 'Підрахунок втрат', desc: 'Олег оцінює ціну своїх помилок', section: 'Розділ 5' },
-                { id: 'recovery_path', x: 400, y: 3000, label: '19', title: 'Шляхи відновлення', desc: 'Допомога, кредит, власні сили, поліція', section: 'Розділ 5' },
-                { id: 'lessons_learned', x: 400, y: 3150, label: '20', title: 'Уроки безпеки', desc: 'Що Олег зрозумів про кібербезпеку', section: 'Розділ 5' },
-                { id: 'month_later', x: 400, y: 3300, label: '21', title: 'Місяць потому', desc: 'Життя налагоджується, перші результати', section: 'Розділ 5' },
+                { id: 'assessment', pageId: 'page8', x: 400, y: 2850, label: '18', title: 'Підрахунок втрат', desc: 'Олег оцінює ціну своїх помилок', section: 'Розділ 5' },
+                { id: 'recovery_path', pageId: 'page8_1', x: 400, y: 3000, label: '19', title: 'Шляхи відновлення', desc: 'Допомога, кредит, власні сили, поліція', section: 'Розділ 5' },
+                { id: 'lessons_learned', pageId: 'page9', x: 400, y: 3150, label: '20', title: 'Уроки безпеки', desc: 'Що Олег зрозумів про кібербезпеку', section: 'Розділ 5' },
+                { id: 'month_later', pageId: 'page9', x: 400, y: 3300, label: '21', title: 'Місяць потому', desc: 'Життя налагоджується, перші результати', section: 'Розділ 5' },
                 
-                { id: 'transformation', x: 400, y: 3500, label: '22', title: 'Новий Олег', desc: 'Трансформація героя через досвід', section: 'Розділ 6' },
-                { id: 'final_choice', x: 400, y: 3650, label: '23', title: 'Фінальне рішення', desc: 'Що робити з набутим досвідом', section: 'Розділ 6' },
-                { id: 'endings', x: 400, y: 3800, label: '24', title: 'Множинні кінцівки', desc: '9 різних шляхів залежно від виборів', section: 'Розділ 6' },
-                { id: 'epilogue', x: 400, y: 3950, label: '25', title: 'Епілог', desc: 'Заключне слово. Поради читачам', section: 'Розділ 6' }
+                { id: 'transformation', pageId: 'page10', x: 400, y: 3500, label: '22', title: 'Новий Олег', desc: 'Трансформація героя через досвід', section: 'Розділ 6' },
+                { id: 'final_choice', pageId: 'page10_1', x: 400, y: 3650, label: '23', title: 'Фінальне рішення', desc: 'Що робити з набутим досвідом', section: 'Розділ 6' },
+                { id: 'endings', pageId: 'ending_perfect', x: 400, y: 3800, label: '24', title: 'Множинні кінцівки', desc: '9 різних шляхів залежно від виборів', section: 'Розділ 6' },
+                { id: 'epilogue', pageId: 'final', x: 400, y: 3950, label: '25', title: 'Епілог', desc: 'Заключне слово. Поради читачам', section: 'Розділ 6' }
             ];
 
             // Фонові секції для розділів
@@ -2912,6 +2974,15 @@
                 ctx.fill();
             }
 
+            // Зберігаємо позиції вузлів для обробника кліків
+            storyNodesPositions = storyNodes.map(node => ({
+                x: node.x,
+                y: node.y,
+                radius: 35,
+                pageId: node.pageId,
+                title: node.title
+            }));
+            
             // Малюємо вузли історії
             storyNodes.forEach((node, index) => {
                 const progress = index / storyNodes.length;
