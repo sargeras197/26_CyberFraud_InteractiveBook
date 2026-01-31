@@ -97,6 +97,180 @@
             overflow: hidden;
         }
         
+        /* Іконка новин */
+        .news-icon {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 5px 25px rgba(102, 126, 234, 0.5);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            animation: pulse 2s infinite;
+        }
+
+        .news-icon:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 30px rgba(102, 126, 234, 0.7);
+        }
+
+        .news-icon svg {
+            width: 30px;
+            height: 30px;
+            fill: white;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 5px 25px rgba(102, 126, 234, 0.5); }
+            50% { box-shadow: 0 5px 35px rgba(102, 126, 234, 0.8); }
+        }
+
+        /* Модальне вікно */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            background: white;
+            margin: 5% auto;
+            padding: 0;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 700px;
+            max-height: 85vh;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: slideDown 0.4s ease;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            font-size: 1.8em;
+        }
+
+        .close {
+            color: white;
+            font-size: 35px;
+            font-weight: bold;
+            cursor: pointer;
+            line-height: 1;
+            transition: all 0.2s;
+        }
+
+        .close:hover {
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            padding: 30px;
+            max-height: calc(85vh - 100px);
+            overflow-y: auto;
+        }
+
+        .update-section {
+            margin-bottom: 30px;
+        }
+
+        .update-section h3 {
+            color: #667eea;
+            font-size: 1.4em;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .update-item {
+            display: flex;
+            align-items: flex-start;
+            margin: 15px 0;
+            padding: 12px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .update-item:hover {
+            background: #e9ecef;
+            transform: translateX(5px);
+        }
+
+        .check-icon {
+            width: 24px;
+            height: 24px;
+            background: #51cf66;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+
+        .check-icon::after {
+            content: '✓';
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .future-icon {
+            width: 24px;
+            height: 24px;
+            background: #ffd43b;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+
+        .future-icon::after {
+            content: '⏳';
+            font-size: 14px;
+        }
+
+        .update-text {
+            flex: 1;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .update-date {
+            font-size: 0.85em;
+            color: #868e96;
+            margin-top: 5px;
+        }
+
         .choice-button::before {
             content: '';
             position: absolute;
@@ -545,6 +719,37 @@
         body.dark-theme .developer-link:hover {
             color: #a5d8ff;
         }
+        
+        /* Адаптивність для мобільних пристроїв */
+        @media (max-width: 768px) {
+            .modal-content {
+                width: 95%;
+                margin: 10% auto;
+                padding: 0;
+            }
+            
+            .modal-header {
+                padding: 20px 20px;
+            }
+            
+            .modal-header h2 {
+                font-size: 1.4em;
+            }
+            
+            .modal-body {
+                padding: 20px;
+            }
+            
+            .menu-icon {
+                width: 45px;
+                height: 45px;
+                font-size: 1.3em;
+            }
+            
+            .update-section h3 {
+                font-size: 1.2em;
+            }
+        }
     </style>
 </head>
 <body>
@@ -555,6 +760,9 @@
         </div>
         <div class="menu-icon" onclick="openStoryMap()" title="Інтерактивна карта">
             🗺️
+        </div>
+        <div class="menu-icon" onclick="openNewsModal()" title="Новини та оновлення">
+            📰
         </div>
     </div>
 
@@ -599,6 +807,99 @@
                     <button class="choice-button" onclick="resetProgress()" style="margin: 0;">
                         🔄 Скинути прогрес
                     </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальне вікно новин -->
+    <div id="newsModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeNewsModal()">&times;</span>
+            <h2 style="color: #667eea; text-align: center; margin-bottom: 30px;">📰 Новини та оновлення</h2>
+            
+            <div class="update-section">
+                <h3 style="color: #51cf66;">✅ Виконано</h3>
+                <div class="update-item">
+                    <div class="check-icon"></div>
+                    <div class="update-text">
+                        Створено інтерактивну історію про кіберфрод з розгалуженим сюжетом
+                        <div class="update-date">Січень 2026</div>
+                    </div>
+                </div>
+                <div class="update-item">
+                    <div class="check-icon"></div>
+                    <div class="update-text">
+                        Додано 5 розділів з різними сценаріями шахрайства
+                        <div class="update-date">Січень 2026</div>
+                    </div>
+                </div>
+                <div class="update-item">
+                    <div class="check-icon"></div>
+                    <div class="update-text">
+                        Впроваджено систему вибору з наслідками
+                        <div class="update-date">Січень 2026</div>
+                    </div>
+                </div>
+                <div class="update-item">
+                    <div class="check-icon"></div>
+                    <div class="update-text">
+                        Додано візуальні ефекти та анімації
+                        <div class="update-date">Січень 2026</div>
+                    </div>
+                </div>
+                <div class="update-item">
+                    <div class="check-icon"></div>
+                    <div class="update-text">
+                        Створено адаптивний дизайн для всіх пристроїв
+                        <div class="update-date">Січень 2026</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="update-section">
+                <h3 style="color: #ffd43b;">🔜 Заплановано</h3>
+                <div class="update-item">
+                    <div class="future-icon"></div>
+                    <div class="update-text">
+                        Додавання нових розділів про фішинг та соціальну інженерію
+                        <div class="update-date">Лютий 2026</div>
+                    </div>
+                </div>
+                <div class="update-item">
+                    <div class="future-icon"></div>
+                    <div class="update-text">
+                        Інтеграція освітніх вікторин після кожного розділу
+                        <div class="update-date">Лютий 2026</div>
+                    </div>
+                </div>
+                <div class="update-item">
+                    <div class="future-icon"></div>
+                    <div class="update-text">
+                        Додавання системи досягнень та прогресу
+                        <div class="update-date">Березень 2026</div>
+                    </div>
+                </div>
+                <div class="update-item">
+                    <div class="future-icon"></div>
+                    <div class="update-text">
+                        Створення мультиплеєрного режиму для спільного проходження
+                        <div class="update-date">Березень 2026</div>
+                    </div>
+                </div>
+                <div class="update-item">
+                    <div class="future-icon"></div>
+                    <div class="update-text">
+                        Додавання аудіо-супроводу та озвучки персонажів
+                        <div class="update-date">Квітень 2026</div>
+                    </div>
+                </div>
+                <div class="update-item">
+                    <div class="future-icon"></div>
+                    <div class="update-text">
+                        Розробка мобільного додатку для iOS та Android
+                        <div class="update-date">Травень 2026</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1085,6 +1386,14 @@
         
         // ===== НАЛАШТУВАННЯ =====
         
+        function openNewsModal() {
+            document.getElementById('newsModal').classList.add('active');
+        }
+        
+        function closeNewsModal() {
+            document.getElementById('newsModal').classList.remove('active');
+        }
+        
         function openSettings() {
             document.getElementById('settingsModal').classList.add('active');
             loadSettings();
@@ -1332,9 +1641,15 @@
         
         // Закриття модального вікна при кліку поза ним
         window.onclick = function(event) {
-            const modal = document.getElementById('settingsModal');
-            if (event.target === modal) {
+            const settingsModal = document.getElementById('settingsModal');
+            const newsModal = document.getElementById('newsModal');
+            
+            if (event.target === settingsModal) {
                 closeSettings();
+            }
+            
+            if (event.target === newsModal) {
+                closeNewsModal();
             }
         }
         
