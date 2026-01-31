@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест іконок</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 40px;
+            background: #1a1a2e;
+            color: white;
+        }
+        .icon-test {
+            display: inline-block;
+            margin: 20px;
+            text-align: center;
+        }
+        .icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            margin: 0 auto 10px;
+            border: 3px solid white;
+        }
+        .start { background: #667eea; }
+        .choice { background: #ffd43b; color: #000; }
+        .good { background: #51cf66; }
+        .bad { background: #ff6b6b; }
+        .neutral { background: #74c0fc; }
+    </style>
+</head>
+<body>
+    <h1>Перевірка іконок для інтерактивної карти</h1>
+    
+    <div class="icon-test">
+        <div class="icon start">⭐</div>
+        <p>Початок<br>(start)<br>⭐ U+2B50</p>
+    </div>
+    
+    <div class="icon-test">
+        <div class="icon choice">?</div>
+        <p>Вибір<br>(choice)<br>? U+003F</p>
+    </div>
+    
+    <div class="icon-test">
+        <div class="icon good">✓</div>
+        <p>Безпечно<br>(good)<br>✓ U+2713</p>
+    </div>
+    
+    <div class="icon-test">
+        <div class="icon bad">✗</div>
+        <p>Помилка<br>(bad)<br>✗ U+2717</p>
+    </div>
+    
+    <div class="icon-test">
+        <div class="icon neutral">◆</div>
+        <p>Нейтральне<br>(neutral)<br>◆ U+25C6</p>
+    </div>
+    
+    <h2 style="margin-top: 40px;">Альтернативні варіанти іконок:</h2>
+    
+    <div class="icon-test">
+        <div class="icon neutral">●</div>
+        <p>● U+25CF<br>Чорний круг</p>
+    </div>
+    
+    <div class="icon-test">
+        <div class="icon neutral">⬤</div>
+        <p>⬤ U+2B24<br>Великий круг</p>
+    </div>
+    
+    <div class="icon-test">
+        <div class="icon neutral">▣</div>
+        <p>▣ U+25A3<br>Квадрат з точкою</p>
+    </div>
+    
+    <div class="icon-test">
+        <div class="icon neutral">➤</div>
+        <p>➤ U+27A4<br>Стрілка</p>
+    </div>
+</body>
+</html>
