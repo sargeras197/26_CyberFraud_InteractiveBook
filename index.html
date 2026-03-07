@@ -588,45 +588,6 @@
         .legend-neutral { background: #74c0fc; }
         .legend-choice { background: #ffd43b; }
         
-        /* Перемикач режимів карти */
-        .map-mode-toggle {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin: 30px 0;
-            padding: 10px;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-        }
-        
-        .mode-button {
-            padding: 15px 30px;
-            border: 2px solid #667eea;
-            background: white;
-            color: #667eea;
-            border-radius: 10px;
-            font-size: 1.1em;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-weight: bold;
-        }
-        
-        .mode-button:hover {
-            background: #f0f4ff;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
-        }
-        
-        .mode-button.active {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border-color: #764ba2;
-        }
-        
         .map-description {
             text-align: center;
             color: #495057;
@@ -636,23 +597,7 @@
             background: #f8f9fa;
             border-radius: 10px;
         }
-        
-        body.dark-theme .mode-button {
-            background: #34495e;
-            color: #74c0fc;
-            border-color: #74c0fc;
-        }
-        
-        body.dark-theme .mode-button:hover {
-            background: #4a5f7f;
-        }
-        
-        body.dark-theme .mode-button.active {
-            background: linear-gradient(135deg, #74c0fc 0%, #a5d8ff 100%);
-            color: #1c1c1c;
-        }
-        
-        body.dark-theme .map-mode-toggle,
+
         body.dark-theme .map-description {
             background: #34495e;
             color: #ecf0f1;
@@ -1708,45 +1653,14 @@
     <!-- Інтерактивна карта сюжету -->
     <div class="container story-map" id="storyMapPage" style="display: none;">
         <h1>🗺️ Інтерактивна карта історії</h1>
-        <p class="subtitle">Візуалізація подорожі Олега</p>
-        
-        <!-- Перемикач режимів -->
-        <div class="map-mode-toggle">
-            <button class="mode-button active" id="choicesMode" onclick="switchMapMode('choices')">
-                🎯 Дерево рішень
-            </button>
-            <button class="mode-button" id="storyMode" onclick="switchMapMode('story')">
-                📖 Потік історії
-            </button>
-        </div>
-        
-        <!-- Опис режиму -->
+        <p class="subtitle">Потік історії у вигляді дерева рішень</p>
+
         <div class="map-description" id="mapDescription">
-            <strong>Режим: Дерево рішень</strong><br>
-            Показує всі можливі вибори та їх наслідки. Кожна точка — це момент, коли Олег приймає рішення.
+            Показує шлях Олега як єдину карту з розгалуженнями, виборами та наслідками. Кожна точка — частина історії, а кожна гілка — можливий розвиток подій.
         </div>
         
         <div class="map-container">
             <canvas id="storyGraph"></canvas>
-        </div>
-        
-        <div class="legend">
-            <div class="legend-item">
-                <div class="legend-color legend-choice"></div>
-                <span>Вибір</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color legend-neutral"></div>
-                <span>Продовження</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color legend-good"></div>
-                <span>Хороший результат</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color legend-bad"></div>
-                <span>Поганий результат</span>
-            </div>
         </div>
         
         <div class="choices">
@@ -1961,8 +1875,6 @@
         }
         
         // ===== ІНТЕРАКТИВНА КАРТА =====
-        
-        let currentMapMode = 'choices'; // choices або story
         
         const storyStructure = {
             intro: { 
@@ -2551,76 +2463,6 @@
             }
         };
         
-        // Структура для режиму "Потік історії"
-        const storyTimeline = [
-            // Розділ 1: Початок
-            { id: 'intro', title: 'Пробудження', chapter: 'Вступ', description: 'Олег отримує повідомлення від мами', x: 80, y: 80, section: 1 },
-            { id: 'decision', title: 'Рішення їхати', chapter: 'Розділ 1', description: 'Олег приймає рішення переїжджати', x: 220, y: 80, section: 1 },
-            { id: 'morning', title: 'Ранкові збори', chapter: 'Розділ 1', description: 'Пакування речей, перевірка документів', x: 360, y: 80, section: 1 },
-            
-            // Розділ 2: Перші загрози
-            { id: 'online', title: 'Пошук квитків', chapter: 'Розділ 1', description: 'Олег заходить в інтернет', x: 500, y: 80, section: 2 },
-            { id: 'phishing', title: 'Фішингові атаки', chapter: 'Розділ 1', description: 'Підозрілі посилання та знижки', x: 640, y: 80, section: 2 },
-            { id: 'choice1', title: 'Перший вибір', chapter: 'Розділ 1', description: 'Клікнути чи перевірити?', x: 780, y: 80, section: 2 },
-            
-            // Розділ 3: Наслідки
-            { id: 'consequences1', title: 'Наслідки вибору', chapter: 'Розділ 1', description: 'Результат першого рішення', x: 80, y: 220, section: 3 },
-            { id: 'packing', title: 'Продовження зборів', chapter: 'Розділ 1', description: 'Валіза, документи, техніка', x: 220, y: 220, section: 3 },
-            { id: 'calls', title: 'Підозрілі дзвінки', chapter: 'Розділ 1', description: 'Невідомі номери, агентства', x: 360, y: 220, section: 3 },
-            
-            // Розділ 4: Другі загрози
-            { id: 'emails', title: 'Фейкові листи', chapter: 'Розділ 1', description: 'Нова Пошта, посилки, оплата', x: 500, y: 220, section: 4 },
-            { id: 'choice2', title: 'Другий вибір', chapter: 'Розділ 1', description: 'Перейти за посиланням?', x: 640, y: 220, section: 4 },
-            { id: 'consequences2', title: 'Результат рішення', chapter: 'Розділ 1', description: 'Втрати або безпека', x: 780, y: 220, section: 4 },
-            
-            // Розділ 5: Фінальні збори
-            { id: 'final_prep', title: 'Останні приготування', chapter: 'Розділ 2', description: 'Перевірка всього необхідного', x: 80, y: 360, section: 5 },
-            { id: 'tech_issues', title: 'Технічні проблеми', chapter: 'Розділ 2', description: 'Диск, дзвінки, підозри', x: 220, y: 360, section: 5 },
-            { id: 'choice3', title: 'Третій вибір', chapter: 'Розділ 2', description: 'Як реагувати на загрози?', x: 360, y: 360, section: 5 },
-            
-            // Розділ 6: Відправлення
-            { id: 'departure', title: 'Виїзд', chapter: 'Розділ 2', description: 'Дорога на вокзал', x: 500, y: 360, section: 6 },
-            { id: 'station', title: 'На вокзалі', chapter: 'Розділ 3', description: 'Перевірка квитка, посадка', x: 640, y: 360, section: 6 },
-            { id: 'reflection', title: 'Рефлексія', chapter: 'Розділ 3', description: 'Олег аналізує пройдений шлях', x: 780, y: 360, section: 6 },
-            
-            // Майбутнє
-            { id: 'train', title: 'У потязі', chapter: 'Розділ 4', description: '[Буде додано] Wi-Fi пастки', x: 220, y: 500, section: 7, future: true },
-            { id: 'arrival', title: 'Прибуття', chapter: 'Розділ 5', description: '[Буде додано] Київ, нові загрози', x: 430, y: 500, section: 7, future: true },
-            { id: 'housing', title: 'Житло', chapter: 'Розділ 5', description: '[Буде додано] Оренда, шахрайство', x: 640, y: 500, section: 7, future: true },
-            { id: 'finale', title: 'Фінал', chapter: 'Розділ 6', description: '[Буде додано] Кінцівки', x: 430, y: 620, section: 8, future: true }
-        ];
-        
-        function switchMapMode(mode) {
-            currentMapMode = mode;
-            
-            // Оновлюємо кнопки
-            document.getElementById('choicesMode').classList.remove('active');
-            document.getElementById('storyMode').classList.remove('active');
-            
-            if (mode === 'choices') {
-                document.getElementById('choicesMode').classList.add('active');
-                document.getElementById('mapDescription').innerHTML = 
-                    '<strong>Режим: Дерево рішень</strong><br>' +
-                    'Показує всі можливі вибори Олега та їх наслідки. Кожна точка - це момент прийняття рішення або результат вибору. ' +
-                    'Лінії з\'єднують вибори з наслідками. На лініях вказано які саме рішення веде до результату.<br><br>' +
-                    '<span style="display: inline-block; width: 12px; height: 12px; background: #667eea; border-radius: 50%; margin-right: 5px;"></span><span style="color: #667eea;">⭐ Початок</span> | ' +
-                    '<span style="display: inline-block; width: 12px; height: 12px; background: #ffd43b; border-radius: 50%; margin-right: 5px;"></span><span style="color: #ffd43b;">? Вибір</span> | ' +
-                    '<span style="display: inline-block; width: 12px; height: 12px; background: #51cf66; border-radius: 50%; margin-right: 5px;"></span><span style="color: #51cf66;">✓ Безпечно</span> | ' +
-                    '<span style="display: inline-block; width: 12px; height: 12px; background: #ff6b6b; border-radius: 50%; margin-right: 5px;"></span><span style="color: #ff6b6b;">✗ Помилка</span> | ' +
-                    '<span style="display: inline-block; width: 12px; height: 12px; background: #74c0fc; border-radius: 50%; margin-right: 5px;"></span><span style="color: #74c0fc;">◆ Нейтральне</span>';
-            } else {
-                document.getElementById('storyMode').classList.add('active');
-                document.getElementById('mapDescription').innerHTML = 
-                    '<strong>Режим: Потік історії</strong><br>' +
-                    'Показує лінійний розвиток сюжету від початку до кінця. ' +
-                    'Кожен вузол - це ключовий момент в історії Олега: від пробудження в Харкові до нового життя в Києві. ' +
-                    'Градієнт кольору показує прогрес через історію. <strong>Акцент на сюжеті</strong>, а не на правильності виборів.<br><br>' +
-                    '📖 25 ключових етапів історії • 🎭 6 розділів • 🎯 Лінійна прогресія сюжету';
-            }
-            
-            drawStoryGraph();
-        }
-        
         function openStoryMap() {
             document.getElementById('storyMapPage').style.display = 'block';
             document.querySelector('.container:not(.story-map)').style.display = 'none';
@@ -2636,64 +2478,46 @@
             const canvas = document.getElementById('storyGraph');
             const ctx = canvas.getContext('2d');
             
-            // Встановлюємо розмір canvas
             canvas.width = canvas.offsetWidth;
-            canvas.height = currentMapMode === 'choices' ? 3200 : 4200;
+            canvas.height = 3200;
             
-            // Очищуємо canvas
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            if (currentMapMode === 'choices') {
-                drawChoicesMode(ctx, canvas);
-            } else {
-                drawStoryMode(ctx, canvas);
-            }
+
+            drawChoicesMode(ctx, canvas);
         }
         
-        // Додаємо обробник кліків на canvas
         document.addEventListener('DOMContentLoaded', function() {
             const canvas = document.getElementById('storyGraph');
             
             canvas.addEventListener('click', function(event) {
-                if (currentMapMode !== 'story') return;
-                
                 const rect = canvas.getBoundingClientRect();
                 const scaleX = canvas.width / rect.width;
                 const scaleY = canvas.height / rect.height;
                 const x = (event.clientX - rect.left) * scaleX;
                 const y = (event.clientY - rect.top) * scaleY;
-                
-                // Перевіряємо, чи клікнули на якийсь вузол
+
                 for (let node of storyNodesPositions) {
                     const distance = Math.sqrt(
                         Math.pow(x - node.x, 2) + Math.pow(y - node.y, 2)
                     );
-                    
+
                     if (distance <= node.radius) {
-                        // Клікнули на вузол - переходимо на сторінку
-                        console.log('Перехід на:', node.pageId, node.title);
                         closeStoryMap();
                         goToPage(node.pageId);
                         break;
                     }
                 }
             });
-            
-            // Додаємо ефект hover
+
             canvas.addEventListener('mousemove', function(event) {
-                if (currentMapMode !== 'story') {
-                    canvas.style.cursor = 'default';
-                    return;
-                }
-                
                 const rect = canvas.getBoundingClientRect();
                 const scaleX = canvas.width / rect.width;
                 const scaleY = canvas.height / rect.height;
                 const x = (event.clientX - rect.left) * scaleX;
                 const y = (event.clientY - rect.top) * scaleY;
-                
+
                 let isOverNode = false;
-                
+
                 for (let node of storyNodesPositions) {
                     const distance = Math.sqrt(
                         Math.pow(x - node.x, 2) + Math.pow(y - node.y, 2)
@@ -2710,6 +2534,8 @@
         });
         
         function drawChoicesMode(ctx, canvas) {
+            storyNodesPositions = [];
+
             // Збільшена висота для всіх розділів
             canvas.height = 3200;
             
@@ -2882,155 +2708,18 @@
                     ctx.font = '9px Arial';
                     ctx.fillText(`Етап ${node.storyLine + 1}`, node.x, node.y + 55 + (words.length * 14) + 12);
                 }
+
+                storyNodesPositions.push({
+                    x: node.x,
+                    y: node.y,
+                    radius: 28,
+                    pageId: nodeId,
+                    title: node.title
+                });
             });
         }
-        
-        // Глобальна змінна для зберігання позицій вузлів
+
         let storyNodesPositions = [];
-        
-        function drawStoryMode(ctx, canvas) {
-            // Лінійний потік історії - акцент на сюжеті, а не на виборах
-            const storyNodes = [
-                { id: 'intro', pageId: 'intro', x: 400, y: 100, label: '1', title: 'Пробудження', desc: 'SMS від мами. Рішення їхати до Києва', section: 'Вступ' },
-                { id: 'morning', pageId: 'page1', x: 400, y: 250, label: '2', title: 'Ранкові збори', desc: 'Пакування речей, перевірка документів', section: 'Розділ 1' },
-                { id: 'online_threats', pageId: 'page1_1', x: 400, y: 400, label: '3', title: 'Перші загрози', desc: 'Фішингові SMS, підозрілі дзвінки, фейкові листи', section: 'Розділ 1' },
-                { id: 'choices_made', pageId: 'page1_2', x: 400, y: 550, label: '4', title: 'Перші рішення', desc: 'Олег робить вибори під тиском часу', section: 'Розділ 1' },
-                { id: 'consequences', pageId: 'page1_3', x: 400, y: 700, label: '5', title: 'Перші наслідки', desc: 'Результати прийнятих рішень стають відчутними', section: 'Розділ 1' },
-                
-                { id: 'final_prep', pageId: 'page2', x: 400, y: 900, label: '6', title: 'Останні приготування', desc: 'Перевірка готовності до поїздки', section: 'Розділ 2' },
-                { id: 'tech_issues', pageId: 'page2_1', x: 400, y: 1050, label: '7', title: 'Технічні проблеми', desc: 'Підозрілий диск, проблеми з зарядкою', section: 'Розділ 2' },
-                { id: 'departure', pageId: 'page2_2', x: 400, y: 1200, label: '8', title: 'Виїзд', desc: 'Дорога на вокзал, останні перевірки', section: 'Розділ 2' },
-                
-                { id: 'station', pageId: 'page3', x: 400, y: 1400, label: '9', title: 'На вокзалі', desc: 'Публічний Wi-Fi, натовп, нові ризики', section: 'Розділ 3' },
-                { id: 'wifi_threat', pageId: 'page4', x: 400, y: 1550, label: '10', title: 'Цифрові пастки', desc: 'Фейкові мережі, SMS від "банку"', section: 'Розділ 3' },
-                { id: 'train', pageId: 'page5', x: 400, y: 1700, label: '11', title: 'У потягу', desc: 'Дорога до нового життя, рефлексія', section: 'Розділ 3' },
-                { id: 'train_learning', pageId: 'page5', x: 400, y: 1850, label: '12', title: 'Аналіз помилок', desc: 'Олег переосмислює свої дії', section: 'Розділ 3' },
-                
-                { id: 'arrival', pageId: 'page6', x: 400, y: 2050, label: '13', title: 'Прибуття до Києва', desc: 'Нове місто, нові можливості, нові загрози', section: 'Розділ 4' },
-                { id: 'housing_search', pageId: 'page6_1', x: 400, y: 2200, label: '14', title: 'Пошук житла', desc: 'Оголошення, соцмережі, рекомендації', section: 'Розділ 4' },
-                { id: 'housing_traps', pageId: 'page6_2', x: 400, y: 2350, label: '15', title: 'Шахрайські схеми', desc: 'Передоплата, фейкові власники, підроблені документи', section: 'Розділ 4' },
-                { id: 'housing_decision', pageId: 'page6_3', x: 400, y: 2500, label: '16', title: 'Вибір житла', desc: 'Олег приймає важливе рішення', section: 'Розділ 4' },
-                { id: 'new_home', pageId: 'page7', x: 400, y: 2650, label: '17', title: 'Облаштування', desc: 'Перші дні в новому місті', section: 'Розділ 4' },
-                
-                { id: 'assessment', pageId: 'page8', x: 400, y: 2850, label: '18', title: 'Підрахунок втрат', desc: 'Олег оцінює ціну своїх помилок', section: 'Розділ 5' },
-                { id: 'recovery_path', pageId: 'page8_1', x: 400, y: 3000, label: '19', title: 'Шляхи відновлення', desc: 'Допомога, кредит, власні сили, поліція', section: 'Розділ 5' },
-                { id: 'lessons_learned', pageId: 'page9', x: 400, y: 3150, label: '20', title: 'Уроки безпеки', desc: 'Що Олег зрозумів про кібербезпеку', section: 'Розділ 5' },
-                { id: 'month_later', pageId: 'page9', x: 400, y: 3300, label: '21', title: 'Місяць потому', desc: 'Життя налагоджується, перші результати', section: 'Розділ 5' },
-                
-                { id: 'transformation', pageId: 'page10', x: 400, y: 3500, label: '22', title: 'Новий Олег', desc: 'Трансформація героя через досвід', section: 'Розділ 6' },
-                { id: 'final_choice', pageId: 'page10_1', x: 400, y: 3650, label: '23', title: 'Фінальне рішення', desc: 'Що робити з набутим досвідом', section: 'Розділ 6' },
-                { id: 'endings', pageId: 'ending_perfect', x: 400, y: 3800, label: '24', title: 'Множинні кінцівки', desc: '9 різних шляхів залежно від виборів', section: 'Розділ 6' },
-                { id: 'epilogue', pageId: 'final', x: 400, y: 3950, label: '25', title: 'Епілог', desc: 'Заключне слово. Поради читачам', section: 'Розділ 6' }
-            ];
-
-            // Фонові секції для розділів
-            const sections = [
-                { name: 'Вступ', y: 50, height: 120, color: 'rgba(139, 92, 246, 0.1)' },
-                { name: 'Розділ 1: День, коли все змінилось', y: 170, height: 600, color: 'rgba(59, 130, 246, 0.1)' },
-                { name: 'Розділ 2: Квиток у невідомість', y: 770, height: 500, color: 'rgba(16, 185, 129, 0.1)' },
-                { name: 'Розділ 3: Дорога', y: 1270, height: 650, color: 'rgba(245, 158, 11, 0.1)' },
-                { name: 'Розділ 4: Нове місто, нові пастки', y: 1920, height: 800, color: 'rgba(239, 68, 68, 0.1)' },
-                { name: 'Розділ 5: Ціна помилки', y: 2720, height: 650, color: 'rgba(168, 85, 247, 0.1)' },
-                { name: 'Розділ 6: Інший Олег', y: 3370, height: 650, color: 'rgba(236, 72, 153, 0.1)' }
-            ];
-
-            sections.forEach(section => {
-                ctx.fillStyle = section.color;
-                ctx.fillRect(50, section.y, canvas.width - 100, section.height);
-                
-                ctx.fillStyle = '#64748b';
-                ctx.font = 'bold 16px Arial';
-                ctx.textAlign = 'left';
-                ctx.fillText(section.name, 70, section.y + 30);
-            });
-
-            // Лінійні з'єднання - один потік історії
-            for (let i = 0; i < storyNodes.length - 1; i++) {
-                const current = storyNodes[i];
-                const next = storyNodes[i + 1];
-                
-                // Градієнт показує прогрес історії
-                const gradient = ctx.createLinearGradient(current.x, current.y, next.x, next.y);
-                const progress = i / storyNodes.length;
-                gradient.addColorStop(0, `hsl(${240 + progress * 60}, 70%, 60%)`);
-                gradient.addColorStop(1, `hsl(${240 + (progress + 0.05) * 60}, 70%, 60%)`);
-                
-                ctx.strokeStyle = gradient;
-                ctx.lineWidth = 4;
-                ctx.setLineDash([]);
-                
-                ctx.beginPath();
-                ctx.moveTo(current.x, current.y + 35);
-                ctx.lineTo(next.x, next.y - 35);
-                ctx.stroke();
-                
-                // Стрілка напрямку
-                ctx.fillStyle = gradient;
-                ctx.beginPath();
-                ctx.moveTo(next.x, next.y - 35);
-                ctx.lineTo(next.x - 8, next.y - 48);
-                ctx.lineTo(next.x + 8, next.y - 48);
-                ctx.closePath();
-                ctx.fill();
-            }
-
-            // Зберігаємо позиції вузлів для обробника кліків
-            storyNodesPositions = storyNodes.map(node => ({
-                x: node.x,
-                y: node.y,
-                radius: 35,
-                pageId: node.pageId,
-                title: node.title
-            }));
-            
-            // Малюємо вузли історії
-            storyNodes.forEach((node, index) => {
-                const progress = index / storyNodes.length;
-                
-                // Тінь
-                ctx.shadowColor = 'rgba(0, 0, 0, 0.25)';
-                ctx.shadowBlur = 12;
-                ctx.shadowOffsetX = 0;
-                ctx.shadowOffsetY = 4;
-                
-                // Градієнтне коло - показує прогрес через історію
-                const gradient = ctx.createRadialGradient(node.x, node.y - 5, 0, node.x, node.y + 5, 35);
-                gradient.addColorStop(0, `hsl(${240 + progress * 60}, 75%, 65%)`);
-                gradient.addColorStop(1, `hsl(${240 + progress * 60}, 70%, 55%)`);
-                
-                ctx.fillStyle = gradient;
-                ctx.beginPath();
-                ctx.arc(node.x, node.y, 35, 0, Math.PI * 2);
-                ctx.fill();
-                
-                ctx.shadowColor = 'transparent';
-                ctx.strokeStyle = '#ffffff';
-                ctx.lineWidth = 4;
-                ctx.stroke();
-                
-                // Номер етапу
-                ctx.fillStyle = '#ffffff';
-                ctx.font = 'bold 24px Arial';
-                ctx.textAlign = 'center';
-                ctx.textBaseline = 'middle';
-                ctx.fillText(node.label, node.x, node.y);
-                
-                // Назва етапу
-                ctx.fillStyle = '#1e293b';
-                ctx.font = 'bold 16px Arial';
-                ctx.fillText(node.title, node.x, node.y + 60);
-                
-                // Опис
-                ctx.fillStyle = '#64748b';
-                ctx.font = '13px Arial';
-                ctx.fillText(node.desc, node.x, node.y + 78);
-                
-                // Розділ
-                ctx.fillStyle = '#94a3b8';
-                ctx.font = 'italic 11px Arial';
-                ctx.fillText(node.section, node.x, node.y + 93);
-            });
-        }
         
         function getNodeColor(type) {
             const colors = {

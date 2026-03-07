@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Інтерактивна карта історії — Дерево рішень</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f9f9f9; }
+    .tree-container { margin: 20px; }
+    .story-container { margin: 20px; padding: 20px; background: #fff; border-radius: 8px; box-shadow: 0 2px 8px #ccc; }
+    .node { cursor: pointer; padding: 6px 12px; border-radius: 6px; background: #e3e3ff; margin: 4px; display: inline-block; }
+    .node.selected { background: #a3a3ff; color: #fff; }
+    .children { margin-left: 24px; }
+  </style>
+</head>
+<body>
+  <h1>🗺️ Інтерактивна карта історії</h1>
+  <div class="tree-container" id="tree"></div>
+  <div class="story-container" id="story"></div>
+
+  <script>
+    // Структура дерева рішень
+    const storyTree = {
+      id: 'start',
+      text: 'Ви прокидаєтесь у незнайомому місці...',
+      story: 'Початок історії: Ви прокидаєтесь у незнайомому місці. Що будете робити?',
+      children: [
+        {
+          id: 'look_around',
+          text: 'Оглянутися навколо',
+          story: 'Ви уважно оглядаєте кімнату. Помічаєте двері та вікно.',
+          children: [
+            {
+              id: 'open_door',
+              text: 'Відкрити двері',
+              story: 'Двері відкриваються, і ви бачите коридор.',
+              children: []
+            },
+            {
+              id: 'open_window',
+              text: 'Відкрити вікно',
+              story: 'Вікно зачинене, але ви бачите сад зовні.',
+              children: []
+            }
+          ]
+        },
+        {
+          id: 'stay',
+          text: 'Залишитися на місці',
+          story: 'Ви вирішили залишитися. Час іде, нічого не змінюється.',
+          children: []
+        }
+      ]
+    };
+
+    // Відображення дерева
+    function renderTree(node, parentEl, selectedId) {
+      const nodeEl = document.createElement('div');
+      nodeEl.className = 'node' + (node.id === selectedId ? ' selected' : '');
+      nodeEl.textContent = node.text;
+      nodeEl.onclick = () => {
+        renderStory(node);
+        renderTree(storyTree, document.getElementById('tree'), node.id);
+      };
+      parentEl.appendChild(nodeEl);
+      if (node.children && node.children.length > 0) {
+        const childrenEl = document.createElement('div');
+        childrenEl.className = 'children';
+        node.children.forEach(child => renderTree(child, childrenEl, selectedId));
+        parentEl.appendChild(childrenEl);
+      }
+    }
+
+    // Відображення історії
+    function renderStory(node) {
+      document.getElementById('story').innerHTML = `<h2>Фрагмент історії</h2><p>${node.story}</p>`;
+    }
+
+    // Початковий рендер
+    renderTree(storyTree, document.getElementById('tree'), 'start');
+    renderStory(storyTree);
+  </script>
+</body>
+</html>
