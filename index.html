@@ -334,12 +334,12 @@
         }
         
         .page {
-            display: none;
+            display: none !important;
             animation: fadeIn 0.6s ease-in;
         }
         
         .page.active {
-            display: block;
+            display: block !important;
         }
         
         .stats {
@@ -969,6 +969,38 @@
             </div>
         </div>
 
+        <!-- Сцена 1: Атмосферний вступ — збір речей -->
+        <div class="page" id="scene1_packing">
+            <h2 class="chapter-title">Сцена 1. Збір речей</h2>
+            <div class="time-stamp">⏰ 06:30, Харків</div>
+            <div class="story-text">
+                <p>У кімнаті напівтемрява, вікна заклеєні скотчем. Олег гарячково кидає речі у валізу. Це момент емоційної напруги. Ти маєш обрати, що саме взяти з собою — місця обмаль.</p>
+                <p><strong>Обери 4 речі зі списку:</strong></p>
+            </div>
+            <form id="scene1PackingForm" class="story-text" style="margin-bottom: 30px;">
+                <label><input type="checkbox" name="item" value="Паспорт, диплом, документи на квартиру"> 📁 Папка з документами (паспорт, диплом, документи на квартиру)</label><br>
+                <label><input type="checkbox" name="item" value="Зарядні пристрої та павербанк"> 🔌 Зарядні пристрої та павербанк</label><br>
+                <label><input type="checkbox" name="item" value="Старий фотоальбом"> 📷 Старий фотоальбом</label><br>
+                <label><input type="checkbox" name="item" value="Теплий одяг"> 🧥 Теплий одяг</label><br>
+                <label><input type="checkbox" name="item" value="Готівка"> 💵 Готівка</label><br>
+                <label><input type="checkbox" name="item" value="Аптечка"> 💊 Аптечка</label><br>
+                <label><input type="checkbox" name="item" value="Їжа на дорогу"> 🍎 Їжа на дорогу</label><br>
+                <div id="scene1PackingWarning" style="color:#c92a2a; margin-top:10px; display:none;"></div>
+            </form>
+            <div class="choices">
+                <button class="choice-button" id="scene1PackingNextBtn" onclick="submitScene1Packing(event)">Взяти речі і йти</button>
+            </div>
+        </div>
+
+        <!-- Результат збору виці -->
+        <div class="page" id="scene1_packing_result">
+            <h2 class="chapter-title">Валіза зібрана</h2>
+            <div class="story-text" id="scene1PackingSummary"></div>
+            <div class="choices">
+                <button class="choice-button" onclick="goToPage('page1')">➡️ Продовжити</button>
+            </div>
+        </div>
+
         <!-- Розділ 1: День, коли все змінилось -->
         
         <!-- Сторінка 1: Початок -->
@@ -1003,7 +1035,7 @@
                 <button class="choice-button" onclick="goToPage('page1_1', {id: 'check_balance', type: 'safe', points: 5})">
                     📱 Перевірити баланс карти та купити квиток онлайн
                 </button>
-                <button class="choice-button" onclick="goToPage('page1_2', {id: 'pack_first', type: 'safe', points: 5})">
+                <button class="choice-button" id="packFirstChoiceBtn" onclick="goToPage('scene1_packing', {id: 'pack_first', type: 'safe', points: 5})">
                     🎒 Спочатку зібрати речі, а потім вирішувати з дорогою
                 </button>
                 <button class="choice-button" onclick="goToPage('page1_3', {id: 'think_coffee', type: 'safe', points: 5})">
@@ -1679,6 +1711,14 @@
             decisions: [],       // Історія рішень
             consequences: []     // Активні наслідки
         };
+
+        function updatePackingChoiceVisibility() {
+            const packBtn = document.getElementById('packFirstChoiceBtn');
+            if (!packBtn) return;
+
+            const isPackingCompleted = localStorage.getItem('scene1PackingCompleted') === 'true';
+            packBtn.style.display = isPackingCompleted ? 'none' : 'block';
+        }
         
         function goToPage(pageId, decision = null) {
             // Зберігаємо рішення, якщо воно є
@@ -1713,6 +1753,10 @@
             const targetPage = document.getElementById(pageId);
             if (targetPage) {
                 targetPage.classList.add('active');
+
+                if (pageId === 'page1') {
+                    updatePackingChoiceVisibility();
+                }
                 
                 // Прокручуємо наверх
                 window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -1755,6 +1799,7 @@
                 localStorage.removeItem('olegStoryProgress');
                 localStorage.removeItem('olegGameState');
                 localStorage.removeItem('olegStorySettings');
+                localStorage.removeItem('scene1PackingCompleted');
                 gameState = {
                     safetyScore: 0,
                     riskScore: 0,
@@ -1765,6 +1810,34 @@
                 closeSettings();
                 goToPage('intro');
             }
+        }
+        
+        // Логіка для вибору речей у валізу (Сцена 1)
+        function submitScene1Packing(e) {
+            e.preventDefault();
+            const form = document.getElementById('scene1PackingForm');
+            const checked = Array.from(form.querySelectorAll('input[type=checkbox]:checked'));
+            const warning = document.getElementById('scene1PackingWarning');
+            if (checked.length < 4) {
+                warning.textContent = 'Обери рівно 4 речі!';
+                warning.style.display = 'block';
+                return false;
+            }
+            if (checked.length > 4) {
+                warning.textContent = 'Можна взяти лише 4 речі!';
+                warning.style.display = 'block';
+                return false;
+            }
+            warning.style.display = 'none';
+            // Показати підсумок
+            const summary = document.getElementById('scene1PackingSummary');
+            summary.innerHTML = '<p>Ти обрав(ла):</p><ul>' + checked.map(i => '<li>' + i.value + '</li>').join('') + '</ul>' +
+                '<p style="margin-top:20px; color:#495057;">Валіза закрита. Час іти. Головне — нічого не забути в цифровому світі.</p>';
+
+            localStorage.setItem('scene1PackingCompleted', 'true');
+            updatePackingChoiceVisibility();
+            goToPage('scene1_packing_result');
+            return false;
         }
         
         // Отримання фінальної кінцівки на основі рішень
@@ -2784,14 +2857,33 @@
             }
         }
         
+        // === ІНІЦІАЛІЗАЦІЯ ПРИ ЗАВАНТАЖЕННІ ===
+        function initializeApp() {
+            // Видаляємо клас active з усіх сторінок
+            const allPages = document.querySelectorAll('.page');
+            allPages.forEach(page => page.classList.remove('active'));
+
+            updatePackingChoiceVisibility();
+            
+            // Гарантуємо, що стартова сторінка (intro) видима
+            const introPage = document.getElementById('intro');
+            if (introPage) {
+                introPage.classList.add('active');
+                console.log('✓ Стартова сторінка ініціалізована');
+            } else {
+                console.error('✗ Сторінка intro не знайдена!');
+            }
+        }
+        
         // Завантажуємо налаштування при старті
         window.addEventListener('load', () => {
+            initializeApp();
             loadSettings();
             // loadProgress(); // Розкоментувати для автозавантаження прогресу
         });
         
-        // Завантажуємо прогрес при відкритті
-        // window.addEventListener('load', loadProgress);
+        // Також ініціалізуємо при готовності DOM
+        document.addEventListener('DOMContentLoaded', initializeApp);
     </script>
 </body>
 </html>
