@@ -1716,18 +1716,14 @@
             const packBtn = document.getElementById('packFirstChoiceBtn');
             if (!packBtn) return;
 
-            const isPackingChosen = localStorage.getItem('scene1PackingChosen') === 'true';
-            packBtn.style.display = isPackingChosen ? 'none' : 'block';
+            const isPackingCompleted = localStorage.getItem('scene1PackingCompleted') === 'true';
+            packBtn.style.display = isPackingCompleted ? 'none' : 'block';
         }
         
         function goToPage(pageId, decision = null) {
             // Зберігаємо рішення, якщо воно є
             if (decision) {
                 gameState.decisions.push(decision);
-
-                if (decision.id === 'pack_first') {
-                    localStorage.setItem('scene1PackingChosen', 'true');
-                }
                 
                 // Оновлюємо бали залежно від типу рішення
                 if (decision.type === 'safe') {
@@ -1803,7 +1799,6 @@
                 localStorage.removeItem('olegStoryProgress');
                 localStorage.removeItem('olegGameState');
                 localStorage.removeItem('olegStorySettings');
-                localStorage.removeItem('scene1PackingChosen');
                 localStorage.removeItem('scene1PackingCompleted');
                 gameState = {
                     safetyScore: 0,
@@ -1839,6 +1834,7 @@
             summary.innerHTML = '<p>Ти обрав(ла):</p><ul>' + checked.map(i => '<li>' + i.value + '</li>').join('') + '</ul>' +
                 '<p style="margin-top:20px; color:#495057;">Валіза закрита. Час іти. Головне — нічого не забути в цифровому світі.</p>';
 
+            localStorage.setItem('scene1PackingCompleted', 'true');
             updatePackingChoiceVisibility();
             goToPage('scene1_packing_result');
             return false;
