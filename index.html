@@ -1716,11 +1716,15 @@
             const packBtn = document.getElementById('packFirstChoiceBtn');
             if (!packBtn) return;
 
-            const isPackingCompleted = localStorage.getItem('scene1PackingCompleted') === 'true';
-            packBtn.style.display = isPackingCompleted ? 'none' : 'block';
+            const isPackingChosen = sessionStorage.getItem('scene1PackingChosen') === 'true';
+            packBtn.style.display = isPackingChosen ? 'none' : 'block';
         }
         
         function goToPage(pageId, decision = null) {
+            if (pageId === 'scene1_packing') {
+                sessionStorage.setItem('scene1PackingChosen', 'true');
+            }
+
             // Зберігаємо рішення, якщо воно є
             if (decision) {
                 gameState.decisions.push(decision);
@@ -1799,7 +1803,8 @@
                 localStorage.removeItem('olegStoryProgress');
                 localStorage.removeItem('olegGameState');
                 localStorage.removeItem('olegStorySettings');
-                localStorage.removeItem('scene1PackingCompleted');
+                localStorage.removeItem('scene1PackingChosen');
+                sessionStorage.removeItem('scene1PackingChosen');
                 gameState = {
                     safetyScore: 0,
                     riskScore: 0,
@@ -1834,7 +1839,6 @@
             summary.innerHTML = '<p>Ти обрав(ла):</p><ul>' + checked.map(i => '<li>' + i.value + '</li>').join('') + '</ul>' +
                 '<p style="margin-top:20px; color:#495057;">Валіза закрита. Час іти. Головне — нічого не забути в цифровому світі.</p>';
 
-            localStorage.setItem('scene1PackingCompleted', 'true');
             updatePackingChoiceVisibility();
             goToPage('scene1_packing_result');
             return false;
@@ -2859,6 +2863,9 @@
         
         // === ІНІЦІАЛІЗАЦІЯ ПРИ ЗАВАНТАЖЕННІ ===
         function initializeApp() {
+            // Міграція: прибираємо старий прапорець, що ховав кнопку між сесіями
+            localStorage.removeItem('scene1PackingChosen');
+
             // Видаляємо клас active з усіх сторінок
             const allPages = document.querySelectorAll('.page');
             allPages.forEach(page => page.classList.remove('active'));
