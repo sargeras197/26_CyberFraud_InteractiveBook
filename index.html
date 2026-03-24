@@ -1611,39 +1611,18 @@
             
             <div class="choices">
                 <button class="choice-button" onclick="goToPage('page3', {id: 'focused_on_main', type: 'safe', points: 15})">
-                    ➡️ Виїжджати на вокзал
+                    ➡️ Перейти до підсумку Розділу 1
                 </button>
             </div>
         </div>
 
-        <!-- Сторінка 3: Розділ 2. Дорога до нового життя -->
+        <!-- Сторінка 3: Підсумок Розділу 1 -->
         <div class="page" id="page3">
-            <h2 class="chapter-title">Розділ 2. Дорога до нового життя</h2>
-            <div class="time-stamp">⏰ 13:45</div>
+            <h2 class="chapter-title">📊 Підсумок Розділу 1</h2>
+            <div class="time-stamp">⏰ Кінець Розділу 1</div>
             
             <div class="story-text">
-                <p>Олег на вокзалі. Валіза, рюкзак, квиток у руці. Навколо галас, люди, оголошення.</p>
-                
-                <p>Він дивиться на табло: "Київ, платформа 3, посадка розпочалася".</p>
-                
-                <p>Серце калатає. Не від страху — від хвилювання. Нове місто. Нові можливості. Нові виклики.</p>
-                
-                <p>Але тепер він знає головне: <strong>не всьому можна довіряти в цифровому світі</strong>.</p>
-            </div>
-            
-            <div class="emotional-moment">
-                "За одну ранок він пережив кілька спроб шахрайства. Деякі — успішно відбив. Деякі — вдарили по гаманцю. Але урок засвоєно. Тепер він обережніший. Розумніший."
-            </div>
-            
-            <div class="story-text">
-                <p>Олег сідає в потяг. Дивиться у вікно. Харків залишається позаду.</p>
-                <p><strong>Попереду — Київ. І нова історія...</strong></p>
-                
-                <p>Телефон майже розряджений. Він дістає його і бачить, що батарея на 15%.</p>
-                
-                <p>На екрані спливає список доступних Wi-Fi мереж. Серед них — <strong>"Вокзал_Free"</strong> з повним сигналом.</p>
-                
-                <p class="highlight">💭 <strong>Що зробить Олег?</strong></p>
+                <p>Наприкінці розділу з'являється табло результатів твоїх рішень.</p>
             </div>
             
             <div class="stats">
@@ -1660,20 +1639,111 @@
             </div>
             
             <div class="choices">
-                <button class="choice-button choice-risky" onclick="goToPage('page4_1', {id: 'fake_wifi', type: 'risky', points: 0})">
-                    📶 Підключитися до "Вокзал_Free"
-                </button>
-                <button class="choice-button choice-safe" onclick="goToPage('page4_2', {id: 'mobile_data', type: 'safe', points: 10})">
-                    📱 Використати мобільний інтернет
-                </button>
-                <button class="choice-button choice-safe" onclick="goToPage('page4_3', {id: 'wait_no_wifi', type: 'safe', points: 5})">
-                    ⏳ Зачекати, не підключатися
+                <button class="choice-button" onclick="goToPage('page4')">
+                    ➡️ Розпочати Розділ 2. Дорога до нового життя
                 </button>
             </div>
             
             <div class="choices">
-                <button class="choice-button secondary" onclick="showCurrentStats(); goToPage('intro')">
+                <button class="choice-button secondary" onclick="goToPage('intro')">
                     🔄 Почати історію заново
+                </button>
+            </div>
+        </div>
+
+        <!-- Розділ 2: Дорога до нового життя -->
+        <div class="page" id="page4">
+            <h2 class="chapter-title">Розділ 2. Дорога до нового життя</h2>
+            <div class="time-stamp">⏰ 13:45, У потязі</div>
+
+            <div class="story-text">
+                <p>У вагоні 4G постійно зникає, а Олегу терміново треба забронювати житло на першу ніч у Києві.</p>
+                <p>Ще в залі очікування він бачив наліпку з QR "Швидкий Wi-Fi без пароля". Наклейка була криво приклеєна поверх старого оголошення, без логотипу вокзалу.</p>
+                <p><strong>Це важливо:</strong> такі наліпки часто клеять сторонні люди або шахраї, а не працівники вокзалу.</p>
+                <p>У списку Wi-Fi з'являються відкриті мережі <strong>"Ivan_Free"</strong> та <strong>"FreFreFre"</strong>.</p>
+                <p>Виглядає зручно, але це може бути <strong>Evil Twin</strong> — фальшива точка доступу, через яку перехоплюють трафік або підсовують підроблену сторінку входу.</p>
+            </div>
+
+            <div class="choices">
+                <button class="choice-button" onclick="goToPage('page4_1', {id: 'chapter2_fake_wifi', type: 'risky', points: 10})">
+                    📶 Підключитися, бо треба терміново
+                </button>
+                <button class="choice-button" onclick="goToPage('page4_3', {id: 'chapter2_wait_no_internet', type: 'safe', points: 10})">
+                    ⏳ Зачекати на стабільний мобільний інтернет
+                </button>
+            </div>
+        </div>
+
+        <div class="page" id="page4_1">
+            <h2 class="chapter-title">Розділ 2. Підозріла мережа</h2>
+            <div class="time-stamp">⏰ 13:49</div>
+
+            <div class="warning">
+                ⚠️ Пастка Evil Twin: відкритий Wi-Fi може перехопити трафік і дані для входу.
+            </div>
+
+            <div class="story-text">
+                <p>Одразу після підключення (або переходу за тим QR) відкривається "сторінка авторизації" з полями для номера телефону та пароля від соцмережі.</p>
+                <p>Олег розуміє, що це підробка, нічого не вводить і відключається від мережі.</p>
+            </div>
+
+            <div class="choices">
+                <button class="choice-button" onclick="goToPage('page5', {id: 'chapter2_after_fake_wifi', type: 'safe', points: 5})">
+                    ➡️ Продовжити дорогу
+                </button>
+            </div>
+        </div>
+
+        <div class="page" id="page4_2">
+            <h2 class="chapter-title">Розділ 2. Безпечний зв'язок</h2>
+            <div class="time-stamp">⏰ 13:48</div>
+
+            <div class="success">
+                ✅ Правильно: мобільний інтернет зменшує ризик перехоплення даних у публічних мережах.
+            </div>
+
+            <div class="story-text">
+                <p>Олег швидко пише повідомлення тітці та перевіряє платформу без зайвих ризиків.</p>
+            </div>
+
+            <div class="choices">
+                <button class="choice-button" onclick="goToPage('page5', {id: 'chapter2_after_mobile', type: 'safe', points: 5})">
+                    ➡️ Продовжити дорогу
+                </button>
+            </div>
+        </div>
+
+        <div class="page" id="page4_3">
+            <h2 class="chapter-title">Розділ 2. Терпіння і контроль</h2>
+            <div class="time-stamp">⏰ 13:50</div>
+
+            <div class="story-text">
+                <p>Олег вирішує не ризикувати. Він чекає, поки мобільний інтернет стане стабільним, і тільки тоді продовжує бронювання.</p>
+            </div>
+
+            <div class="success">
+                ✅ Найкращий захист у дорозі: не вводити дані через випадкові відкриті Wi-Fi мережі.
+            </div>
+
+            <div class="choices">
+                <button class="choice-button" onclick="goToPage('page5', {id: 'chapter2_after_wait', type: 'safe', points: 5})">
+                    ➡️ Продовжити дорогу
+                </button>
+            </div>
+        </div>
+
+        <div class="page" id="page5">
+            <h2 class="chapter-title">Розділ 2. Дорога триває</h2>
+            <div class="time-stamp">⏰ 14:20</div>
+
+            <div class="story-text">
+                <p>Олег сідає у вагон і нарешті переводить подих. Найскладніше позаду, але попереду нове місто і нові рішення.</p>
+                <p><strong>Далі — Розділ 3. Нове місто.</strong></p>
+            </div>
+
+            <div class="choices">
+                <button class="choice-button" onclick="openStoryMap()">
+                    🗺️ Обрати наступну гілку на карті
                 </button>
             </div>
         </div>
@@ -1686,7 +1756,7 @@
         <p class="subtitle">Потік історії у вигляді дерева рішень</p>
 
         <div class="map-description" id="mapDescription">
-            Показує шлях Олега як єдину карту з розгалуженнями, виборами та наслідками. Кожна точка — частина історії, а кожна гілка — можливий розвиток подій.
+            Повна карта з 5 розділів: від перших пасток до фінальних наслідків. Кожна точка — реальна сцена історії, а кожна гілка — конкретне рішення читача.
         </div>
         
         <div class="map-container">
@@ -2018,10 +2088,10 @@
                 storyLine: 0
             },
             page1: { 
-                title: 'День змін', 
+                title: 'Розділ 1: Початок', 
                 type: 'choice',
                 x: 400, y: 150,
-                children: ['page1_1', 'page1_2', 'page1_3'],
+                children: ['page1_1', 'scene1_packing', 'page1_3'],
                 storyLine: 1
             },
             // Гілка 1: Перевірка балансу
@@ -2056,37 +2126,21 @@
                 storyLine: 3,
                 choice: 'Офіц сайт'
             },
-            // Гілка 2: Збирання речей
-            page1_2: { 
-                title: 'Збирання речей', 
+            // Гілка 2: Сцена 1. Збір валізи
+            scene1_packing: {
+                title: 'Сцена 1: Збір валізи',
                 type: 'choice',
                 x: 400, y: 250,
-                children: ['page1_2a', 'page1_2b', 'page1_2c'],
+                children: ['scene1_packing_result'],
                 storyLine: 2
             },
-            page1_2a: { 
-                title: 'Відповісти ✓', 
-                type: 'neutral',
-                x: 350, y: 350,
-                children: ['page2'],
-                storyLine: 3,
-                choice: 'Відповісти'
-            },
-            page1_2b: { 
-                title: 'Скинути ✓✓', 
+            scene1_packing_result: {
+                title: 'Валіза зібрана ✓',
                 type: 'good',
-                x: 420, y: 350,
-                children: ['page2'],
+                x: 400, y: 350,
+                children: ['page1'],
                 storyLine: 3,
-                choice: 'Скинути'
-            },
-            page1_2c: { 
-                title: 'SMS запит ✓', 
-                type: 'neutral',
-                x: 490, y: 350,
-                children: ['page2'],
-                storyLine: 3,
-                choice: 'SMS'
+                choice: 'Обрати 4 речі'
             },
             // Гілка 3: Кава і роздуми
             page1_3: { 
@@ -2120,56 +2174,56 @@
                 storyLine: 3,
                 choice: 'Видалити'
             },
-            // Продовження
+            // Сцена дзвінка про псевдоповернення
             page2: { 
-                title: 'У дорозі', 
+                title: 'Псевдоповернення', 
                 type: 'choice',
                 x: 400, y: 480,
                 children: ['page2_1', 'page2_2', 'page2_3'],
                 storyLine: 4
             },
             page2_1: {
-                title: 'Диск зі скідкою',
-                type: 'neutral',
+                title: 'Дані картки (втрата)',
+                type: 'bad',
                 x: 250, y: 580,
                 children: ['page3'],
                 storyLine: 5,
-                choice: 'Взяти диск'
+                choice: 'Продиктувати'
             },
             page2_2: {
-                title: 'Відмова ✓',
+                title: 'Номер заявки ✓',
                 type: 'good',
                 x: 400, y: 580,
                 children: ['page3'],
                 storyLine: 5,
-                choice: 'Відмовитись'
+                choice: 'Перевірити дані'
             },
             page2_3: {
-                title: 'Перевірка ✓✓',
+                title: 'Скинути/перевірити ✓✓',
                 type: 'good',
                 x: 550, y: 580,
                 children: ['page3'],
                 storyLine: 5,
-                choice: 'Перевірити'
+                choice: 'Офіц. канали'
             },
             page3: {
-                title: 'На вокзалі',
+                title: 'Підсумок розділу 1',
                 type: 'neutral',
                 x: 400, y: 700,
                 children: ['page4'],
                 storyLine: 6
             },
             
-            // Розділ 3: Дорога
+            // Розділ 2: Дорога до нового життя
             page4: {
-                title: 'Wi-Fi на вокзалі',
+                title: 'Evil Twin у потязі',
                 type: 'choice',
                 x: 400, y: 850,
-                children: ['page4_1', 'page4_2', 'page4_3'],
+                children: ['page4_1', 'page4_3'],
                 storyLine: 7
             },
             page4_1: {
-                title: 'Фейковий Wi-Fi',
+                title: 'Ivan_Free / FreFreFre',
                 type: 'choice',
                 x: 200, y: 1000,
                 children: ['page4_1a', 'page4_1b', 'page4_1c'],
@@ -2231,7 +2285,7 @@
                 choice: 'Ігнорувати'
             },
             page4_3: {
-                title: 'Без підключення',
+                title: 'Чекати 4G ✓',
                 type: 'choice',
                 x: 600, y: 1000,
                 children: ['page4_3a', 'page4_3b', 'page4_3c'],
@@ -2269,7 +2323,7 @@
                 storyLine: 10
             },
             
-            // Розділ 4: Нове місто
+            // Розділ 3: Нове місто
             page6: {
                 title: 'Пошук житла',
                 type: 'choice',
@@ -2378,7 +2432,7 @@
                 storyLine: 14
             },
             
-            // Розділ 5: Ціна помилки
+            // Розділ 4: Адаптація
             page8: {
                 title: 'Підрахунок',
                 type: 'choice',
@@ -2487,7 +2541,7 @@
                 storyLine: 18
             },
             
-            // Розділ 6: Інший Олег
+            // Розділ 5: Вчитель
             page10: {
                 title: 'Трансформація',
                 type: 'choice',
@@ -2674,14 +2728,11 @@
             
             // Малюємо етапи історії фоном
             const stages = [
-                { name: 'Розділ 1: Початок', y: 0, height: 200, color: 'rgba(102, 126, 234, 0.08)' },
-                { name: 'Розділ 1: Перші виклики', y: 200, height: 250, color: 'rgba(118, 75, 162, 0.08)' },
-                { name: 'Розділ 2: Продовження', y: 450, height: 200, color: 'rgba(255, 212, 59, 0.08)' },
-                { name: 'Розділ 2-3: Підготовка', y: 650, height: 250, color: 'rgba(81, 207, 102, 0.08)' },
-                { name: 'Розділ 3: Дорога', y: 900, height: 450, color: 'rgba(255, 107, 107, 0.08)' },
-                { name: 'Розділ 4: Нове місто', y: 1350, height: 550, color: 'rgba(72, 219, 251, 0.08)' },
-                { name: 'Розділ 5: Ціна помилки', y: 1900, height: 650, color: 'rgba(255, 184, 77, 0.08)' },
-                { name: 'Розділ 6: Кінець', y: 2550, height: 650, color: 'rgba(186, 143, 255, 0.08)' }
+                { name: 'Розділ 1: Початок. День, коли все змінилось', y: 0, height: 900, color: 'rgba(102, 126, 234, 0.08)' },
+                { name: 'Розділ 2: Дорога до нового життя', y: 900, height: 450, color: 'rgba(255, 107, 107, 0.08)' },
+                { name: 'Розділ 3: Нове місто', y: 1350, height: 550, color: 'rgba(72, 219, 251, 0.08)' },
+                { name: 'Розділ 4: Адаптація', y: 1900, height: 650, color: 'rgba(255, 184, 77, 0.08)' },
+                { name: 'Розділ 5: Вчитель', y: 2550, height: 650, color: 'rgba(186, 143, 255, 0.08)' }
             ];
             
             stages.forEach(stage => {
