@@ -1322,40 +1322,37 @@
             </div>
         </div>
 
-        <!-- Сторінка 2: Продовження історії -->
+        <!-- Сторінка 2: Дзвінок про "повернення коштів" -->
         <div class="page" id="page2">
-            <h2 class="chapter-title">Розділ 1. Збори</h2>
+            <h2 class="chapter-title">Розділ 1. Псевдоповернення коштів</h2>
             <div class="time-stamp">⏰ 10:30</div>
             
             <div class="story-text">
-                <p>Олег методично пакує речі. Валіза майже повна: одяг, техніка, документи. Він тримає в руках старий зовнішній жорсткий диск.</p>
-                
-                <p>1 ТБ спогадів. Фотографії з університету, дипломна робота, резюме, старі проєкти. Він не відкривав його місяців шість.</p>
+                <p>Олег методично пакує речі. Валіза майже повна: одяг, техніка, документи.</p>
+                <p id="page2TicketContext"></p>
             </div>
             
             <div class="emotional-moment">
-                "Взяти чи не взяти? Важить небагато. Але чи потрібен він зараз?"
+                "Невже пощастило? Чи це ще одна пастка?"
             </div>
             
             <div class="story-text">
-                <p>Олег вирішує перевірити, що там взагалі є. Підключає диск до ноутбука. Диск трохи шумить, потім...</p>
-                
-                <p><strong>⚠️ Помилка: "Диск потребує форматування"</strong></p>
-                
-                <p>Олег дивиться на повідомлення. Щось пішло не так. Можливо, диск пошкоджений? Або вірус?</p>
-                
                 <p>Телефон дзвонить. Невідомий номер: +380 44 555-33-77.</p>
+
+                <p style="margin-left: 20px; font-style: italic;">"Доброго дня, служба підтримки платежів. Під час купівлі вашого квитка зафіксовано дубль-операцію. Щоб скасувати зайве списання, продиктуйте дані картки та код із SMS".</p>
+
+                <p>Олег пам'ятає: шахраї часто грають на емоціях, поспіху та жадібності.</p>
             </div>
             
             <div class="choices">
-                <button class="choice-button" onclick="goToPage('page2_1', {id: 'answer_unknown', type: 'risky', points: 5})">
-                    📞 Відповісти на дзвінок
+                <button class="choice-button" onclick="goToPage('page2_1', {id: 'share_card_for_refund', type: 'risky', points: 15, moneyChange: -2000, consequence: {text: 'Передав дані картки шахраям', severity: 'high'}})">
+                    💳 Продиктувати дані картки для "повернення"
                 </button>
-                <button class="choice-button" onclick="goToPage('page2_2', {id: 'restore_disk', type: 'safe', points: 5})">
-                    💻 Спробувати відновити дані з диска
+                <button class="choice-button" onclick="goToPage('page2_2', {id: 'ask_official_proof', type: 'safe', points: 12})">
+                    🧾 Попросити номер заявки і сказати, що передзвоните самі
                 </button>
-                <button class="choice-button" onclick="goToPage('page2_3', {id: 'ignore_continue', type: 'safe', points: 10})">
-                    🚫 Скинути дзвінок і продовжити збори
+                <button class="choice-button" onclick="goToPage('page2_3', {id: 'hangup_check_official', type: 'safe', points: 15})">
+                    🚫 Скинути дзвінок і перевірити платіж в офіційному додатку банку
                 </button>
             </div>
         </div>
@@ -1539,81 +1536,77 @@
             </div>
         </div>
 
-        <!-- Сторінка 2.1: Відповісти на дзвінок -->
+        <!-- Сторінка 2.1: Повірити у псевдоповернення -->
         <div class="page" id="page2_1">
-            <h2 class="chapter-title">Розділ 2. Дзвінок</h2>
+            <h2 class="chapter-title">Розділ 1. Дзвінок</h2>
             <div class="time-stamp">⏰ 10:35</div>
             
             <div class="story-text">
-                <p>Олег відповідає. Голос чоловіка:</p>
-                <p style="margin-left: 20px; font-style: italic;">"Вітаю! Це служба технічної підтримки Microsoft. Ми виявили підозрілу активність на вашому комп'ютері. Можливо, ваш диск заражений вірусом."</p>
-                
-                <p>Олег дивиться на екран з помилкою диска. Збіг?</p>
-                
-                <p>"Як ви про це дізналися?"</p>
-                <p style="margin-left: 20px; font-style: italic;">"Ми отримуємо автоматичні звіти. Можемо допомогти вам видалити загрозу. Просто завантажте нашу програму..."</p>
+                <p>Олег диктує номер картки та код із SMS. "Оператор" запевняє, що зараз оформить повернення.</p>
+
+                <p>Замість повернення приходить SMS від банку:</p>
+                <p style="margin-left: 20px;"><strong>"Списано: 2000 грн"</strong></p>
+
+                <p>Номер одразу стає недоступним.</p>
             </div>
             
             <div class="warning">
-                ⚠️ <strong>ПІДОЗРІЛО!</strong><br>
-                Microsoft НЕ телефонує користувачам. Це класична схема шахрайства.
+                ⚠️ <strong>ШАХРАЙСЬКЕ "ПОВЕРНЕННЯ"!</strong><br>
+                Жодна служба підтримки не просить код із SMS для повернення коштів.
             </div>
             
             <div class="story-text">
-                <p>Олег відчуває підозру і кладе трубку. Блокує номер.</p>
-                <p>Диск він просто від'єднає і перевірить пізніше.</p>
+                <p>Олег блокує картку і телефонує в банк, але частину коштів уже втрачено.</p>
             </div>
             
             <div class="choices">
-                <button class="choice-button" onclick="goToPage('page3', {id: 'rejected_fake_support', type: 'safe', points: 15})">
+                <button class="choice-button" onclick="goToPage('page3', {id: 'lost_money_fake_refund', type: 'safe', points: 5})">
                     ➡️ Продовжити збори (До поїзда 3 години)
                 </button>
             </div>
         </div>
 
-        <!-- Сторінка 2.2: Відновити дані -->
+        <!-- Сторінка 2.2: Попросити підтвердження -->
         <div class="page" id="page2_2">
-            <h2 class="chapter-title">Розділ 2. Спроба відновлення</h2>
+            <h2 class="chapter-title">Розділ 1. Спроба відновлення</h2>
             <div class="time-stamp">⏰ 10:40</div>
             
             <div class="story-text">
-                <p>Олег скидає дзвінок і зосереджується на диску. Відкриває Google, шукає "як відновити дані з пошкодженого диска".</p>
-                
-                <p>Знаходить кілька програм: Recuva, TestDisk, EaseUS Recovery...</p>
-                
-                <p>Завантажує Recuva (безплатна), запускає сканування. Процес займе 20 хвилин.</p>
-                
-                <p>Поки програма працює, Олег завершує пакування. Диск — проблема другорядна. Головне — встигнути на поїзд.</p>
+                <p>Олег просить назвати номер заявки, суму дубль-списання та офіційну адресу, з якої надійде підтвердження.</p>
+
+                <p>Співрозмовник починає тиснути: "Треба негайно, інакше гроші зависнуть на 30 днів. Диктуйте код!"</p>
+
+                <p>Олег розуміє, що це маніпуляція, і завершує дзвінок.</p>
             </div>
             
             <div class="success">
                 ✅ <strong>Правильний підхід!</strong><br>
-                Пошук офіційних безплатних рішень замість паніки — розумно.
+                Перевірка фактів і відмова діяти під тиском часу зберегли гроші.
             </div>
             
             <div class="choices">
-                <button class="choice-button" onclick="goToPage('page3', {id: 'tried_recovery', type: 'safe', points: 10})">
+                <button class="choice-button" onclick="goToPage('page3', {id: 'rejected_fake_refund', type: 'safe', points: 10})">
                     ➡️ Продовжити збори (До поїзда 2 години 45 хв)
                 </button>
             </div>
         </div>
 
-        <!-- Сторінка 2.3: Скинути і продовжити -->
+        <!-- Сторінка 2.3: Скинути і перевірити офіційно -->
         <div class="page" id="page2_3">
-            <h2 class="chapter-title">Розділ 2. Фокус на головному</h2>
+            <h2 class="chapter-title">Розділ 1. Фокус на головному</h2>
             <div class="time-stamp">⏰ 10:32</div>
             
             <div class="story-text">
-                <p>Олег скидає дзвінок і від'єднує диск. Зараз не час розбиратися з технічними проблемами.</p>
-                
-                <p>Він швидко завершує пакування: валіза, рюкзак, документи, телефон, зарядки. Все найнеобхідніше.</p>
-                
-                <p>Дивиться на годинник — 10:45. Поїзд о 14:30. Час є, але треба виїжджати.</p>
+                <p>Олег скидає дзвінок, відкриває офіційний додаток УЗ та банк.</p>
+
+                <p>Жодного дубль-списання немає. Це була спроба соціальної інженерії під виглядом "служби підтримки".</p>
+
+                <p>Він блокує номер і завершує збори без втрат.</p>
             </div>
             
             <div class="success">
                 ✅ <strong>ВІДМІННО!</strong><br>
-                Не розпилюватися на дрібниці, зосередитися на головному — правильна стратегія.
+                Перевірка через офіційні канали ігнорує маніпуляції шахраїв.
             </div>
             
             <div class="choices">
@@ -1623,9 +1616,9 @@
             </div>
         </div>
 
-        <!-- Сторінка 3: На вокзалі (тимчасовий фінал до розвитку історії) -->
+        <!-- Сторінка 3: Розділ 2. Дорога до нового життя -->
         <div class="page" id="page3">
-            <h2 class="chapter-title">Розділ 3. Дорога до нового життя</h2>
+            <h2 class="chapter-title">Розділ 2. Дорога до нового життя</h2>
             <div class="time-stamp">⏰ 13:45</div>
             
             <div class="story-text">
@@ -1654,11 +1647,16 @@
             </div>
             
             <div class="stats">
-                <div class="stats-title">📊 Ваші поточні результати:</div>
-                🏆 Безпечні рішення: <span id="currentSafetyScore"></span><br>
-                ⚠️ Ризикові рішення: <span id="currentRiskScore"></span><br>
-                💰 Поточний баланс: <span id="currentMoney"></span> грн<br>
-                📝 Прийнято рішень: <span id="totalDecisions"></span>
+                <div class="stats-title">📊 Підсумок Розділу 1</div>
+                💰 Стан гаманця: <span id="walletStatus"></span><br>
+                🧠 Рівень кіберграмотності: <span id="literacyLevel"></span><br>
+                📌 Баланс: <span id="currentMoney"></span> грн<br>
+                ✅ Безпечні рішення: <span id="currentSafetyScore"></span><br>
+                ⚠️ Ризикові рішення: <span id="currentRiskScore"></span>
+            </div>
+
+            <div class="ending">
+                Ти виходиш на вулицю. Перші пастки позаду, але справжня гра на виживання в цифровому просторі тільки починається. Попереду — вокзал.
             </div>
             
             <div class="choices">
@@ -1761,6 +1759,14 @@
                 if (pageId === 'page1') {
                     updatePackingChoiceVisibility();
                 }
+
+                if (pageId === 'page2') {
+                    updatePage2TicketContext();
+                }
+
+                if (pageId === 'page3') {
+                    updateChapterOneSummary();
+                }
                 
                 // Прокручуємо наверх
                 window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -1768,6 +1774,56 @@
                 // Зберігаємо прогрес
                 saveProgress(pageId);
             }
+        }
+
+        function hasLegitTicketPurchase() {
+            return gameState.decisions.some(d => d.id === 'continue_safe' || d.id === 'continue_safest');
+        }
+
+        function updatePage2TicketContext() {
+            const contextElem = document.getElementById('page2TicketContext');
+            if (!contextElem) return;
+
+            if (hasLegitTicketPurchase()) {
+                contextElem.textContent = 'Після реальної купівлі квитка на офіційному сайті йому телефонує "служба підтримки платежів" і повідомляє про нібито дубль-списання.';
+            } else {
+                contextElem.textContent = 'Попри хаотичний ранок, йому телефонує псевдопідтримка і повідомляє про нібито помилковий платіж, який треба терміново "підтвердити".';
+            }
+        }
+
+        function getWalletStatus() {
+            if (gameState.money >= 4000) {
+                return 'Повний';
+            }
+            if (gameState.money >= 2000) {
+                return 'Половина';
+            }
+            return 'Порожній';
+        }
+
+        function getLiteracyLevel() {
+            const score = gameState.safetyScore - gameState.riskScore;
+            if (score >= 30) {
+                return 'Експерт';
+            }
+            if (score >= 10) {
+                return 'Обережний';
+            }
+            return 'Новачок';
+        }
+
+        function updateChapterOneSummary() {
+            const walletElem = document.getElementById('walletStatus');
+            const literacyElem = document.getElementById('literacyLevel');
+            const safetyElem = document.getElementById('currentSafetyScore');
+            const riskElem = document.getElementById('currentRiskScore');
+            const moneyElem = document.getElementById('currentMoney');
+
+            if (walletElem) walletElem.textContent = getWalletStatus();
+            if (literacyElem) literacyElem.textContent = getLiteracyLevel();
+            if (safetyElem) safetyElem.textContent = gameState.safetyScore;
+            if (riskElem) riskElem.textContent = gameState.riskScore;
+            if (moneyElem) moneyElem.textContent = gameState.money;
         }
         
         // Збереження прогресу в localStorage
