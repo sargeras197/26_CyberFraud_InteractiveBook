@@ -1654,10 +1654,11 @@
         <!-- Розділ 2: Дорога до нового життя -->
         <div class="page" id="page4">
             <h2 class="chapter-title">Розділ 2. Дорога до нового життя</h2>
-            <div class="time-stamp">⏰ 13:45, У потязі</div>
+            <div class="time-stamp">⏰ 13:45, Вокзал, зал очікування</div>
 
             <div class="story-text">
-                <p>У вагоні 4G постійно зникає, а Олегу терміново треба забронювати житло на першу ніч у Києві.</p>
+                <p><strong>Початкова сцена:</strong> старт нового етапу дороги з вокзалу.</p>
+                <p>Олег чекає посадку в залі очікування. До відправлення лишається зовсім мало часу, а йому терміново треба забронювати житло на першу ніч у Києві.</p>
                 <p>Ще в залі очікування він бачив наліпку з QR "Швидкий Wi-Fi без пароля". Наклейка була криво приклеєна поверх старого оголошення, без логотипу вокзалу.</p>
                 <p><strong>Це важливо:</strong> такі наліпки часто клеять сторонні люди або шахраї, а не працівники вокзалу.</p>
                 <p>У списку Wi-Fi з'являються відкриті мережі <strong>"Ivan_Free"</strong> та <strong>"FreFreFre"</strong>.</p>
@@ -1675,8 +1676,8 @@
         </div>
 
         <div class="page" id="page4_1">
-            <h2 class="chapter-title">Розділ 2. Підозріла мережа</h2>
-            <div class="time-stamp">⏰ 13:49</div>
+            <h2 class="chapter-title">Сцена 1. Підозріла мережа</h2>
+            <div class="time-stamp">⏰ 13:49, Зал очікування</div>
 
             <div class="warning">
                 ⚠️ Пастка Evil Twin: відкритий Wi-Fi може перехопити трафік і дані для входу.
@@ -1714,8 +1715,8 @@
         </div>
 
         <div class="page" id="page4_3">
-            <h2 class="chapter-title">Розділ 2. Терпіння і контроль</h2>
-            <div class="time-stamp">⏰ 13:50</div>
+            <h2 class="chapter-title">Сцена 2. Терпіння і контроль</h2>
+            <div class="time-stamp">⏰ 14:05, У потязі</div>
 
             <div class="story-text">
                 <p>Олег вирішує не ризикувати. Він чекає, поки мобільний інтернет стане стабільним, і тільки тоді продовжує бронювання.</p>
@@ -1733,17 +1734,35 @@
         </div>
 
         <div class="page" id="page5">
-            <h2 class="chapter-title">Розділ 2. Дорога триває</h2>
+            <h2 class="chapter-title">Сцена 3. Дорога триває</h2>
             <div class="time-stamp">⏰ 14:20</div>
 
             <div class="story-text">
-                <p>Олег сідає у вагон і нарешті переводить подих. Найскладніше позаду, але попереду нове місто і нові рішення.</p>
-                <p><strong>Далі — Розділ 3. Нове місто.</strong></p>
+                <p>Поїзд вже рушив, і Олег нарешті переводить подих. Найскладніше позаду, але попереду нове місто і нові рішення.</p>
+                <p><strong>Перед переходом далі — підсумок Розділу 2.</strong></p>
+            </div>
+
+            <div class="choices">
+                <button class="choice-button" onclick="goToPage('page5_summary')">
+                    📊 Переглянути підсумок Розділу 2
+                </button>
+            </div>
+        </div>
+
+        <div class="page" id="page5_summary">
+            <h2 class="chapter-title">Підсумок Розділу 2</h2>
+            <div class="time-stamp">⏰ Кінець Розділу 2</div>
+
+            <div class="stats">
+                <div class="stats-title">Що показав Розділ 2</div>
+                <p>• Випадкові відкриті Wi-Fi і QR-наліпки можуть бути частиною шахрайської пастки.</p>
+                <p>• Навіть коли "дуже терміново", пауза і перевірка зменшують ризики.</p>
+                <p>• У дорозі безпечніше чекати стабільний мобільний інтернет, ніж вводити дані у підозрілих формах.</p>
             </div>
 
             <div class="choices">
                 <button class="choice-button" onclick="openStoryMap()">
-                    🗺️ Обрати наступну гілку на карті
+                    🗺️ Перейти до Розділу 3 на карті
                 </button>
             </div>
         </div>
@@ -1756,7 +1775,7 @@
         <p class="subtitle">Потік історії у вигляді дерева рішень</p>
 
         <div class="map-description" id="mapDescription">
-            Повна карта з 5 розділів: від перших пасток до фінальних наслідків. Кожна точка — реальна сцена історії, а кожна гілка — конкретне рішення читача.
+            Карта показує структуру історії: доступні сцени можна відкривати одразу, а вузли майбутніх розділів позначають запланований розвиток сюжету.
         </div>
         
         <div class="map-container">
@@ -2216,109 +2235,37 @@
             
             // Розділ 2: Дорога до нового життя
             page4: {
-                title: 'Evil Twin у потязі',
+                title: 'Дорога до нового життя',
                 type: 'choice',
                 x: 400, y: 850,
                 children: ['page4_1', 'page4_3'],
                 storyLine: 7
             },
             page4_1: {
-                title: 'Ivan_Free / FreFreFre',
-                type: 'choice',
-                x: 200, y: 1000,
-                children: ['page4_1a', 'page4_1b', 'page4_1c'],
-                storyLine: 8
-            },
-            page4_1a: {
-                title: 'Ввести дані',
+                title: 'Підозріла мережа',
                 type: 'bad',
-                x: 100, y: 1150,
+                x: 250, y: 1000,
                 children: ['page5'],
-                storyLine: 9,
-                choice: 'Банк. дані'
-            },
-            page4_1b: {
-                title: 'Месенджери ✓',
-                type: 'neutral',
-                x: 200, y: 1150,
-                children: ['page5'],
-                storyLine: 9,
-                choice: 'Тільки чати'
-            },
-            page4_1c: {
-                title: 'Вийти ✓✓',
-                type: 'good',
-                x: 300, y: 1150,
-                children: ['page5'],
-                storyLine: 9,
-                choice: 'Відключитись'
-            },
-            page4_2: {
-                title: 'Мобільний',
-                type: 'choice',
-                x: 400, y: 1000,
-                children: ['page4_2a', 'page4_2b', 'page4_2c'],
                 storyLine: 8
-            },
-            page4_2a: {
-                title: 'SMS від банку',
-                type: 'bad',
-                x: 350, y: 1150,
-                children: ['page5'],
-                storyLine: 9,
-                choice: 'Клікнути'
-            },
-            page4_2b: {
-                title: 'Дзвінок ✓✓',
-                type: 'good',
-                x: 420, y: 1150,
-                children: ['page5'],
-                storyLine: 9,
-                choice: 'Зателефонувати'
-            },
-            page4_2c: {
-                title: 'Ігнорувати ✓',
-                type: 'neutral',
-                x: 490, y: 1150,
-                children: ['page5'],
-                storyLine: 9,
-                choice: 'Ігнорувати'
             },
             page4_3: {
-                title: 'Чекати 4G ✓',
-                type: 'choice',
-                x: 600, y: 1000,
-                children: ['page4_3a', 'page4_3b', 'page4_3c'],
+                title: 'Терпіння і контроль',
+                type: 'good',
+                x: 550, y: 1000,
+                children: ['page5'],
                 storyLine: 8
             },
-            page4_3a: {
-                title: 'Чужа точка',
-                type: 'bad',
-                x: 550, y: 1150,
-                children: ['page5'],
-                storyLine: 9,
-                choice: 'Попросити'
-            },
-            page4_3b: {
-                title: 'Powerbank ✓✓',
-                type: 'good',
-                x: 630, y: 1150,
-                children: ['page5'],
-                storyLine: 9,
-                choice: 'Купити'
-            },
-            page4_3c: {
-                title: 'Чекати ✓',
-                type: 'neutral',
-                x: 710, y: 1150,
-                children: ['page5'],
-                storyLine: 9,
-                choice: 'Терпіти'
-            },
             page5: {
-                title: 'У потягу',
+                title: 'Дорога триває',
                 type: 'neutral',
-                x: 400, y: 1300,
+                x: 400, y: 1200,
+                children: ['page5_summary'],
+                storyLine: 10
+            },
+            page5_summary: {
+                title: 'Підсумок Розділу 2',
+                type: 'neutral',
+                x: 400, y: 1320,
                 children: ['page6'],
                 storyLine: 10
             },
@@ -2689,8 +2636,13 @@
                     );
 
                     if (distance <= node.radius) {
-                        closeStoryMap();
-                        goToPage(node.pageId);
+                        const targetPage = document.getElementById(node.pageId);
+                        if (targetPage) {
+                            closeStoryMap();
+                            goToPage(node.pageId);
+                        } else {
+                            alert('Ця сцена ще в розробці. Оберіть інший доступний вузол на карті.');
+                        }
                         break;
                     }
                 }
