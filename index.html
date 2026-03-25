@@ -1657,94 +1657,115 @@
             <div class="time-stamp">⏰ 13:45, Вокзал, зал очікування</div>
 
             <div class="story-text">
-                <p><strong>Початкова сцена:</strong> старт нового етапу дороги з вокзалу.</p>
-                <p>Олег чекає посадку в залі очікування. До відправлення лишається зовсім мало часу, а йому терміново треба забронювати житло на першу ніч у Києві.</p>
-                <p>Ще в залі очікування він бачив наліпку з QR "Швидкий Wi-Fi без пароля". Наклейка була криво приклеєна поверх старого оголошення, без логотипу вокзалу.</p>
-                <p><strong>Це важливо:</strong> такі наліпки часто клеять сторонні люди або шахраї, а не працівники вокзалу.</p>
-                <p>У списку Wi-Fi з'являються відкриті мережі <strong>"Ivan_Free"</strong> та <strong>"FreFreFre"</strong>.</p>
-                <p>Виглядає зручно, але це може бути <strong>Evil Twin</strong> — фальшива точка доступу, через яку перехоплюють трафік або підсовують підроблену сторінку входу.</p>
+                <p><strong>Початкова сцена:</strong> Олег виїхав і вже майже на платформі. До відправлення кілька хвилин, а питання житла на першу ніч у Києві досі не вирішене.</p>
+                <p>Він розуміє, що попереду буде багато поспішних рішень. Саме в такі моменти шахрайські схеми працюють найкраще.</p>
+                <p><strong>У цьому розділі 2 сцени вибору:</strong> спочатку QR-код у залі очікування, далі підозріла Wi-Fi мережа у вагоні під час пошуку житла.</p>
             </div>
 
             <div class="choices">
-                <button class="choice-button" onclick="goToPage('page4_1', {id: 'chapter2_fake_wifi', type: 'risky', points: 10})">
-                    📶 Підключитися, бо треба терміново
-                </button>
-                <button class="choice-button" onclick="goToPage('page4_3', {id: 'chapter2_wait_no_internet', type: 'safe', points: 10})">
-                    ⏳ Зачекати на стабільний мобільний інтернет
+                <button class="choice-button" onclick="goToPage('page4_1')">
+                    ➡️ Почати Сцену 1
                 </button>
             </div>
         </div>
 
         <div class="page" id="page4_1">
-            <h2 class="chapter-title">Сцена 1. Підозріла мережа</h2>
+            <h2 class="chapter-title">Сцена 1. Терпіння і контроль</h2>
             <div class="time-stamp">⏰ 13:49, Зал очікування</div>
 
-            <div class="warning">
-                ⚠️ Пастка Evil Twin: відкритий Wi-Fi може перехопити трафік і дані для входу.
-            </div>
-
             <div class="story-text">
-                <p>Одразу після підключення (або переходу за тим QR) відкривається "сторінка авторизації" з полями для номера телефону та пароля від соцмережі.</p>
-                <p>Олег розуміє, що це підробка, нічого не вводить і відключається від мережі.</p>
+                <p>На стіні — наліпка з QR: <em>"Швидкий Wi-Fi без пароля"</em>. Наклейка криво приклеєна поверх старого оголошення, без логотипу вокзалу.</p>
+                <p>Олегу дуже хочеться зекономити час, але щось у цьому виглядає підозріло.</p>
+                <p><strong>Що робити?</strong></p>
             </div>
 
             <div class="choices">
-                <button class="choice-button" onclick="goToPage('page5', {id: 'chapter2_after_fake_wifi', type: 'safe', points: 5})">
-                    ➡️ Продовжити дорогу
+                <button class="choice-button" onclick="goToPage('page4_3', {id: 'chapter2_qr_scan', type: 'risky', points: 10})">
+                    📷 Сканувати QR і підключитися одразу
+                </button>
+                <button class="choice-button" onclick="goToPage('page5', {id: 'chapter2_qr_ignore', type: 'safe', points: 15})">
+                    🛡️ Пропустити QR, почекати і використати мобільний інтернет
                 </button>
             </div>
         </div>
 
         <div class="page" id="page4_2">
-            <h2 class="chapter-title">Розділ 2. Безпечний зв'язок</h2>
-            <div class="time-stamp">⏰ 13:48</div>
+            <h2 class="chapter-title">Сцена 2. Наслідок ризикового вибору</h2>
+            <div class="time-stamp">⏰ 14:23, У вагоні</div>
 
-            <div class="success">
-                ✅ Правильно: мобільний інтернет зменшує ризик перехоплення даних у публічних мережах.
+            <div class="warning">
+                ⚠️ Це класична пастка Evil Twin: фейкова мережа перехоплює трафік і може підсунути сторінку входу для крадіжки даних.
             </div>
 
             <div class="story-text">
-                <p>Олег швидко пише повідомлення тітці та перевіряє платформу без зайвих ризиків.</p>
+                <p>Олег обрав мережу <strong>"Ivan_Free"</strong>. Відкрилася фальшива "сторінка перевірки" з проханням увійти через соцмережу.</p>
+                <p>В останній момент він зупиняється і нічого не вводить, але час втрачено, а стрес лише зріс.</p>
             </div>
 
             <div class="choices">
-                <button class="choice-button" onclick="goToPage('page5', {id: 'chapter2_after_mobile', type: 'safe', points: 5})">
-                    ➡️ Продовжити дорогу
+                <button class="choice-button" onclick="goToPage('page5_summary', {id: 'chapter2_evil_twin_risky', type: 'risky', points: 10})">
+                    ➡️ До підсумку Розділу 2
                 </button>
             </div>
         </div>
 
         <div class="page" id="page4_3">
-            <h2 class="chapter-title">Сцена 2. Терпіння і контроль</h2>
-            <div class="time-stamp">⏰ 14:05, У потязі</div>
+            <h2 class="chapter-title">Сцена 1. Наслідок вибору</h2>
+            <div class="time-stamp">⏰ 13:52, Зал очікування</div>
 
-            <div class="story-text">
-                <p>Олег вирішує не ризикувати. Він чекає, поки мобільний інтернет стане стабільним, і тільки тоді продовжує бронювання.</p>
+            <div class="warning">
+                ⚠️ QR-код з випадкової наліпки може вести на підроблену сторінку або до небезпечної точки доступу.
             </div>
 
-            <div class="success">
-                ✅ Найкращий захист у дорозі: не вводити дані через випадкові відкриті Wi-Fi мережі.
+            <div class="story-text">
+                <p>Після сканування QR відкривається дивний "портал доступу" і одразу просить номер телефону та пароль від пошти.</p>
+                <p>Олег не вводить дані, вимикає Wi-Fi і вирішує не повторювати таких експериментів у поспіху.</p>
             </div>
 
             <div class="choices">
-                <button class="choice-button" onclick="goToPage('page5', {id: 'chapter2_after_wait', type: 'safe', points: 5})">
-                    ➡️ Продовжити дорогу
+                <button class="choice-button" onclick="goToPage('page5')">
+                    ➡️ До Сцени 2
                 </button>
             </div>
         </div>
 
         <div class="page" id="page5">
-            <h2 class="chapter-title">Сцена 3. Дорога триває</h2>
+            <h2 class="chapter-title">Сцена 2. Підозріла мережа у вагоні</h2>
             <div class="time-stamp">⏰ 14:20</div>
 
             <div class="story-text">
-                <p>Поїзд вже рушив, і Олег нарешті переводить подих. Найскладніше позаду, але попереду нове місто і нові рішення.</p>
-                <p><strong>Перед переходом далі — підсумок Розділу 2.</strong></p>
+                <p>Поїзд рушає. Олег сідає біля вікна і починає шукати житло в дорозі, щоб не залишитися без ночівлі після прибуття.</p>
+                <p>У списку Wi-Fi видно дві відкриті мережі: <strong>"Ivan_Free"</strong> та <strong>"FreFreFre"</strong>.</p>
+                <p>Це схоже на <strong>Evil Twin</strong> - фейкові точки доступу, які імітують "зручний інтернет" для крадіжки даних.</p>
+                <p><strong>Який вибір зробить Олег?</strong></p>
+            </div>
+
+            <div class="choices">
+                <button class="choice-button" onclick="goToPage('page4_2')">
+                    📶 Підключитися до "Ivan_Free" і швидко відкрити сайт оренди
+                </button>
+                <button class="choice-button" onclick="goToPage('page5_2', {id: 'chapter2_evil_twin_avoided', type: 'safe', points: 15})">
+                    🛡️ Не підключатися, використовувати мобільний інтернет для пошуку житла
+                </button>
+            </div>
+        </div>
+
+        <div class="page" id="page5_2">
+            <h2 class="chapter-title">Сцена 2. Виважене рішення</h2>
+            <div class="time-stamp">⏰ 14:24, У вагоні</div>
+
+            <div class="success">
+                ✅ Олег не підключився до підозрілих мереж і зберіг свої дані.
+            </div>
+
+            <div class="story-text">
+                <p>Він вмикає мобільний інтернет, заходить на перевірену платформу оренди і фільтрує оголошення без передоплати.</p>
+                <p>Рішення займає трохи більше часу, зате без ризику віддати акаунти або гроші шахраям.</p>
             </div>
 
             <div class="choices">
                 <button class="choice-button" onclick="goToPage('page5_summary')">
-                    📊 Переглянути підсумок Розділу 2
+                    ➡️ До підсумку Розділу 2
                 </button>
             </div>
         </div>
@@ -1755,14 +1776,296 @@
 
             <div class="stats">
                 <div class="stats-title">Що показав Розділ 2</div>
-                <p>• Випадкові відкриті Wi-Fi і QR-наліпки можуть бути частиною шахрайської пастки.</p>
-                <p>• Навіть коли "дуже терміново", пауза і перевірка зменшують ризики.</p>
-                <p>• У дорозі безпечніше чекати стабільний мобільний інтернет, ніж вводити дані у підозрілих формах.</p>
+                <p>• Сцена 1 (QR у залі очікування): поспіх штовхає на ризик, але перевірка рятує від фейкових порталів.</p>
+                <p>• Сцена 2 (Wi-Fi у вагоні): мережі "Ivan_Free" і "FreFreFre" можуть бути шахрайським Evil Twin.</p>
+                <p>• Для пошуку житла в дорозі безпечніше використовувати мобільний інтернет і перевірені сервіси.</p>
+            </div>
+
+            <div class="choices">
+                <button class="choice-button" onclick="goToPage('page6')">
+                    ➡️ Розпочати Розділ 3. Нове місто
+                </button>
+            </div>
+        </div>
+
+        <!-- Розділ 3: Нове місто -->
+        <div class="page" id="page6">
+            <h2 class="chapter-title">Розділ 3. Нове місто</h2>
+            <div class="time-stamp">⏰ 18:10, Київ, вокзал</div>
+
+            <div class="story-text">
+                <p><strong>Сцена 1. Банкомат на вокзалі</strong></p>
+                <p>Олег щойно прибув і хоче зняти готівку. Біля банкомата тиснява, хтось підказує "швидше" і пропонує допомогу з меню.</p>
+                <p>На картоприймачі видно підозрілу накладку, а поруч стоїть чоловік, який уважно дивиться на клавіатуру.</p>
+            </div>
+
+            <div class="choices">
+                <button class="choice-button" onclick="goToPage('page6_1', {id: 'chapter3_atm_rush', type: 'risky', points: 12, moneyChange: -1500, consequence: {text: 'Ймовірний скімінг банкомата', severity: 'high'}})">
+                    💳 Зняти гроші тут і зараз, не зважаючи на підозри
+                </button>
+                <button class="choice-button" onclick="goToPage('page6_2', {id: 'chapter3_atm_safe', type: 'safe', points: 15})">
+                    🛡️ Відійти і знайти банкомат у відділенні банку або ТЦ
+                </button>
+            </div>
+        </div>
+
+        <div class="page" id="page6_1">
+            <h2 class="chapter-title">Розділ 3. Сцена 1 — Наслідок</h2>
+            <div class="time-stamp">⏰ 18:18</div>
+
+            <div class="warning">
+                ⚠️ Ризикований вибір: через підозрілий банкомат дані картки могли бути скомпрометовані.
+            </div>
+
+            <div class="story-text">
+                <p>Через кілька хвилин приходить повідомлення про незрозумілу операцію. Олег терміново блокує картку в додатку.</p>
+                <p>Урок болючий: у стресі найнебезпечніше "робити швидко".</p>
+            </div>
+
+            <div class="choices">
+                <button class="choice-button" onclick="goToPage('page6_2')">
+                    ➡️ До Сцени 2. Таксі
+                </button>
+            </div>
+        </div>
+
+        <div class="page" id="page6_2">
+            <h2 class="chapter-title">Сцена 2. Таксі</h2>
+            <div class="time-stamp">⏰ 18:25, Площа перед вокзалом</div>
+
+            <div class="story-text">
+                <p>Олег відкриває застосунок таксі, але до нього підходить водій без форми: "Поїхали без черги, дешевше".</p>
+                <p>Він просить передоплату на карту і надсилає посилання "для фіксації поїздки".</p>
+            </div>
+
+            <div class="choices">
+                <button class="choice-button" onclick="goToPage('page6_3', {id: 'chapter3_taxi_fake', type: 'risky', points: 10, moneyChange: -400, consequence: {text: 'Передоплата шахраю в таксі', severity: 'medium'}})">
+                    🚕 Погодитися і переказати передоплату
+                </button>
+                <button class="choice-button" onclick="goToPage('page6_3', {id: 'chapter3_taxi_app', type: 'safe', points: 15})">
+                    📱 Ігнорувати і замовити тільки через офіційний застосунок
+                </button>
+            </div>
+        </div>
+
+        <div class="page" id="page6_3">
+            <h2 class="chapter-title">Сцена 3. «Ідеальна квартира» (Оренда-пастка)</h2>
+            <div class="time-stamp">⏰ 19:10, Дорога до району</div>
+
+            <div class="story-text">
+                <p>Олег знаходить оголошення: нова квартира, низька ціна, "власник за кордоном", ключі після завдатку.</p>
+                <p>Менеджер тисне: "Ще двоє хочуть забрати, бронюй зараз".</p>
+            </div>
+
+            <div class="choices">
+                <button class="choice-button" onclick="goToPage('page7', {id: 'chapter3_rent_trap', type: 'risky', points: 15, moneyChange: -2000, consequence: {text: 'Завдаток за фейкову оренду', severity: 'high'}})">
+                    🏠 Переказати завдаток без перегляду квартири
+                </button>
+                <button class="choice-button" onclick="goToPage('page7', {id: 'chapter3_rent_safe', type: 'safe', points: 20})">
+                    🔍 Відмовитись від передоплати, просити відеодзвінок і документи
+                </button>
+            </div>
+        </div>
+
+        <div class="page" id="page7">
+            <h2 class="chapter-title">Підсумок Розділу 3</h2>
+            <div class="time-stamp">⏰ Кінець Розділу 3</div>
+
+            <div class="stats">
+                <div class="stats-title">Що показав Розділ 3</div>
+                <p>• Банкомат у натовпі + поспіх = високий ризик скімінгу.</p>
+                <p>• Таксі "з рук" і передоплата поза застосунком часто ведуть до шахрайства.</p>
+                <p>• «Ідеальна квартира» без перевірки документів та огляду - класична оренда-пастка.</p>
+            </div>
+
+            <div class="choices">
+                <button class="choice-button" onclick="goToPage('page8')">
+                    ➡️ Розпочати Розділ 4. Адаптація
+                </button>
+            </div>
+        </div>
+
+        <!-- Розділ 4: Адаптація -->
+        <div class="page" id="page8">
+            <h2 class="chapter-title">Розділ 4. Адаптація</h2>
+            <div class="time-stamp">⏰ Наступний день, 10:20</div>
+
+            <div class="story-text">
+                <p><strong>Сцена 1. «Виплати для ВПО» (Фішинг на допомозі)</strong></p>
+                <p>Олег отримує SMS: "Терміново підтвердьте дані для виплат ВПО" з посиланням на сайт-клон.</p>
+            </div>
+
+            <div class="choices">
+                <button class="choice-button" onclick="goToPage('page8_2', {id: 'chapter4_vpo_phish', type: 'risky', points: 12, consequence: {text: 'Спроба крадіжки персональних даних ВПО', severity: 'high'}})">
+                    🔗 Відкрити посилання і ввести дані
+                </button>
+                <button class="choice-button" onclick="goToPage('page8_2', {id: 'chapter4_vpo_safe', type: 'safe', points: 18})">
+                    ✅ Перевірити інформацію лише через офіційні державні сервіси
+                </button>
+            </div>
+        </div>
+
+        <div class="page" id="page8_2">
+            <h2 class="chapter-title">Сцена 2. Атака по файлу</h2>
+            <div class="time-stamp">⏰ 12:40</div>
+
+            <div class="story-text">
+                <p>На пошту приходить файл "Список виплат.xlsx.exe" від невідомого відправника.</p>
+                <p>Назва маскується під таблицю, але це виконуваний файл зі шкідливим кодом.</p>
+            </div>
+
+            <div class="choices">
+                <button class="choice-button" onclick="goToPage('page8_3', {id: 'chapter4_file_attack', type: 'risky', points: 14, consequence: {text: 'Запуск шкідливого файлу', severity: 'high'}})">
+                    📂 Відкрити файл, бо виглядає офіційно
+                </button>
+                <button class="choice-button" onclick="goToPage('page8_3', {id: 'chapter4_file_safe', type: 'safe', points: 18})">
+                    🧪 Перевірити розширення і відправника, не запускати підозріле
+                </button>
+            </div>
+        </div>
+
+        <div class="page" id="page8_3">
+            <h2 class="chapter-title">Сцена 3. Робота-пастка</h2>
+            <div class="time-stamp">⏰ 15:05</div>
+
+            <div class="story-text">
+                <p>Оголошення обіцяє "10 000 грн на тиждень без досвіду". Для старту просять сплатити "доступ до платформи".</p>
+            </div>
+
+            <div class="choices">
+                <button class="choice-button" onclick="goToPage('page8_4', {id: 'chapter4_job_trap', type: 'risky', points: 12, moneyChange: -600, consequence: {text: 'Оплата за фейкову вакансію', severity: 'medium'}})">
+                    💸 Оплатити "вступний внесок"
+                </button>
+                <button class="choice-button" onclick="goToPage('page8_4', {id: 'chapter4_job_safe', type: 'safe', points: 16})">
+                    🔍 Відмовитися і перевірити роботодавця за реєстрами та відгуками
+                </button>
+            </div>
+        </div>
+
+        <div class="page" id="page8_4">
+            <h2 class="chapter-title">Сцена 4. Допомога від знайомих: Viber/Line-акаунти</h2>
+            <div class="time-stamp">⏰ 18:30</div>
+
+            <div class="story-text">
+                <p>У Viber пише "старий знайомий": просить терміново позичити гроші і скидає новий номер картки.</p>
+                <p>Паралельно у Line приходить схоже повідомлення про "допомогу" від іншого контакту.</p>
+            </div>
+
+            <div class="choices">
+                <button class="choice-button" onclick="goToPage('page9', {id: 'chapter4_fake_friend_help', type: 'risky', points: 14, moneyChange: -800, consequence: {text: 'Переказ шахраю під виглядом знайомого', severity: 'high'}})">
+                    🤝 Переказати одразу, не перевіряючи
+                </button>
+                <button class="choice-button" onclick="goToPage('page9', {id: 'chapter4_verify_friend', type: 'safe', points: 20})">
+                    📞 Передзвонити знайомому напряму і підтвердити запит
+                </button>
+            </div>
+        </div>
+
+        <div class="page" id="page9">
+            <h2 class="chapter-title">Підсумок Розділу 4</h2>
+            <div class="time-stamp">⏰ Кінець Розділу 4</div>
+
+            <div class="stats">
+                <div class="stats-title">Що показав Розділ 4</div>
+                <p>• Шахраї часто паразитують на темі допомоги для ВПО.</p>
+                <p>• Файли з подвійним розширенням - типова пастка для зараження.</p>
+                <p>• Робота без перевірки компанії і "вступні внески" - червоний прапорець.</p>
+                <p>• Повідомлення "від знайомих" у месенджерах потрібно підтверджувати дзвінком.</p>
+            </div>
+
+            <div class="choices">
+                <button class="choice-button" onclick="goToPage('page10')">
+                    ➡️ Розпочати Розділ 5. Вчитель
+                </button>
+            </div>
+        </div>
+
+        <!-- Розділ 5: Вчитель -->
+        <div class="page" id="page10">
+            <h2 class="chapter-title">Розділ 5. Вчитель</h2>
+            <div class="time-stamp">⏰ Через кілька тижнів, 11:00</div>
+
+            <div class="story-text">
+                <p><strong>Сцена 1. «Ефект свідка»</strong></p>
+                <p>Олег сидить у тому самому кафе, де колись ледь не втратив доступ до банкінгу. За сусіднім столиком молода мама схвильовано говорить телефоном і чує фразу: "Назвіть код із SMS".</p>
+            </div>
+
+            <div class="choices">
+                <button class="choice-button" onclick="goToPage('page10_2', {id: 'chapter5_bystander_silent', type: 'risky', points: 8})">
+                    🤐 Промовчати, це не його справа
+                </button>
+                <button class="choice-button" onclick="goToPage('page10_2', {id: 'chapter5_bystander_help', type: 'safe', points: 18})">
+                    🗣️ Чемно попередити про шахрайську схему
+                </button>
+            </div>
+        </div>
+
+        <div class="page" id="page10_2">
+            <h2 class="chapter-title">Сцена 2. «Цифрове волонтерство» (Група допомоги)</h2>
+            <div class="time-stamp">⏰ 13:30</div>
+
+            <div class="story-text">
+                <p>Олег приєднується до локальної групи допомоги і стає активним учасником, а згодом модератором.</p>
+                <p>Він публікує короткі інструкції: як перевіряти посилання, профілі та підозрілі файли.</p>
+            </div>
+
+            <div class="choices">
+                <button class="choice-button" onclick="goToPage('page10_3', {id: 'chapter5_volunteer_active', type: 'safe', points: 20})">
+                    🧭 Продовжити допомагати як модератор
+                </button>
+            </div>
+        </div>
+
+        <div class="page" id="page10_3">
+            <h2 class="chapter-title">Сцена 3. «Зустріч з минулим» (Дзвінок «з банку»)</h2>
+            <div class="time-stamp">⏰ 17:45</div>
+
+            <div class="story-text">
+                <p>Дзвінок із невідомого номера: "Служба безпеки банку, у вас підозріла операція".</p>
+                <p>Це майже той самий сценарій, який колись ледь не зламав його плани.</p>
+            </div>
+
+            <div class="choices">
+                <button class="choice-button" onclick="goToPage('page11', {id: 'chapter5_fake_bank_again', type: 'risky', points: 10, consequence: {text: 'Повторна спроба соціальної інженерії', severity: 'medium'}})">
+                    ☎️ Продовжити розмову і пояснювати ситуацію
+                </button>
+                <button class="choice-button" onclick="goToPage('page11', {id: 'chapter5_fake_bank_block', type: 'safe', points: 22})">
+                    🚫 Завершити дзвінок, передзвонити на офіційний номер банку
+                </button>
+            </div>
+        </div>
+
+        <div class="page" id="page11">
+            <h2 class="chapter-title">Підсумок історії. Контакти автора</h2>
+            <div class="time-stamp">⏰ Фінал</div>
+
+            <div class="story-text">
+                <p>Олег пройшов шлях від розгубленості до впевненості. Його головна перемога - не відсутність помилок, а вміння вчасно зупинятись, перевіряти і допомагати іншим.</p>
+            </div>
+
+            <div class="stats">
+                <div class="stats-title">Фінальний стан</div>
+                💰 Баланс: <span id="currentMoneyFinal"></span> грн<br>
+                ✅ Безпечні рішення: <span id="currentSafetyScoreFinal"></span><br>
+                ⚠️ Ризикові рішення: <span id="currentRiskScoreFinal"></span><br>
+                🧠 Рівень кіберграмотності: <span id="literacyLevelFinal"></span>
+            </div>
+
+            <div class="info">
+                <strong>Контакти автора:</strong><br>
+                Розробник: Сергій Євдокимов<br>
+                Сайт: <a href="https://sargeras197.github.io/contacts/" target="_blank" style="color: white; text-decoration: underline;">https://sargeras197.github.io/contacts/</a>
             </div>
 
             <div class="choices">
                 <button class="choice-button" onclick="openStoryMap()">
-                    🗺️ Перейти до Розділу 3 на карті
+                    🗺️ Відкрити карту всієї історії
+                </button>
+            </div>
+
+            <div class="choices">
+                <button class="choice-button secondary" onclick="resetProgress()">
+                    🔄 Пройти історію ще раз
                 </button>
             </div>
         </div>
@@ -1856,6 +2159,10 @@
                 if (pageId === 'page3') {
                     updateChapterOneSummary();
                 }
+
+                if (pageId === 'page11') {
+                    updateFinalSummary();
+                }
                 
                 // Прокручуємо наверх
                 window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -1913,6 +2220,18 @@
             if (safetyElem) safetyElem.textContent = gameState.safetyScore;
             if (riskElem) riskElem.textContent = gameState.riskScore;
             if (moneyElem) moneyElem.textContent = gameState.money;
+        }
+
+        function updateFinalSummary() {
+            const moneyElem = document.getElementById('currentMoneyFinal');
+            const safetyElem = document.getElementById('currentSafetyScoreFinal');
+            const riskElem = document.getElementById('currentRiskScoreFinal');
+            const literacyElem = document.getElementById('literacyLevelFinal');
+
+            if (moneyElem) moneyElem.textContent = gameState.money;
+            if (safetyElem) safetyElem.textContent = gameState.safetyScore;
+            if (riskElem) riskElem.textContent = gameState.riskScore;
+            if (literacyElem) literacyElem.textContent = getLiteracyLevel();
         }
         
         // Збереження прогресу в localStorage
@@ -2235,365 +2554,162 @@
             
             // Розділ 2: Дорога до нового життя
             page4: {
-                title: 'Дорога до нового життя',
-                type: 'choice',
+                title: 'Початкова сцена',
+                type: 'neutral',
                 x: 400, y: 850,
-                children: ['page4_1', 'page4_3'],
+                children: ['page4_1'],
                 storyLine: 7
             },
             page4_1: {
-                title: 'Підозріла мережа',
-                type: 'bad',
-                x: 250, y: 1000,
-                children: ['page5'],
+                title: 'Сцена 1: QR і вибір',
+                type: 'choice',
+                x: 400, y: 980,
+                children: ['page4_3', 'page5'],
                 storyLine: 8
             },
             page4_3: {
-                title: 'Терпіння і контроль',
-                type: 'good',
-                x: 550, y: 1000,
+                title: 'Сцена 1: Ризик QR',
+                type: 'bad',
+                x: 250, y: 1100,
                 children: ['page5'],
-                storyLine: 8
+                storyLine: 9,
+                choice: 'Сканувати'
             },
             page5: {
-                title: 'Дорога триває',
-                type: 'neutral',
-                x: 400, y: 1200,
-                children: ['page5_summary'],
+                title: 'Сцена 2: Evil Twin',
+                type: 'choice',
+                x: 550, y: 1100,
+                children: ['page4_2', 'page5_2'],
                 storyLine: 10
+            },
+            page4_2: {
+                title: 'Сцена 2: Ризик Wi-Fi',
+                type: 'bad',
+                x: 300, y: 1230,
+                children: ['page5_summary'],
+                storyLine: 10,
+                choice: 'Ivan_Free'
+            },
+            page5_2: {
+                title: 'Сцена 2: Безпечно ✓',
+                type: 'good',
+                x: 600, y: 1230,
+                children: ['page5_summary'],
+                storyLine: 10,
+                choice: 'Мобільний інтернет'
             },
             page5_summary: {
                 title: 'Підсумок Розділу 2',
                 type: 'neutral',
                 x: 400, y: 1320,
                 children: ['page6'],
-                storyLine: 10
+                storyLine: 11
             },
             
             // Розділ 3: Нове місто
             page6: {
-                title: 'Пошук житла',
+                title: 'Розділ 3: Банкомат',
                 type: 'choice',
                 x: 400, y: 1450,
-                children: ['page6_1', 'page6_2', 'page6_3'],
-                storyLine: 11
+                children: ['page6_1', 'page6_2'],
+                storyLine: 12
             },
             page6_1: {
-                title: 'Сайт оголошень',
-                type: 'choice',
-                x: 200, y: 1600,
-                children: ['page6_1a', 'page6_1b', 'page6_1c'],
-                storyLine: 12
-            },
-            page6_1a: {
-                title: 'Передоплата',
                 type: 'bad',
-                x: 100, y: 1750,
-                children: ['page7'],
+                title: 'Скімінг (ризик)',
+                x: 250, y: 1570,
+                children: ['page6_2'],
                 storyLine: 13,
-                choice: 'Дешево'
-            },
-            page6_1b: {
-                title: 'Середня ціна ✓',
-                type: 'neutral',
-                x: 200, y: 1750,
-                children: ['page7'],
-                storyLine: 13,
-                choice: 'Нормально'
-            },
-            page6_1c: {
-                title: 'Без передоплати ✓✓',
-                type: 'good',
-                x: 300, y: 1750,
-                children: ['page7'],
-                storyLine: 13,
-                choice: 'Безпечно'
+                choice: 'Поспіх'
             },
             page6_2: {
-                title: 'Соцмережі',
+                title: 'Сцена 2: Таксі',
                 type: 'choice',
-                x: 400, y: 1600,
-                children: ['page6_2a', 'page6_2b', 'page6_2c'],
-                storyLine: 12
-            },
-            page6_2a: {
-                title: 'За кордоном',
-                type: 'bad',
-                x: 350, y: 1750,
-                children: ['page7'],
-                storyLine: 13,
-                choice: 'Довіритись'
-            },
-            page6_2b: {
-                title: 'Перевірка ✓✓',
-                type: 'good',
-                x: 420, y: 1750,
-                children: ['page7'],
-                storyLine: 13,
-                choice: 'Профіль'
-            },
-            page6_2c: {
-                title: 'Зустріч ✓✓✓',
-                type: 'good',
-                x: 490, y: 1750,
-                children: ['page7'],
-                storyLine: 13,
-                choice: 'Показ'
+                x: 400, y: 1690,
+                children: ['page6_3'],
+                storyLine: 13
             },
             page6_3: {
-                title: 'Знайомі',
+                title: 'Сцена 3: Оренда-пастка',
                 type: 'choice',
-                x: 600, y: 1600,
-                children: ['page6_3a', 'page6_3b', 'page6_3c'],
-                storyLine: 12
-            },
-            page6_3a: {
-                title: 'Довіра ✓',
-                type: 'neutral',
-                x: 550, y: 1750,
+                x: 400, y: 1810,
                 children: ['page7'],
-                storyLine: 13,
-                choice: 'Повірити'
-            },
-            page6_3b: {
-                title: 'Документи ✓✓',
-                type: 'good',
-                x: 630, y: 1750,
-                children: ['page7'],
-                storyLine: 13,
-                choice: 'Перевірити'
-            },
-            page6_3c: {
-                title: 'Огляд ✓✓✓',
-                type: 'good',
-                x: 710, y: 1750,
-                children: ['page7'],
-                storyLine: 13,
-                choice: 'Подивитись'
+                storyLine: 14
             },
             page7: {
-                title: 'Новий дім',
+                title: 'Підсумок Розділу 3',
                 type: 'neutral',
-                x: 400, y: 1900,
+                x: 400, y: 1930,
                 children: ['page8'],
-                storyLine: 14
+                storyLine: 15
             },
             
             // Розділ 4: Адаптація
             page8: {
-                title: 'Підрахунок',
+                title: 'Сцена 1: Виплати ВПО',
                 type: 'choice',
-                x: 400, y: 2050,
-                children: ['page8_1', 'page8_2', 'page8_3'],
-                storyLine: 15
-            },
-            page8_1: {
-                title: 'Багато помилок',
-                type: 'choice',
-                x: 200, y: 2200,
-                children: ['page8_1a', 'page8_1b', 'page8_1c'],
+                x: 400, y: 2070,
+                children: ['page8_2'],
                 storyLine: 16
-            },
-            page8_1a: {
-                title: 'Батьки ✓',
-                type: 'neutral',
-                x: 100, y: 2350,
-                children: ['page9'],
-                storyLine: 17,
-                choice: 'Допомога'
-            },
-            page8_1b: {
-                title: 'Кредит',
-                type: 'bad',
-                x: 200, y: 2350,
-                children: ['page9'],
-                storyLine: 17,
-                choice: 'Позика'
-            },
-            page8_1c: {
-                title: 'Підробіток ✓',
-                type: 'neutral',
-                x: 300, y: 2350,
-                children: ['page9'],
-                storyLine: 17,
-                choice: 'Працювати'
             },
             page8_2: {
-                title: 'Помірно помилок',
+                title: 'Сцена 2: Атака файлом',
                 type: 'choice',
-                x: 400, y: 2200,
-                children: ['page8_2a', 'page8_2b', 'page8_2c'],
-                storyLine: 16
-            },
-            page8_2a: {
-                title: 'Поліція ✓✓',
-                type: 'good',
-                x: 350, y: 2350,
-                children: ['page9'],
+                x: 400, y: 2190,
+                children: ['page8_3'],
                 storyLine: 17,
-                choice: 'Заява'
-            },
-            page8_2b: {
-                title: 'Блокування ✓✓',
-                type: 'good',
-                x: 420, y: 2350,
-                children: ['page9'],
-                storyLine: 17,
-                choice: 'Захист'
-            },
-            page8_2c: {
-                title: 'Економія ✓',
-                type: 'neutral',
-                x: 490, y: 2350,
-                children: ['page9'],
-                storyLine: 17,
-                choice: 'Скорочення'
+                choice: 'Перевірка'
             },
             page8_3: {
-                title: 'Без помилок',
+                title: 'Сцена 3: Робота-пастка',
                 type: 'choice',
-                x: 600, y: 2200,
-                children: ['page8_3a', 'page8_3b', 'page8_3c'],
-                storyLine: 16
+                x: 400, y: 2310,
+                children: ['page8_4'],
+                storyLine: 18
             },
-            page8_3a: {
-                title: 'Допомога іншим ✓✓✓',
-                type: 'good',
-                x: 550, y: 2350,
+            page8_4: {
+                title: 'Сцена 4: Viber/Line',
+                type: 'choice',
+                x: 400, y: 2430,
                 children: ['page9'],
-                storyLine: 17,
-                choice: 'Ділитись'
-            },
-            page8_3b: {
-                title: 'Огляд ✓✓',
-                type: 'good',
-                x: 630, y: 2350,
-                children: ['page9'],
-                storyLine: 17,
-                choice: 'Написати'
-            },
-            page8_3c: {
-                title: 'Обережність ✓✓',
-                type: 'good',
-                x: 710, y: 2350,
-                children: ['page9'],
-                storyLine: 17,
-                choice: 'Пильність'
+                storyLine: 19
             },
             page9: {
-                title: 'Місяць потому',
+                title: 'Підсумок Розділу 4',
                 type: 'neutral',
-                x: 400, y: 2500,
+                x: 400, y: 2550,
                 children: ['page10'],
-                storyLine: 18
+                storyLine: 20
             },
             
             // Розділ 5: Вчитель
             page10: {
-                title: 'Трансформація',
+                title: 'Сцена 1: Ефект свідка',
                 type: 'choice',
-                x: 400, y: 2650,
-                children: ['page10_1', 'page10_2', 'page10_3'],
-                storyLine: 19
-            },
-            page10_1: {
-                title: 'Майстер (80+)',
-                type: 'choice',
-                x: 200, y: 2800,
-                children: ['ending_perfect', 'ending_mentor', 'ending_wise'],
-                storyLine: 20
+                x: 400, y: 2700,
+                children: ['page10_2'],
+                storyLine: 21
             },
             page10_2: {
-                title: 'Досвідчений (40-79)',
+                title: 'Сцена 2: Волонтерство',
                 type: 'choice',
-                x: 400, y: 2800,
-                children: ['ending_helper', 'ending_student', 'ending_cautious'],
-                storyLine: 20
+                x: 400, y: 2820,
+                children: ['page10_3'],
+                storyLine: 22
             },
             page10_3: {
-                title: 'Учень (<40)',
+                title: 'Сцена 3: Дзвінок з банку',
                 type: 'choice',
-                x: 600, y: 2800,
-                children: ['ending_survivor', 'ending_fighter', 'ending_return'],
-                storyLine: 20
+                x: 400, y: 2940,
+                children: ['page11'],
+                storyLine: 23
             },
-            
-            // Кінцівки - Золоті
-            ending_perfect: {
-                title: 'Ідеальна 👑',
-                type: 'ending_gold',
-                x: 100, y: 2950,
+            page11: {
+                title: 'Фінал і контакти',
+                type: 'neutral',
+                x: 400, y: 3080,
                 children: [],
-                storyLine: 21,
-                choice: 'Волонтер'
-            },
-            ending_mentor: {
-                title: 'Наставник 👑',
-                type: 'ending_gold',
-                x: 200, y: 2950,
-                children: [],
-                storyLine: 21,
-                choice: 'Посібник'
-            },
-            ending_wise: {
-                title: 'Мудрість 👑',
-                type: 'ending_gold',
-                x: 300, y: 2950,
-                children: [],
-                storyLine: 21,
-                choice: 'Спокій'
-            },
-            
-            // Кінцівки - Срібні
-            ending_helper: {
-                title: 'Помічник 🥈',
-                type: 'ending_silver',
-                x: 350, y: 2950,
-                children: [],
-                storyLine: 21,
-                choice: 'Друзі'
-            },
-            ending_student: {
-                title: 'Студент 🥈',
-                type: 'ending_silver',
-                x: 420, y: 2950,
-                children: [],
-                storyLine: 21,
-                choice: 'Навчання'
-            },
-            ending_cautious: {
-                title: 'Обережний 🥈',
-                type: 'ending_silver',
-                x: 490, y: 2950,
-                children: [],
-                storyLine: 21,
-                choice: 'Впевненість'
-            },
-            
-            // Кінцівки - Бронзові
-            ending_survivor: {
-                title: 'Виживший 🥉',
-                type: 'ending_bronze',
-                x: 550, y: 2950,
-                children: [],
-                storyLine: 21,
-                choice: 'Історія'
-            },
-            ending_fighter: {
-                title: 'Боєць 🥉',
-                type: 'ending_bronze',
-                x: 630, y: 2950,
-                children: [],
-                storyLine: 21,
-                choice: 'Відновлення'
-            },
-            ending_return: {
-                title: 'Повернення 🥉',
-                type: 'ending_bronze',
-                x: 710, y: 2950,
-                children: [],
-                storyLine: 21,
-                choice: 'Додому'
+                storyLine: 24
             }
         };
         
@@ -2613,7 +2729,7 @@
             const ctx = canvas.getContext('2d');
             
             canvas.width = canvas.offsetWidth;
-            canvas.height = 3200;
+            canvas.height = 3400;
             
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -2676,15 +2792,15 @@
             storyNodesPositions = [];
 
             // Збільшена висота для всіх розділів
-            canvas.height = 3200;
+            canvas.height = 3400;
             
             // Малюємо етапи історії фоном
             const stages = [
                 { name: 'Розділ 1: Початок. День, коли все змінилось', y: 0, height: 900, color: 'rgba(102, 126, 234, 0.08)' },
-                { name: 'Розділ 2: Дорога до нового життя', y: 900, height: 450, color: 'rgba(255, 107, 107, 0.08)' },
-                { name: 'Розділ 3: Нове місто', y: 1350, height: 550, color: 'rgba(72, 219, 251, 0.08)' },
-                { name: 'Розділ 4: Адаптація', y: 1900, height: 650, color: 'rgba(255, 184, 77, 0.08)' },
-                { name: 'Розділ 5: Вчитель', y: 2550, height: 650, color: 'rgba(186, 143, 255, 0.08)' }
+                { name: 'Розділ 2: Дорога до нового життя', y: 900, height: 500, color: 'rgba(255, 107, 107, 0.08)' },
+                { name: 'Розділ 3: Нове місто', y: 1400, height: 550, color: 'rgba(72, 219, 251, 0.08)' },
+                { name: 'Розділ 4: Адаптація', y: 1950, height: 650, color: 'rgba(255, 184, 77, 0.08)' },
+                { name: 'Розділ 5: Вчитель', y: 2600, height: 800, color: 'rgba(186, 143, 255, 0.08)' }
             ];
             
             stages.forEach(stage => {
