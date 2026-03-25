@@ -1657,9 +1657,9 @@
             <div class="time-stamp">⏰ 13:45, Вокзал, зал очікування</div>
 
             <div class="story-text">
-                <p><strong>Початкова сцена:</strong> Олег виїхав і вже майже на платформі. До відправлення кілька хвилин, а питання житла на першу ніч у Києві досі не вирішене.</p>
-                <p>Він розуміє, що попереду буде багато поспішних рішень. Саме в такі моменти шахрайські схеми працюють найкраще.</p>
-                <p><strong>У цьому розділі 2 сцени вибору:</strong> спочатку QR-код у залі очікування, далі підозріла Wi-Fi мережа у вагоні під час пошуку житла.</p>
+                <p><strong>Початкова сцена:</strong> поїзд подають на 4 колію. У гучномовці оголошення, люди метушаться, у кожного своя паніка.</p>
+                <p>Олег стискає валізу, перевіряє гаманець і розуміє: якщо зараз помилиться, ночівля в Києві може перетворитися на катастрофу.</p>
+                <p>Саме в дорозі шахраї ловлять на двох речах: <strong>поспіх</strong> і <strong>втому</strong>. Попереду - дві сцени, де кожен клік має ціну.</p>
             </div>
 
             <div class="choices">
@@ -1674,17 +1674,25 @@
             <div class="time-stamp">⏰ 13:49, Зал очікування</div>
 
             <div class="story-text">
-                <p>На стіні — наліпка з QR: <em>"Швидкий Wi-Fi без пароля"</em>. Наклейка криво приклеєна поверх старого оголошення, без логотипу вокзалу.</p>
-                <p>Олегу дуже хочеться зекономити час, але щось у цьому виглядає підозріло.</p>
+                <p>На стіні - свіжа наліпка з QR: <em>"Безкоштовний Wi-Fi для пасажирів. Підключення за 10 секунд"</em>.</p>
+                <p>Наклейка перекриває старе оголошення, у тексті помилка, логотип розмитий. Поруч хтось нервово каже: "Скануй швидше, потім не буде інтернету".</p>
+                <p>Олег уже майже наводить камеру, але в голові спрацьовує тривога.</p>
                 <p><strong>Що робити?</strong></p>
+            </div>
+
+            <div class="emotional-moment">
+                "Якщо я зараз піддамся натовпу, то можу втратити більше, ніж кілька хвилин."
             </div>
 
             <div class="choices">
                 <button class="choice-button" onclick="goToPage('page4_3', {id: 'chapter2_qr_scan', type: 'risky', points: 10})">
-                    📷 Сканувати QR і підключитися одразу
+                    📷 Сканувати QR і перейти на сторінку підключення
+                </button>
+                <button class="choice-button" onclick="goToPage('page4_4', {id: 'chapter2_qr_check', type: 'safe', points: 15})">
+                    🧭 Перевірити QR: запитати працівника вокзалу та звірити офіційний стенд
                 </button>
                 <button class="choice-button" onclick="goToPage('page5', {id: 'chapter2_qr_ignore', type: 'safe', points: 15})">
-                    🛡️ Пропустити QR, почекати і використати мобільний інтернет
+                    🛡️ Ігнорувати QR і одразу перейти на мобільний інтернет
                 </button>
             </div>
         </div>
@@ -1698,8 +1706,9 @@
             </div>
 
             <div class="story-text">
-                <p>Олег обрав мережу <strong>"Ivan_Free"</strong>. Відкрилася фальшива "сторінка перевірки" з проханням увійти через соцмережу.</p>
-                <p>В останній момент він зупиняється і нічого не вводить, але час втрачено, а стрес лише зріс.</p>
+                <p>Олег обрав мережу <strong>"Ivan_Free"</strong>. На екрані з'являється форма: "Підтвердьте акаунт, щоб продовжити".</p>
+                <p>Він не вводить пароль, але бачить, що сайт оренди раптом відкривається в дивному домені-клоні. Ризик був реальний.</p>
+                <p>Час втрачено, нерви на межі, а довіра до "безкоштовного Wi-Fi" зникає остаточно.</p>
             </div>
 
             <div class="choices">
@@ -1710,7 +1719,7 @@
         </div>
 
         <div class="page" id="page4_3">
-            <h2 class="chapter-title">Сцена 1. Наслідок вибору</h2>
+            <h2 class="chapter-title">Сцена 1. Пастка за QR</h2>
             <div class="time-stamp">⏰ 13:52, Зал очікування</div>
 
             <div class="warning">
@@ -1718,13 +1727,61 @@
             </div>
 
             <div class="story-text">
-                <p>Після сканування QR відкривається дивний "портал доступу" і одразу просить номер телефону та пароль від пошти.</p>
-                <p>Олег не вводить дані, вимикає Wi-Fi і вирішує не повторювати таких експериментів у поспіху.</p>
+                <p>Після сканування відкривається "портал доступу" з полями: номер телефону, пароль пошти і код із SMS.</p>
+                <p>Сторінка тисне таймером: <em>"Залишилось 45 секунд до втрати сесії"</em>. Класична психологічна маніпуляція.</p>
+                <p>Олег вагається: повірити поспіху чи зупинитися?</p>
+            </div>
+
+            <div class="emotional-moment">
+                "Якщо це справжній сервіс, чому він просить пароль від пошти? Це не схоже на нормальну авторизацію."
+            </div>
+
+            <div class="choices">
+                <button class="choice-button" onclick="goToPage('page4_5', {id: 'chapter2_qr_enter_data', type: 'risky', points: 15, consequence: {text: 'Введення даних у фейковий портал', severity: 'high'}})">
+                    ⏱️ Ввести дані, бо часу мало
+                </button>
+                <button class="choice-button" onclick="goToPage('page4_4', {id: 'chapter2_qr_stop', type: 'safe', points: 18})">
+                    ✋ Закрити сторінку і перевірити інформацію офіційно
+                </button>
+            </div>
+        </div>
+
+        <div class="page" id="page4_4">
+            <h2 class="chapter-title">Сцена 1. Контроль повернуто</h2>
+            <div class="time-stamp">⏰ 13:56, Платформа</div>
+
+            <div class="success">
+                ✅ Олег перевірив джерело і уникнув пастки ще до введення даних.
+            </div>
+
+            <div class="story-text">
+                <p>Черговий по вокзалу підтверджує: офіційний Wi-Fi не потребує пароля від пошти або соцмереж.</p>
+                <p>Наліпку з QR фотографують для служби безпеки, а Олег сідає у вагон із відчуттям, що перший раунд виграно.</p>
             </div>
 
             <div class="choices">
                 <button class="choice-button" onclick="goToPage('page5')">
-                    ➡️ До Сцени 2
+                    ➡️ Перейти до Сцени 2 у вагоні
+                </button>
+            </div>
+        </div>
+
+        <div class="page" id="page4_5">
+            <h2 class="chapter-title">Сцена 1. Ціна поспіху</h2>
+            <div class="time-stamp">⏰ 13:58, Перед посадкою</div>
+
+            <div class="warning">
+                ⚠️ Небезпечний момент: введені дані могли бути перехоплені шахраями.
+            </div>
+
+            <div class="story-text">
+                <p>Сторінка одразу "падає", а інтернет зникає. Через хвилину приходить лист про вхід у пошту з нового пристрою.</p>
+                <p>Олег швидко змінює пароль і вмикає двофакторну автентифікацію. Гроші поки цілі, але наслідки могли бути значно гірші.</p>
+            </div>
+
+            <div class="choices">
+                <button class="choice-button" onclick="goToPage('page5')">
+                    ➡️ Перейти до Сцени 2 у вагоні
                 </button>
             </div>
         </div>
@@ -1734,18 +1791,26 @@
             <div class="time-stamp">⏰ 14:20</div>
 
             <div class="story-text">
-                <p>Поїзд рушає. Олег сідає біля вікна і починає шукати житло в дорозі, щоб не залишитися без ночівлі після прибуття.</p>
+                <p>Поїзд рушає. За вікном темніє, а в Олега лишається менше години, щоб знайти житло на першу ніч.</p>
                 <p>У списку Wi-Fi видно дві відкриті мережі: <strong>"Ivan_Free"</strong> та <strong>"FreFreFre"</strong>.</p>
-                <p>Це схоже на <strong>Evil Twin</strong> - фейкові точки доступу, які імітують "зручний інтернет" для крадіжки даних.</p>
+                <p>Паралельно в Telegram прилітає "гаряча пропозиція": <em>"Квартира біля вокзалу, бронь лише 500 грн до 15:00"</em>.</p>
+                <p>Збіг виглядає дивно, але й правдоподібно: у незнайомому місті такі рішення часто приймають саме в дорозі.</p>
                 <p><strong>Який вибір зробить Олег?</strong></p>
             </div>
 
+            <div class="emotional-moment">
+                "Можливо, це шанс заощадити час. А можливо - саме той момент, коли помиляються найчастіше."
+            </div>
+
             <div class="choices">
-                <button class="choice-button" onclick="goToPage('page4_2')">
-                    📶 Підключитися до "Ivan_Free" і швидко відкрити сайт оренди
+                <button class="choice-button" onclick="goToPage('page4_2', {id: 'chapter2_evil_twin_connect', type: 'risky', points: 12})">
+                    📶 Підключитися до мережі з кращим сигналом і відкрити оголошення
+                </button>
+                <button class="choice-button" onclick="goToPage('page5_3', {id: 'chapter2_evil_twin_frefre', type: 'risky', points: 14, moneyChange: -500, consequence: {text: 'Втрачено бронь через фейкову оренду', severity: 'medium'}})">
+                    ⚡ Написати власнику в Telegram і забронювати, щоб випередити інших
                 </button>
                 <button class="choice-button" onclick="goToPage('page5_2', {id: 'chapter2_evil_twin_avoided', type: 'safe', points: 15})">
-                    🛡️ Не підключатися, використовувати мобільний інтернет для пошуку житла
+                    🛡️ Перевірити оголошення через мобільний інтернет і не робити передоплату одразу
                 </button>
             </div>
         </div>
@@ -1759,8 +1824,29 @@
             </div>
 
             <div class="story-text">
-                <p>Він вмикає мобільний інтернет, заходить на перевірену платформу оренди і фільтрує оголошення без передоплати.</p>
-                <p>Рішення займає трохи більше часу, зате без ризику віддати акаунти або гроші шахраям.</p>
+                <p>Він вмикає мобільний інтернет, телефонує власнику через платформу та просить короткий відеопоказ квартири.</p>
+                <p>Оголошення, яке вимагало передоплату "до 15:00", зникає через кілька хвилин - ще один сигнал, що це була шахрайська приманка.</p>
+                <p>Рішення зайняло трохи більше часу, зате без ризику втратити акаунти і гроші.</p>
+            </div>
+
+            <div class="choices">
+                <button class="choice-button" onclick="goToPage('page5_summary')">
+                    ➡️ До підсумку Розділу 2
+                </button>
+            </div>
+        </div>
+
+        <div class="page" id="page5_3">
+            <h2 class="chapter-title">Сцена 2. Швидка бронь - швидка втрата</h2>
+            <div class="time-stamp">⏰ 14:27, У вагоні</div>
+
+            <div class="warning">
+                ⚠️ Олег переказав 500 грн "за бронь", після чого контакт зник, а оголошення видалили.
+            </div>
+
+            <div class="story-text">
+                <p>Пошук дешевшого і швидшого варіанту коштував грошей та часу. Шахраї використали знайомий тригер: "тільки зараз".</p>
+                <p>Олег фіксує номер картки отримувача та скаржиться на оголошення в сервісі.</p>
             </div>
 
             <div class="choices">
@@ -1779,6 +1865,8 @@
                 <p>• Сцена 1 (QR у залі очікування): поспіх штовхає на ризик, але перевірка рятує від фейкових порталів.</p>
                 <p>• Сцена 2 (Wi-Fi у вагоні): мережі "Ivan_Free" і "FreFreFre" можуть бути шахрайським Evil Twin.</p>
                 <p>• Для пошуку житла в дорозі безпечніше використовувати мобільний інтернет і перевірені сервіси.</p>
+                <p id="chapter2Outcome" style="margin-top: 10px; font-weight: bold;"></p>
+                <p id="chapter2Aftertaste" style="margin-top: 10px; font-style: italic; color: #495057;"></p>
             </div>
 
             <div class="choices">
@@ -2160,6 +2248,10 @@
                     updateChapterOneSummary();
                 }
 
+                if (pageId === 'page5_summary') {
+                    updateChapterTwoSummary();
+                }
+
                 if (pageId === 'page11') {
                     updateFinalSummary();
                 }
@@ -2220,6 +2312,37 @@
             if (safetyElem) safetyElem.textContent = gameState.safetyScore;
             if (riskElem) riskElem.textContent = gameState.riskScore;
             if (moneyElem) moneyElem.textContent = gameState.money;
+        }
+
+        function hasDecision(decisionId) {
+            return gameState.decisions.some(d => d.id === decisionId);
+        }
+
+        function updateChapterTwoSummary() {
+            const outcomeElem = document.getElementById('chapter2Outcome');
+            const aftertasteElem = document.getElementById('chapter2Aftertaste');
+            if (!outcomeElem) return;
+
+            if (hasDecision('chapter2_qr_enter_data') && hasDecision('chapter2_evil_twin_frefre')) {
+                outcomeElem.textContent = 'Підсумок твого шляху: поспіх двічі коштував дорого - дані опинилися під ризиком, а 500 грн зникли через оренду-пастку.';
+                if (aftertasteElem) aftertasteElem.textContent = 'Післясмак сцени: у Київ Олег в\'їжджає з важким відчуттям провини, але вже з твердим наміром більше не реагувати на тиск часу.';
+                return;
+            }
+
+            if (hasDecision('chapter2_qr_check') && hasDecision('chapter2_evil_twin_avoided')) {
+                outcomeElem.textContent = 'Підсумок твого шляху: ти пройшов(ла) Розділ 2 максимально обережно - перевірка джерел і холодна голова зберегли гроші та нерви.';
+                if (aftertasteElem) aftertasteElem.textContent = 'Післясмак сцени: поїзд прибуває, і замість паніки Олег відчуває контроль - це найкращий старт для нового міста.';
+                return;
+            }
+
+            if (hasDecision('chapter2_qr_scan') || hasDecision('chapter2_evil_twin_connect') || hasDecision('chapter2_evil_twin_frefre')) {
+                outcomeElem.textContent = 'Підсумок твого шляху: були ризикові кроки, але досвід допоміг зупинитися до критичних втрат. Далі важливо не діяти під тиском часу.';
+                if (aftertasteElem) aftertasteElem.textContent = 'Післясмак сцени: Олег втомлений, але уважніший, ніж зранку - дорога вже почала його змінювати.';
+                return;
+            }
+
+            outcomeElem.textContent = 'Підсумок твого шляху: ти тримав(ла) контроль у напружених умовах дороги і не дав(ла) шахрайським сценаріям зламати маршрут.';
+            if (aftertasteElem) aftertasteElem.textContent = 'Післясмак сцени: у вагоні стає тихіше, і вперше за день Олег розуміє, що встиг на свій шанс без зайвих втрат.';
         }
 
         function updateFinalSummary() {
@@ -2564,36 +2687,60 @@
                 title: 'Сцена 1: QR і вибір',
                 type: 'choice',
                 x: 400, y: 980,
-                children: ['page4_3', 'page5'],
+                children: ['page4_3', 'page4_4', 'page5'],
                 storyLine: 8
             },
             page4_3: {
                 title: 'Сцена 1: Ризик QR',
                 type: 'bad',
                 x: 250, y: 1100,
-                children: ['page5'],
+                children: ['page4_5', 'page4_4'],
                 storyLine: 9,
                 choice: 'Сканувати'
+            },
+            page4_4: {
+                title: 'Сцена 1: Перевірка ✓',
+                type: 'good',
+                x: 700, y: 1100,
+                children: ['page5'],
+                storyLine: 9,
+                choice: 'Перевірити'
+            },
+            page4_5: {
+                title: 'Сцена 1: Дані в пастку',
+                type: 'bad',
+                x: 250, y: 1220,
+                children: ['page5'],
+                storyLine: 9,
+                choice: 'Ввести дані'
             },
             page5: {
                 title: 'Сцена 2: Evil Twin',
                 type: 'choice',
                 x: 550, y: 1100,
-                children: ['page4_2', 'page5_2'],
+                children: ['page4_2', 'page5_3', 'page5_2'],
                 storyLine: 10
             },
             page4_2: {
                 title: 'Сцена 2: Ризик Wi-Fi',
                 type: 'bad',
-                x: 300, y: 1230,
+                x: 470, y: 1230,
                 children: ['page5_summary'],
                 storyLine: 10,
                 choice: 'Ivan_Free'
             },
+            page5_3: {
+                title: 'Сцена 2: Бронь-пастка',
+                type: 'bad',
+                x: 620, y: 1230,
+                children: ['page5_summary'],
+                storyLine: 10,
+                choice: 'FreFreFre'
+            },
             page5_2: {
                 title: 'Сцена 2: Безпечно ✓',
                 type: 'good',
-                x: 600, y: 1230,
+                x: 700, y: 1230,
                 children: ['page5_summary'],
                 storyLine: 10,
                 choice: 'Мобільний інтернет'
