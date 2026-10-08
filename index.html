@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Між містами та кліками: історія Олега</title>
+    <title>Останнє повідомлення — інтерактивна історія</title>
     <style>
         * {
             margin: 0;
@@ -269,6 +269,72 @@
             font-size: 0.85em;
             color: #868e96;
             margin-top: 5px;
+        }
+
+        .support-modal-content {
+            max-width: 700px;
+        }
+
+        .support-intro {
+            color: #495057;
+            line-height: 1.6;
+            margin: -10px 0 25px;
+        }
+
+        .support-section {
+            border: 1px solid #dee2e6;
+            border-radius: 10px;
+            margin: 12px 0;
+            overflow: hidden;
+        }
+
+        .support-section summary {
+            cursor: pointer;
+            padding: 16px 18px;
+            color: #495057;
+            font-weight: bold;
+            font-size: 1.05em;
+            transition: background 0.2s;
+        }
+
+        .support-section summary:hover {
+            background: #f8f9fa;
+        }
+
+        .support-section[open] summary {
+            color: #667eea;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .support-section-content {
+            padding: 16px 18px;
+            color: #495057;
+            line-height: 1.7;
+        }
+
+        .support-section-content p {
+            margin-bottom: 12px;
+        }
+
+        .support-section-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        .support-contact-link {
+            display: inline-block;
+            margin: 4px 0 12px;
+            color: #667eea;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .support-contact-link:hover {
+            text-decoration: underline;
+        }
+
+        .support-note {
+            color: #868e96;
+            font-size: 0.9em;
         }
 
         .choice-button::before {
@@ -654,6 +720,33 @@
             background: #2c3e50;
             color: #ecf0f1;
         }
+
+        body.dark-theme .support-intro,
+        body.dark-theme .support-section summary,
+        body.dark-theme .support-section-content {
+            color: #ecf0f1;
+        }
+
+        body.dark-theme .support-section {
+            border-color: #4a5f7f;
+        }
+
+        body.dark-theme .support-section summary:hover {
+            background: #34495e;
+        }
+
+        body.dark-theme .support-section[open] summary {
+            color: #74c0fc;
+            border-bottom-color: #4a5f7f;
+        }
+
+        body.dark-theme .support-contact-link {
+            color: #74c0fc;
+        }
+
+        body.dark-theme .support-note {
+            color: #adb5bd;
+        }
         
         body.dark-theme .menu-icon {
             background: #34495e;
@@ -776,8 +869,8 @@
         <div class="menu-icon" onclick="openStoryMap()" title="Інтерактивна карта">
             🗺️
         </div>
-        <div class="menu-icon" onclick="openNewsModal()" title="Новини та оновлення">
-            📰
+        <div class="menu-icon" onclick="openSupportModal()" title="Підтримка та довідка">
+            💬
         </div>
     </div>
 
@@ -827,119 +920,89 @@
         </div>
     </div>
 
-    <!-- Модальне вікно новин -->
-    <div id="newsModal" class="modal">
-        <div class="modal-content">
-            <span class="modal-close" onclick="closeNewsModal()">&times;</span>
-            <h2 style="color: #667eea; text-align: center; margin-bottom: 30px;">📰 Новини та оновлення</h2>
-            
-            <div class="update-section">
-                <h3 style="color: #51cf66;">✅ Виконано</h3>
-                <div class="update-item">
-                    <div class="check-icon"></div>
-                    <div class="update-text">
-                        Створено інтерактивну історію про кіберфрод з розгалуженим сюжетом
-                        <div class="update-date">Січень 2026</div>
-                    </div>
-                </div>
-                <div class="update-item">
-                    <div class="check-icon"></div>
-                    <div class="update-text">
-                        Додано 5 розділів з різними сценаріями шахрайства
-                        <div class="update-date">Січень 2026</div>
-                    </div>
-                </div>
-                <div class="update-item">
-                    <div class="check-icon"></div>
-                    <div class="update-text">
-                        Впроваджено систему вибору з наслідками
-                        <div class="update-date">Січень 2026</div>
-                    </div>
-                </div>
-                <div class="update-item">
-                    <div class="check-icon"></div>
-                    <div class="update-text">
-                        Додано візуальні ефекти та анімації
-                        <div class="update-date">Січень 2026</div>
-                    </div>
-                </div>
-                <div class="update-item">
-                    <div class="check-icon"></div>
-                    <div class="update-text">
-                        Створено адаптивний дизайн для всіх пристроїв
-                        <div class="update-date">Січень 2026</div>
-                    </div>
-                </div>
-            </div>
+    <!-- Модальне вікно підтримки -->
+    <div id="supportModal" class="modal">
+        <div class="modal-content support-modal-content">
+            <span class="modal-close" onclick="closeSupportModal()">&times;</span>
+            <h2 class="modal-title">💬 Підтримка та довідка</h2>
+            <p class="support-intro">
+                Тут зібрано все необхідне для комфортного користування платформою.
+                Оберіть потрібний підпункт.
+            </p>
 
-            <div class="update-section">
-                <h3 style="color: #ffd43b;">🔜 Заплановано</h3>
-                <div class="update-item">
-                    <div class="future-icon"></div>
-                    <div class="update-text">
-                        Додавання нових розділів про фішинг та соціальну інженерію
-                        <div class="update-date">Лютий 2026</div>
+            <details class="support-section" open>
+                <summary>📖 Як користуватися платформою</summary>
+                <div class="support-section-content">
+                    <p><strong>1. Розпочніть історію.</strong> Натисніть «Розпочати історію» на головному екрані.</p>
+                    <p><strong>2. Читайте уважно.</strong> Кожна сцена містить ситуацію з цифрового життя та підказки.</p>
+                    <p><strong>3. Обирайте дію.</strong> Ваші рішення змінюють сюжет, рівень безпеки та фінальний результат.</p>
+                    <p><strong>4. Досліджуйте повторно.</strong> Інтерактивна карта допоможе переглянути доступні гілки історії.</p>
+                    <p><strong>5. Налаштуйте досвід.</strong> У меню налаштувань можна змінити тему, масштаб і скинути прогрес.</p>
+                </div>
+            </details>
+
+            <details class="support-section">
+                <summary>🛡️ Про платформу</summary>
+                <div class="support-section-content">
+                    <p><strong>«Останнє повідомлення»</strong> — інтерактивна художня історія про кібершахрайство.</p>
+                    <p>Платформа допомагає розпізнавати фішинг, соціальну інженерію, небезпечні дзвінки, підроблені пропозиції та інші цифрові загрози через практику й наслідки власних рішень.</p>
+                    <p>Це навчальний матеріал, а не заміна консультації банку, кіберполіції чи іншої компетентної служби.</p>
+                </div>
+            </details>
+
+            <details class="support-section">
+                <summary>👨‍💻 Автор і контакти</summary>
+                <div class="support-section-content">
+                    <p><strong>Автор і розробник:</strong> Сергій Євдокимов</p>
+                    <p>Поставити запитання, повідомити про помилку або запропонувати покращення можна через сторінку контактів:</p>
+                    <a class="support-contact-link" href="https://sargeras197.github.io/contacts/" target="_blank" rel="noopener noreferrer">
+                        🔗 Відкрити контакти автора
+                    </a>
+                    <p class="support-note">Посилання на соціальні мережі та інші актуальні канали зв’язку доступні на цій сторінці.</p>
+                </div>
+            </details>
+
+            <details class="support-section">
+                <summary>📰 Новини та оновлення</summary>
+                <div class="support-section-content">
+                    <div class="update-section">
+                        <h3 style="color: #51cf66;">✅ Виконано</h3>
+                        <div class="update-item"><div class="check-icon"></div><div class="update-text">Створено інтерактивну історію про кіберфрод з розгалуженим сюжетом<div class="update-date">Січень 2026</div></div></div>
+                        <div class="update-item"><div class="check-icon"></div><div class="update-text">Додано 5 розділів з різними сценаріями шахрайства<div class="update-date">Січень 2026</div></div></div>
+                        <div class="update-item"><div class="check-icon"></div><div class="update-text">Впроваджено систему вибору з наслідками<div class="update-date">Січень 2026</div></div></div>
+                        <div class="update-item"><div class="check-icon"></div><div class="update-text">Додано візуальні ефекти та адаптивний дизайн<div class="update-date">Січень 2026</div></div></div>
+                    </div>
+                    <div class="update-section">
+                        <h3 style="color: #ffd43b;">🔜 Заплановано</h3>
+                        <div class="update-item"><div class="future-icon"></div><div class="update-text">Нові розділи про фішинг і соціальну інженерію<div class="update-date">У планах</div></div></div>
+                        <div class="update-item"><div class="future-icon"></div><div class="update-text">Освітні вікторини та система досягнень<div class="update-date">У планах</div></div></div>
+                        <div class="update-item"><div class="future-icon"></div><div class="update-text">Аудіосупровід та нові можливості для спільного проходження<div class="update-date">У планах</div></div></div>
                     </div>
                 </div>
-                <div class="update-item">
-                    <div class="future-icon"></div>
-                    <div class="update-text">
-                        Інтеграція освітніх вікторин після кожного розділу
-                        <div class="update-date">Лютий 2026</div>
-                    </div>
-                </div>
-                <div class="update-item">
-                    <div class="future-icon"></div>
-                    <div class="update-text">
-                        Додавання системи досягнень та прогресу
-                        <div class="update-date">Березень 2026</div>
-                    </div>
-                </div>
-                <div class="update-item">
-                    <div class="future-icon"></div>
-                    <div class="update-text">
-                        Створення мультиплеєрного режиму для спільного проходження
-                        <div class="update-date">Березень 2026</div>
-                    </div>
-                </div>
-                <div class="update-item">
-                    <div class="future-icon"></div>
-                    <div class="update-text">
-                        Додавання аудіо-супроводу та озвучки персонажів
-                        <div class="update-date">Квітень 2026</div>
-                    </div>
-                </div>
-                <div class="update-item">
-                    <div class="future-icon"></div>
-                    <div class="update-text">
-                        Розробка мобільного додатку для iOS та Android
-                        <div class="update-date">Травень 2026</div>
-                    </div>
-                </div>
-            </div>
+            </details>
         </div>
     </div>
 
     <div class="container">
         <!-- Вступний екран -->
         <div class="page active intro-screen" id="intro">
-            <h1>Між містами<br>та кліками:<br>історія Олега</h1>
-            <p class="subtitle">Інтерактивна історія про кібербезпеку</p>
+            <h1>Останнє<br>повідомлення</h1>
+            <p class="subtitle">Інтерактивна художня історія про кібершахрайство</p>
             
             <div class="intro-description">
                 <p><strong>Це твоя історія.</strong></p>
                 <p style="margin-top: 15px;">
-                    Ти керуєш долею Олега — звичайного хлопця, який змушений покинути рідне місто 
-                    і вирушити в невідомість. Його подорож — це не лише фізичний шлях з міста в місто, 
-                    а й цифровий лабіринт: повідомлення, дзвінки, посилання, пропозиції.
+                    Марко повертається додому після важкого дня. На телефоні з'являється повідомлення нібито від банку:
+                    рахунок заблоковано, а для відновлення доступу потрібно перейти за посиланням.
+                    Майже одночасно подруга Софія просить терміново позичити гроші.
                 </p>
                 <p style="margin-top: 15px;">
-                    <strong>Кожне твоє рішення має значення.</strong> Один клік може врятувати гроші, 
-                    а інший — знищити плани. Деякі наслідки проявляться миттєво, інші — через кілька 
-                    розділів.
+                    <strong>Кожне твоє рішення має значення.</strong> Один клік може врятувати акаунт,
+                    а інший — відкрити шахраям доступ до нього. Наслідки можуть проявитися не одразу.
                 </p>
                 <p style="margin-top: 15px;">
-                    Ця книга не моралізує. Вона показує. Через досвід, помилки і правильні вибори.
+                    Ця історія не повчає. Вона показує, як довіра, поспіх і бажання допомогти
+                    змінюють перебіг подій.
                 </p>
                 <p style="margin-top: 20px; text-align: center; font-style: italic; color: #667eea;">
                     Готовий розпочати?
@@ -947,7 +1010,7 @@
             </div>
             
             <div class="choices">
-                <button class="choice-button start-button" onclick="goToPage('page1')">
+                <button class="choice-button start-button" onclick="goToPage('story_intro')">
                     🚀 Розпочати історію
                 </button>
             </div>
@@ -962,13 +1025,171 @@
                     </div>
                     <div class="version-info">
                         <span>📌</span>
-                        <span class="version-badge">v0.01</span>
-                        <span>від 30.01.2026</span>
+                        <span class="version-badge">v1.01</span>
+                        <span>від 09.10.2026</span>
                     </div>
                 </div>
             </div>
         </div>
 
+        <!-- Нова історія: «Останнє повідомлення» -->
+        <div class="page" id="story_intro">
+            <h2 class="chapter-title">Вступ. Повідомлення о 22:47</h2>
+            <div class="time-stamp">⏰ 22:47</div>
+            <div class="story-text">
+                <p>Марко повернувся додому після важкого дня. На телефоні з'явилося повідомлення нібито від банку: його рахунок тимчасово заблоковано, а для відновлення доступу потрібно перейти за посиланням.</p>
+                <p>Майже одночасно написала подруга Софія: вона терміново потребувала грошей і просила нікому про це не розповідати.</p>
+                <p><strong>Обидва повідомлення здаються справжніми. У Марка є лише кілька хвилин.</strong></p>
+            </div>
+            <div class="message-box">
+                <strong>🏦 Банк:</strong> «Виявлено підозрілу активність. Підтвердьте особу за посиланням...»<br><br>
+                <strong>💬 Софія:</strong> «Марку, дуже терміново. Позич, будь ласка, 2 000 грн. Я все поясню потім».
+            </div>
+            <div class="choices">
+                <button class="choice-button" onclick="goToPage('story_stage1_bank', {id: 'stage1_bank_link', type: 'risky', points: 15, consequence: {text: 'Марко відкрив підозріле посилання', severity: 'high'}})">🔗 Перейти за банківським посиланням</button>
+                <button class="choice-button" onclick="goToPage('story_stage1_bank', {id: 'stage1_bank_verify', type: 'safe', points: 15})">📞 Ігнорувати повідомлення та зателефонувати до банку за офіційним номером</button>
+                <button class="choice-button" onclick="goToPage('story_stage1_friend', {id: 'stage1_friend_check', type: 'safe', points: 10})">👨‍💻 Показати повідомлення старшому братові, який розуміється на комп'ютерах</button>
+            </div>
+        </div>
+
+        <div class="page" id="story_stage1_bank">
+            <h2 class="chapter-title">Етап 1. Перше рішення</h2>
+            <div class="time-stamp">⏰ 22:52</div>
+            <div class="story-text">
+                <p>Марко перевіряє банківське повідомлення. Деталі виглядають переконливо, але адреса сайту відрізняється від офіційної лише одним символом.</p>
+                <p>У цей момент Софія надсилає ще одне повідомлення: «Ти зі мною? Не дзвони, просто перекинь гроші».</p>
+            </div>
+            <div class="choices">
+                <button class="choice-button" onclick="goToPage('story_stage2_1', {id: 'stage2_bank_data', type: 'risky', points: 18, consequence: {text: 'Дані могли потрапити до шахраїв', severity: 'high'}})">🔐 Ввести дані для «відновлення доступу»</button>
+                <button class="choice-button" onclick="goToPage('story_stage2_2', {id: 'stage2_bank_official', type: 'safe', points: 18})">✅ Завершити дію та перевірити інформацію в офіційному застосунку</button>
+            </div>
+        </div>
+
+        <div class="page" id="story_stage1_friend">
+            <h2 class="chapter-title">Етап 1. Перше рішення</h2>
+            <div class="time-stamp">⏰ 22:52</div>
+            <div class="story-text">
+                <p>Брат одразу помічає: Софія зазвичай не просить приховувати розмову і не пише з таким незвичним стилем.</p>
+                <p>«Не поспішай. Спочатку переконайся, що це справді вона», — каже він.</p>
+            </div>
+            <div class="choices">
+                <button class="choice-button" onclick="goToPage('story_stage2_3', {id: 'stage2_friend_transfer', type: 'risky', points: 15, moneyChange: -2000, consequence: {text: 'Переказ грошей шахраю', severity: 'high'}})">💸 Негайно переказати гроші</button>
+                <button class="choice-button" onclick="goToPage('story_stage2_4', {id: 'stage2_friend_call', type: 'safe', points: 18})">📞 Зателефонувати Софії особисто</button>
+                <button class="choice-button" onclick="goToPage('story_stage2_5', {id: 'stage2_friend_social', type: 'risky', points: 8})">💬 Написати їй у соціальній мережі</button>
+            </div>
+        </div>
+
+        <div class="page" id="story_stage2_1">
+            <h2 class="chapter-title">Етап 2. Наслідки рішення</h2>
+            <div class="story-text">
+                <p>Сторінка просить код із SMS. Марко вагається: банк ніколи не просив його повідомляти такі коди.</p>
+                <p>На екрані з'являється таймер. Тиск зростає.</p>
+            </div>
+            <div class="choices">
+                <button class="choice-button" onclick="goToPage('story_stage3_careful', {id: 'stage3_stop', type: 'safe', points: 20})">🛑 Зупинитися, закрити сторінку та змінити пароль через офіційний застосунок</button>
+                <button class="choice-button" onclick="goToPage('story_stage3_risk', {id: 'stage3_code', type: 'risky', points: 20, consequence: {text: 'Передано код підтвердження', severity: 'high'}})">📩 Ввести код, щоб швидше повернути доступ</button>
+            </div>
+        </div>
+
+        <div class="page" id="story_stage2_2">
+            <h2 class="chapter-title">Етап 2. Наслідки рішення</h2>
+            <div class="story-text">
+                <p>Офіційний застосунок показує: блокування немає. Повідомлення було підробленим.</p>
+                <p>Марко зберігає скриншот і думає, чи варто попередити інших.</p>
+            </div>
+            <div class="choices">
+                <button class="choice-button" onclick="goToPage('story_stage3_investigate', {id: 'stage3_report', type: 'safe', points: 20})">🔎 Перевірити адресу, поскаржитися та зберегти докази</button>
+                <button class="choice-button" onclick="goToPage('story_stage3_careful', {id: 'stage3_ignore', type: 'safe', points: 12})">🗑️ Видалити повідомлення та просто забути про нього</button>
+            </div>
+        </div>
+
+        <div class="page" id="story_stage2_3">
+            <h2 class="chapter-title">Етап 2. Наслідки рішення</h2>
+            <div class="story-text">
+                <p>Переказ виконано. Софія не відповідає, а за кілька хвилин її справжній номер телефонує Маркові.</p>
+                <p>Вона нічого не просила. Її акаунт зламали.</p>
+            </div>
+            <div class="choices">
+                <button class="choice-button" onclick="goToPage('story_stage3_investigate', {id: 'stage3_help_friend', type: 'safe', points: 18})">🧭 Допомогти Софії відновити акаунт і зафіксувати шахрайство</button>
+                <button class="choice-button" onclick="goToPage('story_stage3_risk', {id: 'stage3_hide_mistake', type: 'risky', points: 15})">🤐 Приховати помилку й нічого не робити</button>
+            </div>
+        </div>
+
+        <div class="page" id="story_stage2_4">
+            <h2 class="chapter-title">Етап 2. Наслідки рішення</h2>
+            <div class="story-text">
+                <p>Софія відповідає на дзвінок і дивується: вона не писала жодних повідомлень. Разом вони бачать, що її акаунт відкрито на невідомому пристрої.</p>
+            </div>
+            <div class="choices">
+                <button class="choice-button" onclick="goToPage('story_stage3_investigate', {id: 'stage3_joint_help', type: 'safe', points: 22})">🛡️ Разом змінити пароль, завершити чужі сесії та попередити друзів</button>
+                <button class="choice-button" onclick="goToPage('story_stage3_careful', {id: 'stage3_wait', type: 'risky', points: 8})">⏳ Почекати до ранку, не втручаючись</button>
+            </div>
+        </div>
+
+        <div class="page" id="story_stage2_5">
+            <h2 class="chapter-title">Етап 2. Наслідки рішення</h2>
+            <div class="story-text">
+                <p>У соціальній мережі Софія також відповідає, але її профіль раптово надсилає Маркові посилання «для підтвердження переказу».</p>
+                <p>Тепер підозра очевидна: хтось веде розмову від її імені.</p>
+            </div>
+            <div class="choices">
+                <button class="choice-button" onclick="goToPage('story_stage3_investigate', {id: 'stage3_social_report', type: 'safe', points: 16})">📋 Зберегти докази та повідомити підтримку платформи</button>
+                <button class="choice-button" onclick="goToPage('story_stage3_risk', {id: 'stage3_social_link', type: 'risky', points: 16})">🔗 Перейти за посиланням, щоб «розібратися»</button>
+            </div>
+        </div>
+
+        <div class="page" id="story_stage3_careful">
+            <h2 class="chapter-title">Етап 3. Загострення подій</h2>
+            <div class="story-text">
+                <p>Вночі Марко отримує ще два повідомлення з різних номерів. Шахраї вже знають, що він реагує на тему банку.</p>
+                <p>Цього разу він не діє сам: перевіряє факти, блокує контакти й звертається до фахівців.</p>
+            </div>
+            <div class="choices">
+                <button class="choice-button" onclick="finishStory({id: 'final_careful', type: 'safe', points: 15})">🛡️ Звернутися до банку та кіберполіції через офіційні канали</button>
+                <button class="choice-button" onclick="finishStory({id: 'final_late', type: 'risky', points: 5})">🔕 Заблокувати номери, але не повідомляти про спробу</button>
+            </div>
+        </div>
+
+        <div class="page" id="story_stage3_risk">
+            <h2 class="chapter-title">Етап 3. Загострення подій</h2>
+            <div class="story-text">
+                <p>Після необережного кроку з'являються нові спроби входу. Марко розуміє, що шахраї розраховують на його сором і поспіх.</p>
+                <p>Тепер потрібно вирішити: приховувати помилку чи попросити допомоги.</p>
+            </div>
+            <div class="choices">
+                <button class="choice-button" onclick="finishStory({id: 'final_recovery', type: 'safe', points: 18})">🆘 Розповісти правду, заблокувати доступ і почати відновлення</button>
+                <button class="choice-button" onclick="finishStory({id: 'final_loss', type: 'risky', points: 12})">🙈 Нічого не змінювати, сподіваючись, що все минеться</button>
+            </div>
+        </div>
+
+        <div class="page" id="story_stage3_investigate">
+            <h2 class="chapter-title">Етап 3. Загострення подій</h2>
+            <div class="story-text">
+                <p>Зібрані докази показують: одна й та сама схема використовується проти кількох людей. Марко може просто закрити чат або допомогти зупинити ланцюг.</p>
+            </div>
+            <div class="choices">
+                <button class="choice-button" onclick="finishStory({id: 'final_helper', type: 'safe', points: 22})">🤝 Передати докази фахівцям і попередити знайомих</button>
+                <button class="choice-button" onclick="finishStory({id: 'final_private', type: 'safe', points: 10})">🔒 Захистити лише власні акаунти й не втручатися</button>
+            </div>
+        </div>
+
+        <div class="page" id="story_final">
+            <h2 class="chapter-title">Фінал. Наслідки рішень</h2>
+            <div class="time-stamp">⏰ Наступного ранку</div>
+            <div class="ending" id="storyFinalText"></div>
+            <div class="stats">
+                <div class="stats-title">Твій шлях</div>
+                Безпечні рішення: <span id="newSafetyScore"></span><br>
+                Ризикові рішення: <span id="newRiskScore"></span><br>
+                Збережено коштів: <span id="newMoney"></span> грн
+            </div>
+            <div class="choices">
+                <button class="choice-button" onclick="openStoryMap()">🗺️ Відкрити карту історії</button>
+                <button class="choice-button secondary" onclick="resetProgress()">🔄 Пройти історію ще раз</button>
+            </div>
+        </div>
+
+        <!-- Стара версія сюжету збережена для сумісності з попередніми станами -->
         <!-- Сцена 1: Атмосферний вступ — збір речей -->
         <div class="page" id="scene1_packing">
             <h2 class="chapter-title">Сцена 1. Збір речей</h2>
@@ -2216,7 +2437,7 @@
         <p class="subtitle">Потік історії у вигляді дерева рішень</p>
 
         <div class="map-description" id="mapDescription">
-            Карта показує структуру історії: доступні сцени можна відкривати одразу, а вузли майбутніх розділів позначають запланований розвиток сюжету.
+            Карта показує чотири етапи історії: вступ, наслідки першого рішення, загострення подій та автоматичний фінал.
         </div>
         
         <div class="map-container">
@@ -2321,6 +2542,31 @@
                 // Зберігаємо прогрес
                 saveProgress(pageId);
             }
+        }
+
+        function finishStory(decision) {
+            goToPage('story_final', decision);
+
+            const finalText = document.getElementById('storyFinalText');
+            const safetyElem = document.getElementById('newSafetyScore');
+            const riskElem = document.getElementById('newRiskScore');
+            const moneyElem = document.getElementById('newMoney');
+
+            if (finalText) {
+                const endings = {
+                    final_careful: 'Марко не дозволив тиску керувати собою. Він захистив акаунти, передав інформацію банку та зрозумів: перевірка фактів — це не недовіра, а турбота про себе.',
+                    final_recovery: 'Марко припустився помилки, але не дозволив сорому погіршити ситуацію. Він звернувся по допомогу, відновив доступ і перетворив неприємний досвід на план захисту.',
+                    final_helper: 'Марко не лише захистив себе, а й допоміг Софії та іншим людям. Розслідування почалося з одного скриншота, який він не видалив у поспіху.',
+                    final_private: 'Марко захистив власні акаунти, але зрозумів, що мовчання залишає шахраям простір для нових атак. Наступного разу він обов’язково повідомить фахівців.',
+                    final_late: 'Марко зупинив атаку, але запізно зрозумів, що кожна неповідомлена спроба залишає інших людей без попередження.',
+                    final_loss: 'Марко сподівався, що проблема зникне сама. Вона не зникла, проте тепер він знає: прохання про допомогу — не слабкість, а перший крок до відновлення.'
+                };
+                finalText.textContent = endings[decision.id] || endings.final_private;
+            }
+
+            if (safetyElem) safetyElem.textContent = gameState.safetyScore;
+            if (riskElem) riskElem.textContent = gameState.riskScore;
+            if (moneyElem) moneyElem.textContent = gameState.money;
         }
 
         function hasLegitTicketPurchase() {
@@ -2606,12 +2852,12 @@
         
         // ===== НАЛАШТУВАННЯ =====
         
-        function openNewsModal() {
-            document.getElementById('newsModal').classList.add('active');
+        function openSupportModal() {
+            document.getElementById('supportModal').classList.add('active');
         }
         
-        function closeNewsModal() {
-            document.getElementById('newsModal').classList.remove('active');
+        function closeSupportModal() {
+            document.getElementById('supportModal').classList.remove('active');
         }
         
         function openSettings() {
@@ -2673,7 +2919,7 @@
         
         // ===== ІНТЕРАКТИВНА КАРТА =====
         
-        const storyStructure = {
+        let storyStructure = {
             intro: { 
                 title: 'Початок', 
                 type: 'start',
@@ -2992,6 +3238,21 @@
                 storyLine: 24
             }
         };
+
+        storyStructure = {
+            story_intro: { title: 'Вступ: Повідомлення о 22:47', type: 'start', x: 400, y: 80, children: ['story_stage1_bank', 'story_stage1_friend'] },
+            story_stage1_bank: { title: 'Перше рішення: банк', type: 'choice', x: 240, y: 260, children: ['story_stage2_1', 'story_stage2_2'] },
+            story_stage1_friend: { title: 'Перше рішення: Софія', type: 'choice', x: 560, y: 260, children: ['story_stage2_3', 'story_stage2_4', 'story_stage2_5'] },
+            story_stage2_1: { title: 'Код підтвердження', type: 'choice', x: 100, y: 500, children: ['story_stage3_careful', 'story_stage3_risk'] },
+            story_stage2_2: { title: 'Офіційна перевірка', type: 'good', x: 300, y: 500, children: ['story_stage3_investigate', 'story_stage3_careful'] },
+            story_stage2_3: { title: 'Переказ грошей', type: 'bad', x: 480, y: 500, children: ['story_stage3_investigate', 'story_stage3_risk'] },
+            story_stage2_4: { title: 'Дзвінок Софії', type: 'good', x: 650, y: 500, children: ['story_stage3_investigate', 'story_stage3_careful'] },
+            story_stage2_5: { title: 'Соціальна мережа', type: 'choice', x: 820, y: 500, children: ['story_stage3_investigate', 'story_stage3_risk'] },
+            story_stage3_careful: { title: 'Обережність', type: 'choice', x: 180, y: 760, children: ['story_final'] },
+            story_stage3_risk: { title: 'Ризик', type: 'choice', x: 400, y: 760, children: ['story_final'] },
+            story_stage3_investigate: { title: 'Розслідування', type: 'choice', x: 650, y: 760, children: ['story_final'] },
+            story_final: { title: 'Автоматичний фінал', type: 'neutral', x: 400, y: 980, children: [] }
+        };
         
         function openStoryMap() {
             document.getElementById('storyMapPage').style.display = 'block';
@@ -3009,7 +3270,7 @@
             const ctx = canvas.getContext('2d');
             
             canvas.width = canvas.offsetWidth;
-            canvas.height = 3400;
+            canvas.height = 1100;
             
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -3071,16 +3332,14 @@
         function drawChoicesMode(ctx, canvas) {
             storyNodesPositions = [];
 
-            // Збільшена висота для всіх розділів
-            canvas.height = 3400;
+            canvas.height = 1100;
             
             // Малюємо етапи історії фоном
             const stages = [
-                { name: 'Розділ 1: Початок. День, коли все змінилось', y: 0, height: 900, color: 'rgba(102, 126, 234, 0.08)' },
-                { name: 'Розділ 2: Дорога до нового життя', y: 900, height: 500, color: 'rgba(255, 107, 107, 0.08)' },
-                { name: 'Розділ 3: Нове місто', y: 1400, height: 550, color: 'rgba(72, 219, 251, 0.08)' },
-                { name: 'Розділ 4: Адаптація', y: 1950, height: 650, color: 'rgba(255, 184, 77, 0.08)' },
-                { name: 'Розділ 5: Вчитель', y: 2600, height: 800, color: 'rgba(186, 143, 255, 0.08)' }
+                { name: 'Вступ і перше рішення', y: 0, height: 220, color: 'rgba(102, 126, 234, 0.08)' },
+                { name: 'Наслідки рішення', y: 220, height: 320, color: 'rgba(255, 107, 107, 0.08)' },
+                { name: 'Загострення подій', y: 540, height: 320, color: 'rgba(72, 219, 251, 0.08)' },
+                { name: 'Автоматичний фінал', y: 860, height: 240, color: 'rgba(186, 143, 255, 0.08)' }
             ];
             
             stages.forEach(stage => {
@@ -3305,14 +3564,14 @@
         // Закриття модального вікна при кліку поза ним
         window.onclick = function(event) {
             const settingsModal = document.getElementById('settingsModal');
-            const newsModal = document.getElementById('newsModal');
+            const supportModal = document.getElementById('supportModal');
             
             if (event.target === settingsModal) {
                 closeSettings();
             }
             
-            if (event.target === newsModal) {
-                closeNewsModal();
+            if (event.target === supportModal) {
+                closeSupportModal();
             }
         }
         
