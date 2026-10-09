@@ -811,7 +811,6 @@
                     <select id="languageSelect" onchange="changeLanguage(this.value)">
                         <option value="uk">🇺🇦 Українська</option>
                         <option value="en">🇬🇧 English</option>
-                        <option value="ru">🇷🇺 Русский</option>
                         <option value="pl">🇵🇱 Polski</option>
                     </select>
                 </div>
@@ -2321,8 +2320,6 @@
                 
                 // Зберігаємо прогрес
                 saveProgress(pageId);
-                const settings = JSON.parse(localStorage.getItem('olegStorySettings') || '{}');
-                applyLanguage(settings.language || 'uk');
             }
         }
 
@@ -2337,41 +2334,14 @@
 
             if (finalText) {
                 const endings = {
-                    uk: {
-                        final_careful: 'Марко не дозволив тиску керувати собою. Він захистив акаунти, передав інформацію банку та зрозумів: перевірка фактів — це не недовіра, а турбота про себе.',
-                        final_recovery: 'Марко припустився помилки, але не дозволив сорому погіршити ситуацію. Він звернувся по допомогу, відновив доступ і перетворив неприємний досвід на план захисту.',
-                        final_helper: 'Марко не лише захистив себе, а й допоміг Софії та іншим людям. Розслідування почалося з одного скриншота, який він не видалив у поспіху.',
-                        final_private: 'Марко захистив власні акаунти, але зрозумів, що мовчання залишає шахраям простір для нових атак. Наступного разу він обов’язково повідомить фахівців.',
-                        final_late: 'Марко зупинив атаку, але запізно зрозумів, що кожна неповідомлена спроба залишає інших людей без попередження.',
-                        final_loss: 'Марко сподівався, що проблема зникне сама. Вона не зникла, проте тепер він знає: прохання про допомогу — не слабкість, а перший крок до відновлення.'
-                    },
-                    en: {
-                        final_careful: 'Marko did not let pressure control him. He secured the accounts, reported the incident to the bank and learned that checking facts is not distrust — it is self-care.',
-                        final_recovery: 'Marko made a mistake, but did not let shame make things worse. He asked for help, restored access and turned the experience into a protection plan.',
-                        final_helper: 'Marko protected himself and helped Sofia and others. The investigation began with one screenshot he did not delete in a rush.',
-                        final_private: 'Marko secured his own accounts, but realized that silence leaves room for further attacks. Next time, he will contact specialists.',
-                        final_late: 'Marko stopped the attack, but realized too late that every unreported attempt leaves others without a warning.',
-                        final_loss: 'Marko hoped the problem would disappear. It did not, but he learned that asking for help is not weakness — it is the first step to recovery.'
-                    },
-                    ru: {
-                        final_careful: 'Марко не позволил давлению управлять собой. Он защитил аккаунты, сообщил о случившемся банку и понял: проверка фактов — это не недоверие, а забота о себе.',
-                        final_recovery: 'Марко ошибся, но не позволил стыду усугубить ситуацию. Он попросил помощи, восстановил доступ и превратил этот опыт в план защиты.',
-                        final_helper: 'Марко защитил себя и помог Софии и другим людям. Расследование началось с одного скриншота, который он не удалил в спешке.',
-                        final_private: 'Марко защитил свои аккаунты, но понял, что молчание оставляет пространство для новых атак. В следующий раз он обратится к специалистам.',
-                        final_late: 'Марко остановил атаку, но слишком поздно понял: каждая незаявленная попытка оставляет других людей без предупреждения.',
-                        final_loss: 'Марко надеялся, что проблема исчезнет сама. Этого не произошло, но он понял: попросить о помощи — не слабость, а первый шаг к восстановлению.'
-                    },
-                    pl: {
-                        final_careful: 'Marko nie pozwolił, aby presja przejęła kontrolę. Zabezpieczył konta, zgłosił sprawę bankowi i zrozumiał, że sprawdzanie faktów to nie brak zaufania, lecz troska o siebie.',
-                        final_recovery: 'Marko popełnił błąd, ale nie pozwolił, by wstyd pogorszył sytuację. Poprosił o pomoc, odzyskał dostęp i zamienił doświadczenie w plan ochrony.',
-                        final_helper: 'Marko ochronił siebie i pomógł Sofii oraz innym osobom. Śledztwo zaczęło się od jednego zrzutu ekranu, którego nie usunął w pośpiechu.',
-                        final_private: 'Marko zabezpieczył własne konta, ale zrozumiał, że milczenie otwiera drogę kolejnym atakom. Następnym razem skontaktuje się ze specjalistami.',
-                        final_late: 'Marko powstrzymał atak, ale zbyt późno zrozumiał, że każda niezgłoszona próba pozostawia innych bez ostrzeżenia.',
-                        final_loss: 'Marko miał nadzieję, że problem sam zniknie. Tak się nie stało, ale zrozumiał, że prośba o pomoc to nie słabość, lecz pierwszy krok do odzyskania kontroli.'
-                    }
+                    final_careful: 'Марко не дозволив тиску керувати собою. Він захистив акаунти, передав інформацію банку та зрозумів: перевірка фактів — це не недовіра, а турбота про себе.',
+                    final_recovery: 'Марко припустився помилки, але не дозволив сорому погіршити ситуацію. Він звернувся по допомогу, відновив доступ і перетворив неприємний досвід на план захисту.',
+                    final_helper: 'Марко не лише захистив себе, а й допоміг Софії та іншим людям. Розслідування почалося з одного скриншота, який він не видалив у поспіху.',
+                    final_private: 'Марко захистив власні акаунти, але зрозумів, що мовчання залишає шахраям простір для нових атак. Наступного разу він обов’язково повідомить фахівців.',
+                    final_late: 'Марко зупинив атаку, але запізно зрозумів, що кожна неповідомлена спроба залишає інших людей без попередження.',
+                    final_loss: 'Марко сподівався, що проблема зникне сама. Вона не зникла, проте тепер він знає: прохання про допомогу — не слабкість, а перший крок до відновлення.'
                 };
-                const currentLanguage = JSON.parse(localStorage.getItem('olegStorySettings') || '{}').language || 'uk';
-                finalText.textContent = endings[currentLanguage][decision.id] || endings[currentLanguage].final_private;
+                finalText.textContent = endings[decision.id] || endings.final_private;
             }
 
             if (safetyElem) safetyElem.textContent = gameState.safetyScore;
@@ -2696,147 +2666,10 @@
             saveSettingValue('theme', theme);
         }
         
-        const translationCatalog = {
-            'Останнє повідомлення': { en: 'The Last Message', ru: 'Последнее сообщение', pl: 'Ostatnia wiadomość' },
-            'Останнє': { en: 'The Last', ru: 'Последнее', pl: 'Ostatnia' },
-            'повідомлення': { en: 'Message', ru: 'сообщение', pl: 'wiadomość' },
-            'Інтерактивна художня історія про кібершахрайство': { en: 'An interactive fiction story about cyber fraud', ru: 'Интерактивная художественная история о кибермошенничестве', pl: 'Interaktywna opowieść fabularna o cyberoszustwach' },
-            'Це твоя історія.': { en: 'This is your story.', ru: 'Это твоя история.', pl: 'To twoja historia.' },
-            "Марко повертається додому після важкого дня. На телефоні з'являється повідомлення нібито від банку: рахунок заблоковано, а для відновлення доступу потрібно перейти за посиланням. Майже одночасно подруга Софія просить терміново позичити гроші.": { en: 'Marko returns home after a difficult day. A message supposedly from his bank appears on his phone: his account is blocked and he must follow a link to restore access. Almost at the same time, his friend Sofia urgently asks to borrow money.', ru: 'Марко возвращается домой после тяжёлого дня. На телефоне появляется сообщение якобы от банка: счёт заблокирован, а для восстановления доступа нужно перейти по ссылке. Почти одновременно подруга София срочно просит одолжить деньги.', pl: 'Marko wraca do domu po trudnym dniu. Na telefonie pojawia się wiadomość rzekomo z banku: konto zostało zablokowane, a aby odzyskać dostęp, trzeba otworzyć link. Niemal jednocześnie przyjaciółka Sofia pilnie prosi o pożyczkę.' },
-            'Кожне твоє рішення має значення.': { en: 'Every choice you make matters.', ru: 'Каждое твоё решение имеет значение.', pl: 'Każda Twoja decyzja ma znaczenie.' },
-            "Один клік може врятувати акаунт, а інший — відкрити шахраям доступ до нього. Наслідки можуть проявитися не одразу.": { en: 'One click can save an account, while another can give criminals access. The consequences may not appear immediately.', ru: 'Один клик может спасти аккаунт, а другой — открыть киберпреступникам доступ. Последствия могут проявиться не сразу.', pl: 'Jedno kliknięcie może uratować konto, a inne może dać oszustom do niego dostęp. Konsekwencje mogą pojawić się dopiero później.' },
-            'Один клік може врятувати акаунт,': { en: 'One click can save an account,', ru: 'Один клик может спасти аккаунт,', pl: 'Jedno kliknięcie może uratować konto,' },
-            'а інший — відкрити шахраям доступ до нього. Наслідки можуть проявитися не одразу.': { en: 'while another can give criminals access. The consequences may not appear immediately.', ru: 'а другой — открыть киберпреступникам доступ. Последствия могут проявиться не сразу.', pl: 'a inne może dać oszustom do niego dostęp. Konsekwencje mogą pojawić się dopiero później.' },
-            'Ця історія не повчає. Вона показує, як довіра, поспіх і бажання допомогти змінюють перебіг подій.': { en: 'This story does not lecture. It shows how trust, haste and the desire to help can change what happens next.', ru: 'Эта история не поучает. Она показывает, как доверие, спешка и желание помочь меняют ход событий.', pl: 'Ta historia nie poucza. Pokazuje, jak zaufanie, pośpiech i chęć pomocy zmieniają bieg wydarzeń.' },
-            'Готовий розпочати?': { en: 'Ready to begin?', ru: 'Готов начать?', pl: 'Gotowy, aby zacząć?' },
-            '🚀 Розпочати історію': { en: '🚀 Start the story', ru: '🚀 Начать историю', pl: '🚀 Rozpocznij historię' },
-            '💬 Підтримка та довідка': { en: '💬 Help & support', ru: '💬 Помощь и поддержка', pl: '💬 Pomoc i wsparcie' },
-            'Тут зібрано все необхідне для комфортного користування платформою.': { en: 'Everything you need for a comfortable experience on the platform is collected here.', ru: 'Здесь собрано всё необходимое для удобного использования платформы.', pl: 'Zebraliśmy tu wszystko, czego potrzebujesz do wygodnego korzystania z platformy.' },
-            'Оберіть потрібний підпункт.': { en: 'Choose a section below.', ru: 'Выберите нужный раздел.', pl: 'Wybierz odpowiednią sekcję.' },
-            '📖 Як користуватися платформою': { en: '📖 How to use the platform', ru: '📖 Как пользоваться платформой', pl: '📖 Jak korzystać z platformy' },
-            '🛡️ Про платформу': { en: '🛡️ About the platform', ru: '🛡️ О платформе', pl: '🛡️ O platformie' },
-            '👨‍💻 Автор і контакти': { en: '👨‍💻 Author & contacts', ru: '👨‍💻 Автор и контакты', pl: '👨‍💻 Autor i kontakt' },
-            '📰 Новини та оновлення': { en: '📰 News & updates', ru: '📰 Новости и обновления', pl: '📰 Aktualności i aktualizacje' },
-            '✅ Виконано': { en: '✅ Completed', ru: '✅ Выполнено', pl: '✅ Zrealizowane' },
-            '🔜 Заплановано': { en: '🔜 Planned', ru: '🔜 Запланировано', pl: '🔜 Zaplanowane' },
-            'Відкрити контакти автора': { en: 'Open author contacts', ru: 'Открыть контакты автора', pl: 'Otwórz dane kontaktowe autora' },
-            '🌍 Мова': { en: '🌍 Language', ru: '🌍 Язык', pl: '🌍 Język' },
-            '💾 Прогрес': { en: '💾 Progress', ru: '💾 Прогресс', pl: '💾 Postęp' },
-            '🔄 Скинути прогрес': { en: '🔄 Reset progress', ru: '🔄 Сбросить прогресс', pl: '🔄 Zresetuj postęp' },
-            '🔍 Масштабування': { en: '🔍 Zoom', ru: '🔍 Масштабирование', pl: '🔍 Powiększenie' },
-            '🎨 Тема': { en: '🎨 Theme', ru: '🎨 Тема', pl: '🎨 Motyw' },
-            '🌍 Мова': { en: '🌍 Language', ru: '🌍 Язык', pl: '🌍 Język' },
-            '👨‍💻 Розробник:': { en: '👨‍💻 Developer:', ru: '👨‍💻 Разработчик:', pl: '👨‍💻 Deweloper:' },
-            'від 09.10.2026': { en: 'from 09.10.2026', ru: 'от 09.10.2026', pl: 'od 09.10.2026' },
-            '1. Розпочніть історію.': { en: '1. Start the story.', ru: '1. Начните историю.', pl: '1. Rozpocznij historię.' },
-            'Натисніть «Розпочати історію» на головному екрані.': { en: 'Click “Start the story” on the home screen.', ru: 'Нажмите «Начать историю» на главном экране.', pl: 'Kliknij „Rozpocznij historię” na ekranie głównym.' },
-            '2. Читайте уважно.': { en: '2. Read carefully.', ru: '2. Читайте внимательно.', pl: '2. Czytaj uważnie.' },
-            '3. Обирайте дію.': { en: '3. Choose an action.', ru: '3. Выбирайте действие.', pl: '3. Wybierz działanie.' },
-            '4. Досліджуйте повторно.': { en: '4. Explore again.', ru: '4. Исследуйте историю повторно.', pl: '4. Odkrywaj ponownie.' },
-            '5. Налаштуйте досвід.': { en: '5. Adjust your experience.', ru: '5. Настройте работу платформы.', pl: '5. Dostosuj korzystanie z platformy.' },
-            'Поставити запитання, повідомити про помилку або запропонувати покращення можна через сторінку контактів:': { en: 'Use the contact page to ask a question, report an issue or suggest an improvement:', ru: 'На странице контактов можно задать вопрос, сообщить об ошибке или предложить улучшение:', pl: 'Na stronie kontaktowej możesz zadać pytanie, zgłosić błąd lub zaproponować ulepszenie:' },
-            'Автор і розробник:': { en: 'Author and developer:', ru: 'Автор и разработчик:', pl: 'Autor i deweloper:' },
-            'Посилання на соціальні мережі та інші актуальні канали зв’язку доступні на цій сторінці.': { en: 'Links to social media and other current contact channels are available on this page.', ru: 'Ссылки на социальные сети и другие актуальные каналы связи доступны на этой странице.', pl: 'Linki do mediów społecznościowych i innych aktualnych kanałów kontaktu są dostępne na tej stronie.' },
-            'Про платформу': { en: 'About the platform', ru: 'О платформе', pl: 'O platformie' },
-            'Підтримка та довідка': { en: 'Help & support', ru: 'Помощь и поддержка', pl: 'Pomoc i wsparcie' },
-            'Вступ. Повідомлення о 22:47': { en: 'Introduction. The 22:47 message', ru: 'Вступление. Сообщение в 22:47', pl: 'Wstęp. Wiadomość o 22:47' },
-            'Етап 1. Перше рішення': { en: 'Stage 1. The first decision', ru: 'Этап 1. Первое решение', pl: 'Etap 1. Pierwsza decyzja' },
-            'Етап 2. Наслідки рішення': { en: 'Stage 2. Consequences', ru: 'Этап 2. Последствия решения', pl: 'Etap 2. Konsekwencje decyzji' },
-            'Етап 3. Загострення подій': { en: 'Stage 3. Escalation', ru: 'Этап 3. Обострение событий', pl: 'Etap 3. Eskalacja wydarzeń' },
-            'Фінал. Наслідки рішень': { en: 'Finale. The consequences of your choices', ru: 'Финал. Последствия решений', pl: 'Finał. Konsekwencje decyzji' },
-            '🔗 Перейти за банківським посиланням': { en: '🔗 Follow the bank link', ru: '🔗 Перейти по банковской ссылке', pl: '🔗 Otwórz link banku' },
-            '📞 Ігнорувати повідомлення та зателефонувати до банку за офіційним номером': { en: '📞 Ignore the message and call the bank using its official number', ru: '📞 Игнорировать сообщение и позвонить в банк по официальному номеру', pl: '📞 Zignoruj wiadomość i zadzwoń do banku na oficjalny numer' },
-            '👨‍💻 Показати повідомлення старшому братові, який розуміється на комп’ютерах': { en: '👨‍💻 Show the message to your tech-savvy older brother', ru: '👨‍💻 Показать сообщение старшему брату, который разбирается в компьютерах', pl: '👨‍💻 Pokaż wiadomość starszemu bratu, który zna się na komputerach' },
-            '💸 Негайно переказати гроші': { en: '💸 Transfer the money immediately', ru: '💸 Немедленно перевести деньги', pl: '💸 Natychmiast przelać pieniądze' },
-            '📞 Зателефонувати Софії особисто': { en: '📞 Call Sofia directly', ru: '📞 Позвонить Софии лично', pl: '📞 Zadzwonić bezpośrednio do Sofii' },
-            '💬 Написати їй у соціальній мережі': { en: '💬 Message her on social media', ru: '💬 Написать ей в социальной сети', pl: '💬 Napisać do niej w mediach społecznościowych' },
-            '🔐 Ввести дані для «відновлення доступу»': { en: '🔐 Enter the details to “restore access”', ru: '🔐 Ввести данные для «восстановления доступа»', pl: '🔐 Wprowadzić dane, aby „odzyskać dostęp”' },
-            '✅ Завершити дію та перевірити інформацію в офіційному застосунку': { en: '✅ Stop and verify the information in the official app', ru: '✅ Остановиться и проверить информацию в официальном приложении', pl: '✅ Przerwać i sprawdzić informacje w oficjalnej aplikacji' },
-            '🛡️ Разом змінити пароль, завершити чужі сесії та попередити друзів': { en: '🛡️ Change the password together, end other sessions and warn friends', ru: '🛡️ Вместе сменить пароль, завершить чужие сеансы и предупредить друзей', pl: '🛡️ Wspólnie zmienić hasło, zakończyć obce sesje i ostrzec znajomych' },
-            '🛑 Зупинитися, закрити сторінку та змінити пароль через офіційний застосунок': { en: '🛑 Stop, close the page and change the password in the official app', ru: '🛑 Остановиться, закрыть страницу и сменить пароль в официальном приложении', pl: '🛑 Zatrzymać się, zamknąć stronę i zmienić hasło w oficjalnej aplikacji' },
-            '📩 Ввести код, щоб швидше повернути доступ': { en: '📩 Enter the code to regain access faster', ru: '📩 Ввести код, чтобы быстрее вернуть доступ', pl: '📩 Wprowadzić kod, aby szybciej odzyskać dostęp' },
-            '🤝 Передати докази фахівцям і попередити знайомих': { en: '🤝 Give the evidence to specialists and warn people you know', ru: '🤝 Передать доказательства специалистам и предупредить знакомых', pl: '🤝 Przekazać dowody specjalistom i ostrzec znajomych' },
-            '🗺️ Відкрити карту історії': { en: '🗺️ Open the story map', ru: '🗺️ Открыть карту истории', pl: '🗺️ Otwórz mapę historii' },
-            '🔄 Пройти історію ще раз': { en: '🔄 Play the story again', ru: '🔄 Пройти историю ещё раз', pl: '🔄 Zagraj historię ponownie' },
-            '⚙️ Налаштування': { en: '⚙️ Settings', ru: '⚙️ Настройки', pl: '⚙️ Ustawienia' },
-            '🗺️ Інтерактивна карта': { en: '🗺️ Interactive map', ru: '🗺️ Интерактивная карта', pl: '🗺️ Interaktywna mapa' },
-            'Налаштування': { en: 'Settings', ru: 'Настройки', pl: 'Ustawienia' },
-            '☀️ Світла': { en: '☀️ Light', ru: '☀️ Светлая', pl: '☀️ Jasny' },
-            '🌙 Темна': { en: '🌙 Dark', ru: '🌙 Тёмная', pl: '🌙 Ciemny' },
-            '🇺🇦 Українська': { en: '🇺🇦 Ukrainian', ru: '🇺🇦 Украинский', pl: '🇺🇦 Ukraiński' },
-            '🇬🇧 English': { en: '🇬🇧 English', ru: '🇬🇧 Английский', pl: '🇬🇧 Angielski' },
-            '🇷🇺 Русский': { en: '🇷🇺 Russian', ru: '🇷🇺 Русский', pl: '🇷🇺 Rosyjski' },
-            '🇵🇱 Polski': { en: '🇵🇱 Polish', ru: '🇵🇱 Польский', pl: '🇵🇱 Polski' },
-            '🗺️ Інтерактивна карта історії': { en: '🗺️ Interactive story map', ru: '🗺️ Интерактивная карта истории', pl: '🗺️ Interaktywna mapa historii' },
-            'Потік історії у вигляді дерева рішень': { en: 'The story flow as a decision tree', ru: 'Ход истории в виде дерева решений', pl: 'Przebieg historii w formie drzewa decyzji' },
-            '⬅️ Повернутися до історії': { en: '⬅️ Return to the story', ru: '⬅️ Вернуться к истории', pl: '⬅️ Wrócić do historii' }
-        };
-
-        function applyLanguage(lang) {
-            const selectedLanguage = ['uk', 'en', 'ru', 'pl'].includes(lang) ? lang : 'uk';
-            const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
-            const textNodes = [];
-            let node;
-            while ((node = walker.nextNode())) {
-                if (node.parentElement && !['SCRIPT', 'STYLE'].includes(node.parentElement.tagName)) {
-                    textNodes.push(node);
-                }
-            }
-
-            textNodes.forEach(textNode => {
-                if (!textNode.__i18nOriginal) {
-                    textNode.__i18nOriginal = textNode.nodeValue.trim();
-                }
-                const original = textNode.__i18nOriginal;
-                const entry = translationCatalog[original];
-                if (entry && selectedLanguage !== 'uk') {
-                    const leading = textNode.nodeValue.match(/^\s*/)[0];
-                    const trailing = textNode.nodeValue.match(/\s*$/)[0];
-                    textNode.nodeValue = leading + (entry[selectedLanguage] || original) + trailing;
-                } else if (!entry && selectedLanguage !== 'uk') {
-                    const fragment = Object.keys(translationCatalog)
-                        .sort((first, second) => second.length - first.length)
-                        .find(key => original.includes(key));
-                    if (fragment) {
-                        const replacement = translationCatalog[fragment][selectedLanguage] || fragment;
-                        textNode.nodeValue = textNode.nodeValue.replace(fragment, replacement);
-                    }
-                } else if (selectedLanguage === 'uk' && original) {
-                    const leading = textNode.nodeValue.match(/^\s*/)[0];
-                    const trailing = textNode.nodeValue.match(/\s*$/)[0];
-                    textNode.nodeValue = leading + original + trailing;
-                }
-            });
-
-            const introContent = {
-                uk: {
-                    title: 'Останнє<br>повідомлення',
-                    description: '<p><strong>Це твоя історія.</strong></p><p style="margin-top: 15px;">Марко повертається додому після важкого дня. На телефоні з&#39;являється повідомлення нібито від банку: рахунок заблоковано, а для відновлення доступу потрібно перейти за посиланням. Майже одночасно подруга Софія просить терміново позичити гроші.</p><p style="margin-top: 15px;"><strong>Кожне твоє рішення має значення.</strong> Один клік може врятувати акаунт, а інший — відкрити шахраям доступ до нього. Наслідки можуть проявитися не одразу.</p><p style="margin-top: 15px;">Ця історія не повчає. Вона показує, як довіра, поспіх і бажання допомогти змінюють перебіг подій.</p><p style="margin-top: 20px; text-align: center; font-style: italic; color: #667eea;">Готовий розпочати?</p>'
-                },
-                en: {
-                    title: 'The Last<br>Message',
-                    description: '<p><strong>This is your story.</strong></p><p style="margin-top: 15px;">Marko returns home after a difficult day. A message supposedly from his bank appears on his phone: his account is blocked and he must follow a link to restore access. Almost at the same time, his friend Sofia urgently asks to borrow money.</p><p style="margin-top: 15px;"><strong>Every choice you make matters.</strong> One click can save an account, while another can give criminals access. The consequences may not appear immediately.</p><p style="margin-top: 15px;">This story does not lecture. It shows how trust, haste and the desire to help can change what happens next.</p><p style="margin-top: 20px; text-align: center; font-style: italic; color: #667eea;">Ready to begin?</p>'
-                },
-                ru: {
-                    title: 'Последнее<br>сообщение',
-                    description: '<p><strong>Это твоя история.</strong></p><p style="margin-top: 15px;">Марко возвращается домой после тяжёлого дня. На телефоне появляется сообщение якобы от банка: счёт заблокирован, а для восстановления доступа нужно перейти по ссылке. Почти одновременно подруга София срочно просит одолжить деньги.</p><p style="margin-top: 15px;"><strong>Каждое твоё решение имеет значение.</strong> Один клик может спасти аккаунт, а другой — открыть киберпреступникам доступ. Последствия могут проявиться не сразу.</p><p style="margin-top: 15px;">Эта история не поучает. Она показывает, как доверие, спешка и желание помочь меняют ход событий.</p><p style="margin-top: 20px; text-align: center; font-style: italic; color: #667eea;">Готов начать?</p>'
-                },
-                pl: {
-                    title: 'Ostatnia<br>wiadomość',
-                    description: '<p><strong>To twoja historia.</strong></p><p style="margin-top: 15px;">Marko wraca do domu po trudnym dniu. Na telefonie pojawia się wiadomość rzekomo z banku: konto zostało zablokowane, a aby odzyskać dostęp, trzeba otworzyć link. Niemal jednocześnie przyjaciółka Sofia pilnie prosi o pożyczkę.</p><p style="margin-top: 15px;"><strong>Każda Twoja decyzja ma znaczenie.</strong> Jedno kliknięcie może uratować konto, a inne może dać oszustom do niego dostęp. Konsekwencje mogą pojawić się dopiero później.</p><p style="margin-top: 15px;">Ta historia nie poucza. Pokazuje, jak zaufanie, pośpiech i chęć pomocy zmieniają bieg wydarzeń.</p><p style="margin-top: 20px; text-align: center; font-style: italic; color: #667eea;">Gotowy, aby zacząć?</p>'
-                }
-            };
-            const intro = introContent[selectedLanguage];
-            const introTitle = document.querySelector('#intro h1');
-            const introDescription = document.querySelector('#intro .intro-description');
-            if (introTitle) introTitle.innerHTML = intro.title;
-            if (introDescription) introDescription.innerHTML = intro.description;
-            document.documentElement.lang = selectedLanguage;
-        }
-
         function changeLanguage(lang) {
             saveSettingValue('language', lang);
-            applyLanguage(lang);
+            // Тут буде логіка зміни мови (поки що просто зберігаємо)
+            alert('Переклад буде доданий в наступних версіях. Translation coming soon!');
         }
         
         function saveSettingValue(key, value) {
@@ -2864,7 +2697,6 @@
             if (settings.language) {
                 document.getElementById('languageSelect').value = settings.language;
             }
-            applyLanguage(settings.language || 'uk');
         }
         
         // ===== ІНТЕРАКТИВНА КАРТА =====
